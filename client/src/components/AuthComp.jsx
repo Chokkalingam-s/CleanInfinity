@@ -12,6 +12,7 @@ export default function AuthComponent() {
     district: '',
     ward: '',
     captchaInput: '',
+    otp: '', // Added OTP to state
   })
 
   const handleChange = (e) => {
@@ -19,7 +20,14 @@ export default function AuthComponent() {
     setFormData({ ...formData, [name]: value })
   }
 
-  const InputField = ({ type, name, placeholder, required = true }) => (
+  const InputField = ({
+    type,
+    name,
+    placeholder,
+    required = true,
+    className = '',
+    ...props
+  }) => (
     <input
       type={type}
       name={name}
@@ -27,16 +35,17 @@ export default function AuthComponent() {
       value={formData[name]}
       onChange={handleChange}
       required={required}
-      className='w-full'
+      className={`w-full ${className}`} // Add className here
+      {...props}
     />
   )
 
-  const SelectField = ({ name, options }) => (
+  const SelectField = ({ name, options, className = '' }) => (
     <select
       name={name}
       value={formData[name]}
       onChange={handleChange}
-      className='w-full'
+      className={`w-full ${className}`} // Add className here
     >
       {options.map((option, index) => (
         <option
@@ -71,6 +80,7 @@ export default function AuthComponent() {
                 type='text'
                 name='mobile'
                 placeholder='Mobile No'
+                className='w-full'
               />
               <InputField
                 type='email'
@@ -84,18 +94,10 @@ export default function AuthComponent() {
                   readOnly
                   className='w-2/3 bg-gray-200'
                 />
-                <input
+                <InputField
                   type='text'
                   name='captchaInput'
                   placeholder='Enter Captcha'
-                  value={formData.captchaInput}
-                  onFocus={(e) =>
-                    e.target.setSelectionRange(
-                      e.target.value.length,
-                      e.target.value.length
-                    )
-                  }
-                  onChange={handleChange}
                   className='w-1/3'
                 />
               </div>
@@ -122,11 +124,22 @@ export default function AuthComponent() {
                 name='email'
                 placeholder='Mail Id'
               />
-              <InputField
-                type='text'
-                name='otp'
-                placeholder='Enter OTP'
-              />
+              <div className='flex items-center'>
+                <InputField
+                  type='number' // Changed to number type
+                  name='otp'
+                  placeholder='Enter OTP'
+                  className='w-10/12'
+                  min='0' // Optional: Set min to 0 for number input
+                  onFocus={(e) => e.target.select()} // Select the content on focus
+                />
+                <button
+                  type='button'
+                  className='ml-2'
+                >
+                  Verify OTP
+                </button>
+              </div>
               <InputField
                 type='text'
                 name='address'
@@ -148,14 +161,17 @@ export default function AuthComponent() {
               />
             </>
           )}
+          <button type='submit'>Submit</button>
           <div className='w-full group authBtn border-2 border-medium-green rounded-lg mt-4 font-bold'>
             <button
+              type='button'
               className={`animate ${!isSignUp ? 'activeBtn' : 'notActiveBtn'}`}
               onClick={() => setIsSignUp(!isSignUp)}
             >
               {isSignUp ? 'Sign in' : 'Sign up'}
             </button>
             <button
+              type='button'
               className={`animate ${isSignUp ? 'activeBtn' : 'notActiveBtn'}`}
               onClick={() => setIsSignUp(!isSignUp)}
             >
