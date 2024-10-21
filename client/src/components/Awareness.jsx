@@ -4,12 +4,13 @@ function Accordion({ title, content }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className='border-b'>
+    <div className='w-full border-b border-medium-green'>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='w-full text-left py-2'
+        className='w-full text-left py-2 flex items-center justify-between'
       >
         {title}
+        <span className={'ml-2 transform font-bold'}>{isOpen ? 'x' : '+'}</span>
       </button>
       {isOpen && <div className='py-2'>{content}</div>}
     </div>
@@ -37,17 +38,25 @@ function Card() {
 }
 export default function Awareness() {
   return (
-    <>
+    <div className='w-1/2 flex items-center justify-center flex-col m-auto'>
       <h2>Guide Me</h2>
       <h3>How To Use Our App!!</h3>
-      <div className='w-52 h-2/4 bg-white'>
+      <div className='h-2/4 bg-white'>
         <video></video>
       </div>
       <h3>How Can We Help You?</h3>
-      <input
-        type='text'
-        placeholder='Ask your question'
-      />
+      <div className='relative flex items-center'>
+        <img
+          src='/magnifying-glass-solid.svg'
+          className='w-5 absolute ml-2 z-10 -translate-y-2'
+        />
+        <input
+          type='text'
+          placeholder='Ask your question'
+          className='placeholder:p-6'
+        />
+      </div>
+
       <h3>FAQs</h3>
       <Accordion
         title='What is this app about?'
@@ -70,6 +79,6 @@ export default function Awareness() {
       <h2>Articles</h2>
       <Card />
       <button>See more</button>
-    </>
+    </div>
   )
 }

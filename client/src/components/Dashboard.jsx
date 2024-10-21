@@ -23,7 +23,7 @@ export default function Dashboard({ creditVal, BarGraphVals }) {
       </div>
       <div className='flex items-center justify-center flex-col'>
         <div
-          className='rounded-md shadow-lg p-5'
+          className='rounded-md shadow-lg p-5 bg-light-green'
           style={{ width: '70%' }}
           id='graph'
         >
