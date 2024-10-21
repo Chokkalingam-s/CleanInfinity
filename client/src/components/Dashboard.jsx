@@ -1,33 +1,50 @@
-import React from 'react'
+import BarGraph from './BarChart'
 
-export default function Dashboard() {
+export default function Dashboard({ creditVal, BarGraphVals }) {
+  const titles = [
+    'Knowledge',
+    'Progress',
+    'Pair Dustbin',
+    'Notify',
+    'PingMe',
+    'Activity',
+  ]
   return (
-    <div className='relative bg-slate-600 top-10'>
-      <div className='w-52 bg-white flex'>
+    <>
+      <div
+        className='w-28 items-center font-bold flex fixed justify-between right-2 p-2 rounded-lg bg-medium-green text-white'
+        id='credit'
+      >
         <img
           src='/coins-solid.svg'
-          className='w-10'
+          className='w-6 shadow'
         />
-        <p>500</p>
+        <p>{creditVal}</p>
       </div>
-      <div
-        className='graph w-10/12 bg-slate-400 m-4'
-        style={{ height: '40vh' }}
-      ></div>
-      <h3>How to use?</h3>
-      <div className='grid grid-cols-3'>
-        {Array(6)
-          .fill(0)
-          .map((_, i) => (
+      <div className='flex items-center justify-center flex-col'>
+        <div
+          className='rounded-md shadow-lg p-5 bg-light-green'
+          style={{ width: '70%' }}
+          id='graph'
+        >
+          <BarGraph data={BarGraphVals} />
+        </div>
+        <h3>How to use?</h3>
+        <div className='w-1/2 grid grid-cols-3 items-center justify-center'>
+          {titles.map((title, i) => (
             <div
-              className='p-4 w-11/12 items-center justify-center border rounded shadow'
+              className='p-4 w-11/12 mb-4 items-center justify-center border rounded shadow-lg hover:shadow-md'
               key={i}
             >
-              {' '}
-              Content {i + 1}
+              <img
+                src='https://via.placeholder.com/150'
+                className='rounded-lg'
+              />
+              <p className='font-medium text-xl text-center'>{title}</p>
             </div>
           ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
