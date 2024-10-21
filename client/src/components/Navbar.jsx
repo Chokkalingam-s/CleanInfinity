@@ -10,7 +10,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className='h-10 flex items-center fixed w-full justify-between px-2 top-0 bg-light-green z-10'>
+    <header className='h-10 flex items-center fixed w-full justify-between px-2 top-0 bg-light-green z-10 rounded-lg shadow-lg p-4'>
       <img
         src='/1.png'
         className='w-1/12 h-10 bg-white'
@@ -21,7 +21,7 @@ export default function Navbar() {
           <Link
             key={href}
             to={href}
-            className={label === 'Dashboard' ? 'activeLink' : ''}
+            className={label === 'Dashboard' ? '' : ''}
           >
             {label}
           </Link>
