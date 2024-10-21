@@ -11,6 +11,7 @@ export default function AuthComponent() {
     state: '',
     district: '',
     ward: '',
+    captchaInput: '',
   })
 
   const handleChange = (e) => {
@@ -83,10 +84,19 @@ export default function AuthComponent() {
                   readOnly
                   className='w-2/3 bg-gray-200'
                 />
-                <InputField
+                <input
                   type='text'
                   name='captchaInput'
                   placeholder='Enter Captcha'
+                  value={formData.captchaInput}
+                  onFocus={(e) =>
+                    e.target.setSelectionRange(
+                      e.target.value.length,
+                      e.target.value.length
+                    )
+                  }
+                  onChange={handleChange}
+                  className='w-1/3'
                 />
               </div>
               <InputField

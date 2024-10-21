@@ -22,3 +22,14 @@ input {
 .activeBtn {
   @apply bg-medium-green text-white;
 }
+
+header button {
+  @apply w-full bg-medium-green font-bold p-4;
+}
+
+header a {
+  @apply font-medium px-2 hover:text-fuchsia-300;
+}
+.activeLink {
+  @apply text-fuchsia-300;
+}

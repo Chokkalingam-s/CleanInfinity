@@ -1,5 +1,5 @@
-import AuthComponent from './components/AuthComp'
+import Layout from './components/Layout'
 
 export default function App() {
-  return <AuthComponent />
+  return <Layout />
 }
