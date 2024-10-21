@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function AuthComponent() {
+export default function AuthComponent({ setSignUp }) {
   const [isSignUp, setIsSignUp] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -12,7 +12,7 @@ export default function AuthComponent() {
     district: '',
     ward: '',
     captchaInput: '',
-    otp: '', // Added OTP to state
+    otp: '',
   })
 
   const handleChange = (e) => {
@@ -45,7 +45,7 @@ export default function AuthComponent() {
       name={name}
       value={formData[name]}
       onChange={handleChange}
-      className={`w-full ${className}`} // Add className here
+      className={`w-full ${className}`}
     >
       {options.map((option, index) => (
         <option
@@ -126,12 +126,12 @@ export default function AuthComponent() {
               />
               <div className='flex items-center'>
                 <InputField
-                  type='number' // Changed to number type
+                  type='number'
                   name='otp'
                   placeholder='Enter OTP'
                   className='w-10/12'
-                  min='0' // Optional: Set min to 0 for number input
-                  onFocus={(e) => e.target.select()} // Select the content on focus
+                  min='0'
+                  onFocus={(e) => e.target.select()}
                 />
                 <button
                   type='button'
@@ -161,7 +161,14 @@ export default function AuthComponent() {
               />
             </>
           )}
-          <button type='submit'>Submit</button>
+          <button type='submit'>
+            <a
+              href='/dashboard'
+              onClick={() => setSignUp(false)}
+            >
+              Submit
+            </a>
+          </button>
           <div className='w-full group authBtn border-2 border-medium-green rounded-lg mt-4 font-bold'>
             <button
               type='button'

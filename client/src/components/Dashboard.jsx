@@ -30,7 +30,7 @@ export default function Dashboard({ creditVal, BarGraphVals }) {
           <BarGraph data={BarGraphVals} />
         </div>
         <h3>How to use?</h3>
-        <div className='w-1/2 grid grid-cols-3 items-center justify-center'>
+        <div className='w-[70%] grid grid-cols-4 items-center justify-center'>
           {titles.map((title, i) => (
             <div
               className='p-4 w-11/12 mb-4 items-center justify-center border rounded shadow-lg hover:shadow-md'
