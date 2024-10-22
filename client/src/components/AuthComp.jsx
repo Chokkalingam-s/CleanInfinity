@@ -41,14 +41,14 @@ export default function AuthComponent({ states, districts, wards }) {
               className={`animate ${!isSignUp ? 'activeBtn' : 'notActiveBtn'}`}
               onClick={() => setIsSignUp(!isSignUp)}
             >
-              {isSignUp ? 'Sign in' : 'Sign up'}
+              Sign In
             </button>
             <button
               type='button'
               className={`animate ${isSignUp ? 'activeBtn' : 'notActiveBtn'}`}
               onClick={() => setIsSignUp(!isSignUp)}
             >
-              {!isSignUp ? 'Sign in' : 'Sign up'}
+              Sign Up
             </button>
           </div>
           {!isSignUp ? (
