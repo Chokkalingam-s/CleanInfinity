@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function AuthComponent({ setSignUp }) {
+export default function AuthComponent({ setSignUp,states,districts,wards }) {
   const [isSignUp, setIsSignUp] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -20,48 +20,6 @@ export default function AuthComponent({ setSignUp }) {
     setFormData({ ...formData, [name]: value })
   }
 
-  const InputField = ({
-    type,
-    name,
-    placeholder,
-    required = true,
-    className = '',
-    ...props
-  }) => (
-    <input
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      value={formData[name]}
-      onChange={handleChange}
-      required={required}
-      className={`w-full ${className}`} // Add className here
-      {...props}
-    />
-  )
-
-  const SelectField = ({ name, options, className = '' }) => (
-    <select
-      name={name}
-      value={formData[name]}
-      onChange={handleChange}
-      className={`w-full ${className}`}
-    >
-      {options.map((option, index) => (
-        <option
-          key={index}
-          value={option}
-        >
-          {option}
-        </option>
-      ))}
-    </select>
-  )
-
-  const states = ['State 1', 'State 2']
-  const districts = ['District 1', 'District 2']
-  const wards = ['Ward 1', 'Ward 2']
-
   return (
     <div
       aria-label='for creating a full page view'
@@ -72,104 +30,11 @@ export default function AuthComponent({ setSignUp }) {
           onSubmit={(e) => {
             e.preventDefault()
             console.log(formData)
+            setSignUp(false)
+            // navigate to dashboard here, if needed
           }}
         >
-          {!isSignUp ? (
-            <>
-              <InputField
-                type='text'
-                name='mobile'
-                placeholder='Mobile No'
-                className='w-full'
-              />
-              <InputField
-                type='email'
-                name='email'
-                placeholder='Mail Id'
-              />
-              <div className='flex items-center'>
-                <input
-                  type='text'
-                  value='ABC123'
-                  readOnly
-                  className='w-2/3 bg-gray-200'
-                />
-                <InputField
-                  type='text'
-                  name='captchaInput'
-                  placeholder='Enter Captcha'
-                  className='w-1/3'
-                />
-              </div>
-              <InputField
-                type='password'
-                name='password'
-                placeholder='Password'
-              />
-            </>
-          ) : (
-            <>
-              <InputField
-                type='text'
-                name='name'
-                placeholder='Name'
-              />
-              <InputField
-                type='text'
-                name='mobile'
-                placeholder='Mobile No'
-              />
-              <InputField
-                type='email'
-                name='email'
-                placeholder='Mail Id'
-              />
-              <div className='flex items-center'>
-                <InputField
-                  type='number'
-                  name='otp'
-                  placeholder='Enter OTP'
-                  className='w-10/12'
-                  min='0'
-                  onFocus={(e) => e.target.select()}
-                />
-                <button
-                  type='button'
-                  className='ml-2'
-                >
-                  Verify OTP
-                </button>
-              </div>
-              <InputField
-                type='text'
-                name='address'
-                placeholder='Address'
-              />
-              <div className='flex'>
-                <SelectField
-                  name='state'
-                  options={states}
-                />
-                <SelectField
-                  name='district'
-                  options={districts}
-                />
-              </div>
-              <SelectField
-                name='ward'
-                options={wards}
-              />
-            </>
-          )}
-          <button type='submit'>
-            <a
-              href='/dashboard'
-              onClick={() => setSignUp(false)}
-            >
-              Submit
-            </a>
-          </button>
-          <div className='w-full group authBtn border-2 border-medium-green rounded-lg mt-4 font-bold'>
+          <div className='w-full group authBtn border-2 border-medium-green rounded-lg font-bold mb-4'>
             <button
               type='button'
               className={`animate ${!isSignUp ? 'activeBtn' : 'notActiveBtn'}`}
@@ -185,6 +50,156 @@ export default function AuthComponent({ setSignUp }) {
               {!isSignUp ? 'Sign in' : 'Sign up'}
             </button>
           </div>
+          {!isSignUp ? (
+            <>
+              <input
+                type='text'
+                name='mobile'
+                placeholder='Mobile No'
+                value={formData.mobile}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <input
+                type='email'
+                name='email'
+                placeholder='Mail Id'
+                value={formData.email}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <div className='flex items-center mb-2'>
+                <input
+                  type='text'
+                  value='ABC123'
+                  readOnly
+                  className='bg-gray-200 w-1/2'
+                />
+                <input
+                  type='text'
+                  name='captchaInput'
+                  placeholder='Enter Captcha'
+                  value={formData.captchaInput}
+                  onChange={handleChange}
+                  className='w-1/3 ml-2'
+                />
+              </div>
+              <input
+                type='password'
+                name='password'
+                placeholder='Password'
+                value={formData.password}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type='text'
+                name='name'
+                placeholder='Name'
+                value={formData.name}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <input
+                type='text'
+                name='mobile'
+                placeholder='Mobile No'
+                value={formData.mobile}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <input
+                type='email'
+                name='email'
+                placeholder='Mail Id'
+                value={formData.email}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <div className='flex items-center justify-center gap-x-2 mb-2'>
+                <input
+                  type='number'
+                  name='otp'
+                  placeholder='Enter OTP'
+                  value={formData.otp}
+                  onChange={handleChange}
+                  min='0'
+                  className='w-full mb-0'
+                  onFocus={(e) => e.target.select()}
+                />
+                <button
+                  type='button'
+                  className='w-full bg-medium-green rounded-lg p-2 shadow-lg hover:bg-transparent hover:border-2 border-medium-green hover:text-dark-green font-bold hover:shadow-sm'
+                >
+                  Verify OTP
+                </button>
+              </div>
+              <input
+                type='text'
+                name='address'
+                placeholder='Address'
+                value={formData.address}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <div className='flex mb-2'>
+                <select
+                  name='state'
+                  value={formData.state}
+                  onChange={handleChange}
+                  className='w-1/2 mr-2'
+                >
+                  {states.map((state, index) => (
+                    <option
+                      key={index}
+                      value={state}
+                    >
+                      {state}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  name='district'
+                  value={formData.district}
+                  onChange={handleChange}
+                  className='w-1/2'
+                >
+                  {districts.map((district, index) => (
+                    <option
+                      key={index}
+                      value={district}
+                    >
+                      {district}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <select
+                name='ward'
+                value={formData.ward}
+                onChange={handleChange}
+                className='w-full mb-2'
+              >
+                {wards.map((ward, index) => (
+                  <option
+                    key={index}
+                    value={ward}
+                  >
+                    {ward}
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
+          <button
+            type='submit'
+            className='w-full bg-medium-green rounded-lg p-2 shadow-lg hover:bg-transparent hover:border-2 border-medium-green hover:text-dark-green font-bold hover:shadow-sm mt-4'
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>

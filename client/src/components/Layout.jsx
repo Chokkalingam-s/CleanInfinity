@@ -12,6 +12,9 @@ import Progress from './Progress'
 
 function LayoutContent({ data, credits, setIsSignUp }) {
   const location = useLocation()
+  const states = ['State 1', 'State 2']
+  const districts = ['District 1', 'District 2']
+  const wards = ['Ward 1', 'Ward 2']
 
   return (
     <div
@@ -49,7 +52,14 @@ function LayoutContent({ data, credits, setIsSignUp }) {
           />
           <Route
             path='/'
-            element={<AuthComponent setSignUp={setIsSignUp} />}
+            element={
+              <AuthComponent
+                setSignUp={setIsSignUp}
+                districts={districts}
+                states={states}
+                wards={wards}
+              />
+            }
           />
         </Routes>
       </main>
