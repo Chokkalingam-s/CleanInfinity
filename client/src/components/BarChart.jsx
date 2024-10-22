@@ -17,7 +17,7 @@ export default function BarGraph({ data }) {
         <div key={index} className='flex flex-col items-center'>
           <div
             style={{ height: `${data[index]}px` }}
-            className='w-8 bg-medium-green rounded-lg hover:bg-dark-green'
+            className='w-8 bg-medium-green rounded-lg hover:bg-dark-green shadow-lg'
           ></div>
           <span className='mt-2 text-sm font-bold'>{month}</span>
         </div>
