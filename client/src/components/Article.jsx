@@ -1,11 +1,10 @@
 export default function Article() {
     return (
-        
       <div className='flex flex-row max-w-sm mx-auto border border-gray-300 rounded-lg overflow-hidden shadow-lg backdrop-blur-lg bg-white/30'>
         <img
           src='https://placehold.co/300x430/'
           alt='Card Image'
-          className='w-40 h-full object-cover' // Adjusted width for horizontal layout
+          className='w-40 h-full object-cover'
         />
         <div className='p-4 backdrop-blur-lg bg-white/20 w-full flex flex-col justify-between'>
           <h3 className='text-xl font-semibold text-gray-800 mb-2'>Card Title</h3>
@@ -18,7 +17,6 @@ export default function Article() {
           </button>
         </div>
       </div>
-      
     );
   }
   

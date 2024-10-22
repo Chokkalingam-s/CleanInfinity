@@ -10,10 +10,12 @@ import Navbar from './Navbar'
 import Awareness from './Awareness'
 import Progress from './Progress'
 import NFCPage from './NFC'
+import states from '../data/stateAndDistrict.json'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function LayoutContent({ data, credits }) {
   const location = useLocation()
-  const states = ['State 1', 'State 2']
   const districts = ['District 1', 'District 2']
   const wards = ['Ward 1', 'Ward 2']
 
@@ -23,6 +25,7 @@ function LayoutContent({ data, credits }) {
         location.pathname === '/' ? 'pt-0' : 'pt-12'
       } bg-lightest-green`}
     >
+      <ToastContainer />
       {location.pathname !== '/' && <Navbar />}
       <main>
         <Routes>
