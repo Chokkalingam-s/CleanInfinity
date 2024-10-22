@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Navbar() {
+  const location = useLocation() // Get the current location
   const links = [
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/awareness', label: 'Awareness' },
@@ -22,7 +23,11 @@ export default function Navbar() {
           <Link
             key={href}
             to={href}
-            className={label === 'Dashboard' ? '' : ''}
+            className={
+              location.pathname === href
+                ? 'text-medium-green'
+                : 'text-dark-green'
+            }
           >
             {label}
           </Link>
