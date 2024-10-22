@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function AuthComponent({ setSignUp,states,districts,wards }) {
+export default function AuthComponent({ states, districts, wards }) {
   const [isSignUp, setIsSignUp] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -30,8 +30,6 @@ export default function AuthComponent({ setSignUp,states,districts,wards }) {
           onSubmit={(e) => {
             e.preventDefault()
             console.log(formData)
-            setSignUp(false)
-            // navigate to dashboard here, if needed
           }}
         >
           <div className='w-full group authBtn border-2 border-medium-green rounded-lg font-bold mb-4'>
@@ -196,6 +194,10 @@ export default function AuthComponent({ setSignUp,states,districts,wards }) {
           )}
           <button
             type='submit'
+            onClick={() => {
+              console.log(formData)
+              window.location.href = '/dashboard'
+            }}
             className='w-full bg-medium-green rounded-lg p-2 shadow-lg hover:bg-transparent hover:border-2 border-medium-green hover:text-dark-green font-bold hover:shadow-sm mt-4'
           >
             Submit

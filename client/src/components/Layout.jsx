@@ -10,7 +10,7 @@ import Navbar from './Navbar'
 import Awareness from './Awareness'
 import Progress from './Progress'
 
-function LayoutContent({ data, credits, setIsSignUp }) {
+function LayoutContent({ data, credits }) {
   const location = useLocation()
   const states = ['State 1', 'State 2']
   const districts = ['District 1', 'District 2']
@@ -54,7 +54,6 @@ function LayoutContent({ data, credits, setIsSignUp }) {
             path='/'
             element={
               <AuthComponent
-                setSignUp={setIsSignUp}
                 districts={districts}
                 states={states}
                 wards={wards}
