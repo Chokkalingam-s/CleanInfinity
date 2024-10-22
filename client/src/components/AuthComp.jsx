@@ -25,6 +25,9 @@ export default function AuthComponent({ states, districts, wards }) {
       aria-label='for creating a full page view'
       className='min-h-screen flex items-center justify-center bg-lightest-green'
     >
+      <div>
+        <img src='https://placehold.co/600x400' />
+      </div>
       <div className='w-1/3 bg-light-green p-6 rounded-lg shadow-2xl'>
         <form
           onSubmit={(e) => {
@@ -71,7 +74,7 @@ export default function AuthComponent({ states, districts, wards }) {
                   type='text'
                   value='ABC123'
                   readOnly
-                  className='bg-gray-200 w-1/2'
+                  className='w-1/2'
                 />
                 <input
                   type='text'
@@ -101,40 +104,6 @@ export default function AuthComponent({ states, districts, wards }) {
                 onChange={handleChange}
                 className='w-full mb-2'
               />
-              <input
-                type='text'
-                name='mobile'
-                placeholder='Mobile No'
-                value={formData.mobile}
-                onChange={handleChange}
-                className='w-full mb-2'
-              />
-              <input
-                type='email'
-                name='email'
-                placeholder='Mail Id'
-                value={formData.email}
-                onChange={handleChange}
-                className='w-full mb-2'
-              />
-              <div className='flex items-center justify-center gap-x-2 mb-2'>
-                <input
-                  type='number'
-                  name='otp'
-                  placeholder='Enter OTP'
-                  value={formData.otp}
-                  onChange={handleChange}
-                  min='0'
-                  className='w-full mb-0'
-                  onFocus={(e) => e.target.select()}
-                />
-                <button
-                  type='button'
-                  className='w-full bg-medium-green rounded-lg p-2 shadow-lg hover:bg-transparent hover:border-2 border-medium-green hover:text-dark-green font-bold hover:shadow-sm'
-                >
-                  Verify OTP
-                </button>
-              </div>
               <input
                 type='text'
                 name='address'
@@ -190,6 +159,20 @@ export default function AuthComponent({ states, districts, wards }) {
                   </option>
                 ))}
               </select>
+              <input
+                type='text'
+                name='otp'
+                placeholder='Enter OTP'
+                value={formData.otp}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <button
+                type='button'
+                className='w-full bg-medium-green rounded-lg p-2 shadow-lg hover:bg-transparent hover:border-2 border-medium-green hover:text-dark-green font-bold hover:shadow-sm mb-4'
+              >
+                Verify OTP
+              </button>
             </>
           )}
           <button
