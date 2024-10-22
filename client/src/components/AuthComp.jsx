@@ -41,14 +41,14 @@ export default function AuthComponent({ states, districts, wards }) {
               className={`animate ${!isSignUp ? 'activeBtn' : 'notActiveBtn'}`}
               onClick={() => setIsSignUp(!isSignUp)}
             >
-              {isSignUp ? 'Sign in' : 'Sign up'}
+              Sign In
             </button>
             <button
               type='button'
               className={`animate ${isSignUp ? 'activeBtn' : 'notActiveBtn'}`}
               onClick={() => setIsSignUp(!isSignUp)}
             >
-              {!isSignUp ? 'Sign in' : 'Sign up'}
+              Sign Up
             </button>
           </div>
           {!isSignUp ? (
@@ -109,6 +109,22 @@ export default function AuthComponent({ states, districts, wards }) {
                 name='address'
                 placeholder='Address'
                 value={formData.address}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <input
+                type='text'
+                name='mobile'
+                placeholder='Mobile Number'
+                value={formData.mobile}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <input
+                type='email'
+                name='email'
+                placeholder='Email'
+                value={formData.email}
                 onChange={handleChange}
                 className='w-full mb-2'
               />
