@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Card from './Card'
 
 function Accordion({ title, content }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,26 +17,7 @@ function Accordion({ title, content }) {
     </div>
   )
 }
-function Card() {
-  return (
-    <div className='flex border rounded shadow'>
-      <div className='w-3/10'>
-        <img
-          src='https://via.placeholder.com/150'
-          alt='Card Image'
-          className='h-full object-cover'
-        />
-      </div>
-      <div className='w-7/10 p-4'>
-        <h3 className='text-xl font-bold'>Card Title</h3>
-        <p className='text-sm text-gray-600'>
-          This is a description of the card. It can be about anything you want
-          to display in this section.
-        </p>
-      </div>
-    </div>
-  )
-}
+
 export default function Awareness() {
   return (
     <div className='w-1/2 flex items-center justify-center flex-col m-auto'>

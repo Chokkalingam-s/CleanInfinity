@@ -9,6 +9,7 @@ import Dashboard from './Dashboard'
 import Navbar from './Navbar'
 import Awareness from './Awareness'
 import Progress from './Progress'
+import NFCPage from './NFC'
 
 function LayoutContent({ data, credits }) {
   const location = useLocation()
@@ -44,7 +45,7 @@ function LayoutContent({ data, credits }) {
           />
           <Route
             path='/nfc'
-            element={<Progress />}
+            element={<NFCPage />}
           />
           <Route
             path='/profile'

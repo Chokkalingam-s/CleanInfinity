@@ -1,4 +1,5 @@
 import BarGraph from './BarChart'
+import VerticalCard from './VerticalCard'
 
 export default function Dashboard({ creditVal, BarGraphVals }) {
   const titles = [
@@ -30,20 +31,7 @@ export default function Dashboard({ creditVal, BarGraphVals }) {
           <BarGraph data={BarGraphVals} />
         </div>
         <h3>How to use?</h3>
-        <div className='w-[70%] grid grid-cols-4 items-center justify-center'>
-          {titles.map((title, i) => (
-            <div
-              className='p-4 w-11/12 mb-4 items-center justify-center border rounded shadow-lg hover:shadow-md'
-              key={i}
-            >
-              <img
-                src='https://via.placeholder.com/150'
-                className='rounded-lg'
-              />
-              <p className='font-medium text-xl text-center'>{title}</p>
-            </div>
-          ))}
-        </div>
+        <VerticalCard titles={titles} />
       </div>
     </>
   )
