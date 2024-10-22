@@ -3,7 +3,7 @@ export default function Card() {
     <div className='flex border rounded shadow'>
       <div className='w-3/10'>
         <img
-          src='https://via.placeholder.com/150'
+          src='https://placehold.co/150/'
           alt='Card Image'
           className='h-full object-cover'
         />
