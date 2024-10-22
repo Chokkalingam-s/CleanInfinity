@@ -112,6 +112,22 @@ export default function AuthComponent({ states, districts, wards }) {
                 onChange={handleChange}
                 className='w-full mb-2'
               />
+              <input
+                type='text'
+                name='mobile'
+                placeholder='Mobile Number'
+                value={formData.mobile}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
+              <input
+                type='email'
+                name='email'
+                placeholder='Email'
+                value={formData.email}
+                onChange={handleChange}
+                className='w-full mb-2'
+              />
               <div className='flex mb-2'>
                 <select
                   name='state'
