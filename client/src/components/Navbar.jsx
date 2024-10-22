@@ -15,7 +15,7 @@ export default function Navbar() {
     <header className='h-10 flex items-center fixed w-full justify-between px-2 top-0 bg-light-green z-10 rounded-lg shadow-lg p-4'>
       <img
         src='/1.png'
-        className='w-1/12 h-10 bg-white'
+        className='w-1/12 h-10 '
         alt='Logo'
       />
       <nav className='flex gap-2 menu'>
