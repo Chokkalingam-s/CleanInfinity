@@ -1,24 +1,23 @@
-import BarChart from './BarChart';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import BarChart from './BarChart'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 
 export default function Progress() {
-  const data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 75];
+  const data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 75]
 
-  // Define a smaller size for the CircularProgressbar
   const progressBarStyles = {
     root: {
-      width: '120px', // Adjust width for smaller screens
-      height: '120px', // Adjust height for smaller screens
+      width: '120px',
+      height: '120px',
     },
     path: {
-      stroke: '#4CAF50', // Customize the path color
+      stroke: '#4CAF50',
     },
     text: {
-      fill: '#4CAF50', // Customize the text color
-      fontSize: '12px', // Adjust text size
+      fill: '#4CAF50',
+      fontSize: '12px',
     },
-  };
+  }
 
   return (
     <div className='p-4 sm:p-6'>
@@ -86,5 +85,5 @@ export default function Progress() {
 
       <BarChart data={data} />
     </div>
-  );
+  )
 }
