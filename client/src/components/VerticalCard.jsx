@@ -8,7 +8,7 @@ export default function VerticalCard({ titles }) {
         >
           <img
             src='https://via.placeholder.com/150'
-            className='rounded-lg'
+            className='rounded-lg vert-img'
           />
           <p className='font-medium text-xl text-center'>{title}</p>
         </div>

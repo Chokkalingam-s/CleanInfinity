@@ -1,7 +1,7 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
-  const location = useLocation() // Get the current location
+  const location = useLocation(); // Get the current location
   const links = [
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/awareness', label: 'Awareness' },
@@ -9,30 +9,28 @@ export default function Navbar() {
     { href: '/nfc', label: 'NFC Pairing' },
     { href: '/profile', label: 'Profile' },
     { href: '/', label: 'Log out' },
-  ]
+  ];
 
   return (
-    <header className='h-10 flex items-center fixed w-full justify-between px-2 top-0 bg-light-green z-10 rounded-lg shadow-lg p-4'>
-      <img
-        src='/1.png'
-        className='w-1/12 h-10 '
-        alt='Logo'
-      />
-      <nav className='flex gap-2 menu'>
-        {links.map(({ href, label }) => (
-          <Link
-            key={href}
-            to={href}
-            className={
-              location.pathname === href
-                ? 'text-medium-green'
-                : 'text-dark-green'
-            }
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
+    <header className="fixed top-0 w-full bg-black z-10 shadow-lg">
+      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+        <Link to="/dashboard">
+          <img src="/1.png" className="w-12 h-10" alt="Logo" />
+        </Link>
+        <nav className="flex gap-4">
+          {links.map(({ href, label }) => (
+            <Link
+              key={href}
+              to={href}
+              className={`text-green-500 hover:text-green-600 transition-colors duration-300 ${
+                location.pathname === href ? 'font-semibold' : 'font-medium'
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
-  )
+  );
 }
