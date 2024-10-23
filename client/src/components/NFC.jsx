@@ -1,4 +1,4 @@
-import Card from './Card';
+
 import VerticalCard from './VerticalCard';
 
 export default function NFCPage() {
@@ -11,7 +11,7 @@ export default function NFCPage() {
       {/* Card Section */}
       <div className="flex flex-col md:flex-row justify-center mb-6">
         <div className="w-full md:w-1/2 lg:w-1/3 p-2">
-          <Card />
+       
         </div>
       </div>
 
