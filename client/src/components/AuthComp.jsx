@@ -190,15 +190,16 @@ export default function AuthComponent({ states, wards }) {
                 onChange={handleChange}
                 className="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
               />
-              <input
-                type="email"
-                name="email"
-                placeholder="Mail Id"
-                value={formData.email}
+               <input
+                type='password'
+                name='password'
+                placeholder='Password'
+                value={formData.password}
                 onChange={handleChange}
                 className="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
               />
-              <div className="flex items-center mb-4">
+             
+              <div className='flex items-center'>
                 <input
                   type="text"
                   value="ABC123"
@@ -214,14 +215,7 @@ export default function AuthComponent({ states, wards }) {
                   className="w-1/2 ml-2 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                 />
               </div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-              />
+             
             </>
           )}
           <button
