@@ -1,1 +1,29 @@
 @tailwind base;@tailwind components;@tailwind utilities;input,select{@apply rounded-lg p-2 mb-4 hover:shadow-md bg-lightest-green}.animate{@apply transition-all duration-700 ease-in-out}.authBtn button{@apply w-1/2 p-2}.notActivebtn{@apply text-dark-green border-2 border-medium-green border-solid}.activeBtn{@apply bg-medium-green}header button{@apply w-full bg-medium-green font-bold p-4}header a{@apply font-medium px-2 hover:text-dark-green}h1{@apply text-4xl font-bold}h2{@apply text-3xl font-semibold}h3{@apply text-2xl font-medium}h4{@apply text-xl font-medium}h5{@apply text-lg font-medium}h1,h2,h3,h4,h5{@apply my-6}
+@keyframes greenAnimation {
+    0% {
+      background-color: #d4f1d4;
+    }
+    50% {
+      background-color: #a4d4a4;
+    }
+    100% {
+      background-color: #d4f1d4;
+    }
+  }
+  
+  .bg-green-animation {
+    animation: greenAnimation 5s ease-in-out infinite;
+  }
+  
+  input,
+  select {
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus,
+  select:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+  
