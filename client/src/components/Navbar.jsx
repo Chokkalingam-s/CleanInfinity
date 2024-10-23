@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   const location = useLocation(); // Get the current location
   const links = [
     { href: '/dashboard', label: 'Dashboard' },
@@ -8,7 +8,6 @@ export default function Navbar() {
     { href: '/progress', label: 'Progress' },
     { href: '/nfc', label: 'NFC Pairing' },
     { href: '/profile', label: 'Profile' },
-    { href: '/', label: 'Log out' },
   ];
 
   return (
@@ -17,7 +16,7 @@ export default function Navbar() {
         <Link to="/dashboard">
           <img src="/1.png" className="w-12 h-10" alt="Logo" />
         </Link>
-        <nav className="flex gap-4">
+        <nav className="flex gap-4 items-center">
           {links.map(({ href, label }) => (
             <Link
               key={href}
@@ -29,6 +28,18 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+          {user ? (
+            <div className="text-green-500 font-semibold">{user.name}</div> // Show user name
+          ) : (
+            <Link
+              to="/"
+              className={`text-green-500 hover:text-green-600 transition-colors duration-300 ${
+                location.pathname === '/' ? 'font-semibold' : 'font-medium'
+              }`}
+            >
+              Log out
+            </Link>
+          )}
         </nav>
       </div>
     </header>
