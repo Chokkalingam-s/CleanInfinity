@@ -202,14 +202,15 @@ export default function AuthComponent({ states, wards }) {
                 onChange={handleChange}
                 className='w-full'
               />
-              <input
-                type='email'
-                name='email'
-                placeholder='Mail Id'
-                value={formData.email}
+               <input
+                type='password'
+                name='password'
+                placeholder='Password'
+                value={formData.password}
                 onChange={handleChange}
                 className='w-full'
               />
+             
               <div className='flex items-center'>
                 <input
                   type='text'
@@ -226,14 +227,7 @@ export default function AuthComponent({ states, wards }) {
                   className='ml-2'
                 />
               </div>
-              <input
-                type='password'
-                name='password'
-                placeholder='Password'
-                value={formData.password}
-                onChange={handleChange}
-                className='w-full'
-              />
+             
             </>
           )}
           <button
