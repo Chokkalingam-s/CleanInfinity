@@ -17,12 +17,12 @@ export default function AuthComponent({ states, wards }) {
   })
   const [otpSent, setOtpSent] = useState(false)
   const [otpVerified, setOtpVerified] = useState(false)
-  const [districtsArr, setDistricts] = useState([states.states[0].districts])
+  const [districtsArr, setDistricts] = useState(states.states[0].districts)
   const [captcha, setCaptcha] = useState('')
   const [captchaVerified, setCaptchaVerified] = useState(false)
 
   useEffect(() => {
-    generateCaptcha() // Generate a new captcha when the component loads
+    generateCaptcha()
   }, [])
 
   const generateCaptcha = () => {
@@ -52,8 +52,11 @@ export default function AuthComponent({ states, wards }) {
       const selectedState = states.states.find(
         (stateObj) => stateObj.state === value
       )
-      if (selectedState) setDistricts(selectedState.districts)
-      else setDistricts([])
+      if (selectedState) {
+        setDistricts(selectedState.districts)
+      } else {
+        setDistricts([])
+      }
     }
   }
 
@@ -72,7 +75,7 @@ export default function AuthComponent({ states, wards }) {
     if (isSignUp && otpVerified) window.location.href = '/dashboard'
     else if (!isSignUp && captchaVerified) window.location.href = '/dashboard'
   }
-
+  console.log(districtsArr[0])
   return (
     <div className='min-h-screen flex items-center justify-center'>
       <div className='max-w-sm p-8 bg-light-green rounded-xl shadow-lg'>
@@ -163,7 +166,7 @@ export default function AuthComponent({ states, wards }) {
                     onChange={handleChange}
                     className='input-field'
                   />
-                  <div className='flex mb-4'>
+                  <div className='flex mb-4 gap-x-2'>
                     <select
                       name='state'
                       value={formData.state}
@@ -187,7 +190,7 @@ export default function AuthComponent({ states, wards }) {
                     >
                       {districtsArr.map((district, index) => (
                         <option
-                          key={index}
+                          key={`${index}`}
                           value={district}
                         >
                           {district}
