@@ -17,6 +17,9 @@ importers:
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
+      client:
+        specifier: 'file:'
+        version: file:(@popperjs/core@2.11.8)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -660,6 +663,9 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
+
+  'client@file:':
+    resolution: {directory: '', type: directory}
 
   color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -2297,6 +2303,24 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  client@file:(@popperjs/core@2.11.8):
+    dependencies:
+      autoprefixer: 10.4.20(postcss@8.4.47)
+      axios: 1.7.7
+      bootstrap: 5.3.3(@popperjs/core@2.11.8)
+      dotenv: 16.4.5
+      jquery: 3.7.1
+      postcss: 8.4.47
+      react: 18.3.1
+      react-circular-progressbar: 2.1.0(react@18.3.1)
+      react-dom: 18.3.1(react@18.3.1)
+      react-router-dom: 6.27.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      tailwindcss: 3.4.14
+    transitivePeerDependencies:
+      - '@popperjs/core'
+      - debug
+      - ts-node
 
   color-convert@1.9.3:
     dependencies:
