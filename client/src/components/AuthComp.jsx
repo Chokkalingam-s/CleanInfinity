@@ -52,7 +52,7 @@ export default function AuthComponent({ states, wards }) {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-animation">
-      <div className="w-full max-w-lg p-8 bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
+      <div className="w-full max-w-lg p-8 bg-light-green rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
         <div className="flex justify-center mb-6">
           <button
             type="button"
