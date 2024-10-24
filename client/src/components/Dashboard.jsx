@@ -13,7 +13,7 @@ export default function Dashboard({ creditVal, BarGraphVals }) {
   return (
     <>
       <div
-        className='w-28 fixed right-4 top-16 flex items-center justify-between p-2 rounded-lg bg-medium-green text-white shadow-lg'
+        className='w-28 fixed right-4 top-16 flex items-center justify-between p-2 rounded-lg bg-medium-green shadow-lg text-lightest-green'
         id='credit'
       >
         <img
