@@ -14,6 +14,7 @@ import Profile from './Profile';
 import states from '../data/stateAndDistrict.json';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NFCCard from './NFC-Card'
 
 function LayoutContent({ data, credits }) {
   const location = useLocation();
@@ -37,6 +38,7 @@ function LayoutContent({ data, credits }) {
           <Route path="/awareness" element={<Awareness />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/nfc" element={<NFCPage />} />
+          <Route path="/nfc-card" element={<NFCCard />} />
           <Route path="/profile" element={<Profile />} /> {/* Correct Profile Component */}
           <Route
             path="/"
