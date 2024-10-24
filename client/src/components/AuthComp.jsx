@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
+import { useState, useEffect } from 'react' 
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 export default function AuthComponent({ states, wards }) {
-  const [isSignUp, setIsSignUp] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -14,68 +15,111 @@ export default function AuthComponent({ states, wards }) {
     ward: '',
     captchaInput: '',
     otp: '',
-  })
-  const [otpSent, setOtpSent] = useState(false)
-  const [otpVerified, setOtpVerified] = useState(false)
-  const [districtsArr, setDistricts] = useState(states.states[0].districts)
-  const [captcha, setCaptcha] = useState('')
-  const [captchaVerified, setCaptchaVerified] = useState(false)
+  });
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+  const [districtsArr, setDistricts] = useState(states.states[0].districts);
+  const [captcha, setCaptcha] = useState('');
+  const [captchaVerified, setCaptchaVerified] = useState(false);
 
   useEffect(() => {
-    generateCaptcha()
-  }, [])
+    generateCaptcha();
+  }, []);
 
   const generateCaptcha = () => {
     const randomCaptcha = Math.random()
       .toString(36)
       .substring(2, 8)
-      .toUpperCase()
-    setCaptcha(randomCaptcha)
-  }
+      .toUpperCase();
+    setCaptcha(randomCaptcha);
+  };
 
   const verifyCaptcha = () => {
     if (formData.captchaInput === captcha) {
-      setCaptchaVerified(true)
-      toast.success('Captcha verified successfully!')
+      setCaptchaVerified(true);
+      toast.success('Captcha verified successfully!');
     } else {
-      toast.error('Captcha is incorrect, please try again.')
-      setCaptchaVerified(false)
-      generateCaptcha()
+      toast.error('Captcha is incorrect, please try again.');
+      setCaptchaVerified(false);
+      generateCaptcha();
     }
-  }
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
     if (name === 'state') {
       const selectedState = states.states.find(
         (stateObj) => stateObj.state === value
-      )
+      );
       if (selectedState) {
-        setDistricts(selectedState.districts)
+        setDistricts(selectedState.districts);
       } else {
-        setDistricts([])
+        setDistricts([]);
       }
     }
-  }
+  };
 
   const sendOtp = () => {
-    setOtpSent(true)
-    toast.success('OTP sent successfully!')
-  }
+    setOtpSent(true);
+    toast.success('OTP sent successfully!');
+  };
 
   const verifyOtp = () => {
-    setOtpVerified(true)
-    toast.success('OTP verified successfully!')
-  }
+    setOtpVerified(true);
+    toast.success('OTP verified successfully!');
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (isSignUp && otpVerified) window.location.href = '/dashboard'
-    else if (!isSignUp && captchaVerified) window.location.href = '/dashboard'
-  }
-  console.log(districtsArr[0])
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (isSignUp) {
+        // Sign Up Logic
+        const response = await axios.post('http://localhost:5000/signup', {
+          name: formData.name,
+          mobile: formData.mobile,
+          email: formData.email,
+          address: formData.address,
+          state: formData.state,
+          district: formData.district,
+          ward: formData.ward,
+          password: formData.password,
+        });
+
+        toast.success(response.data || 'User registered successfully');
+        // Reset form after signup
+        setFormData({
+          email: '',
+          password: '',
+          name: '',
+          mobile: '',
+          address: '',
+          state: '',
+          district: '',
+          ward: '',
+          captchaInput: '',
+          otp: '',
+        });
+      } else {
+        // Sign In Logic
+        const response = await axios.post('http://localhost:5000/signin', {
+          mobile: formData.mobile,
+          password: formData.password,
+        });
+
+        toast.success(response.data || 'User logged in successfully');
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        toast.error(error.response.data);
+      } else {
+        toast.error('An error occurred during authentication');
+      }
+    }
+  };
+
   return (
     <div className='min-h-screen flex items-center justify-center'>
       <div className='max-w-sm p-8 bg-light-green rounded-xl shadow-lg'>
@@ -150,6 +194,14 @@ export default function AuthComponent({ states, wards }) {
 
               {otpVerified && (
                 <>
+                 <input
+                type='password'
+                name='password'
+                placeholder='Password'
+                value={formData.password}
+                onChange={handleChange}
+                className='input-field'
+              />
                   <input
                     type='email'
                     name='email'
@@ -276,5 +328,5 @@ export default function AuthComponent({ states, wards }) {
         </form>
       </div>
     </div>
-  )
+  );
 }

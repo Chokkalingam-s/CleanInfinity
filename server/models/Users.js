@@ -13,6 +13,10 @@ const Users = sequelize.define('Users', {
         allowNull: false,
         unique: true
     },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     mailId: {
         type: DataTypes.STRING,
         allowNull: false,
