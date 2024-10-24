@@ -12,10 +12,8 @@
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
-    "bootstrap": "^5.3.3",
     "client": "file:",
     "dotenv": "^16.4.5",
-    "jquery": "^3.7.1",
     "postcss": "^8.4.47",
     "react": "^18.3.1",
     "react-circular-progressbar": "^2.1.0",
@@ -30,7 +28,6 @@
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
     "axios": "^1.7.4",
-    "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.1",
