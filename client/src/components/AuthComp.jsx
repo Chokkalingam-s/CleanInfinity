@@ -115,8 +115,11 @@ export default function AuthComponent({ states, wards }) {
       if (error.response && error.response.data) {
         toast.error(error.response.data);
       } else {
-        toast.error('An error occurred during authentication');
-      }
+        if (error.response && error.response.status === 409) {
+        toast.error(error.response.data.message);
+    } else {
+        toast.error('An error occurred while processing your request.');
+    }}
     }
   };
 
@@ -255,6 +258,7 @@ export default function AuthComponent({ states, wards }) {
                     value={formData.ward}
                     onChange={handleChange}
                     className='input-field'
+                    placeholder='Select Ward'
                   >
                     {wards.map((ward, index) => (
                       <option
