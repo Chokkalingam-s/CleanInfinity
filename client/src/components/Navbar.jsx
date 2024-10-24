@@ -14,16 +14,13 @@ export default function Navbar() {
   ]
 
   return (
-    <header className='fixed top-0 w-full bg-black z-10 shadow-lg'>
-      <div className='container mx-auto px-4 py-2 flex items-center justify-between'>
-        <Link to='/dashboard'>
-          <img
-            src='/1.png'
-            className='w-12 h-10'
-            alt='Logo'
-          />
-        </Link>
-
+    <header className='fixed top-0 w-full z-10 shadow-lg'>
+      <div className='mx-auto px-4 py-2 flex items-center justify-between'>
+        <img
+          src='/1.png'
+          className='w-12 h-10'
+          alt='Logo'
+        />
         <button
           className='lg:hidden text-dark-green focus:outline-none'
           onClick={() => setIsOpen(!isOpen)}

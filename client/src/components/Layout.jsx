@@ -10,7 +10,7 @@ import Navbar from './Navbar';
 import Awareness from './Awareness';
 import Progress from './Progress';
 import NFCPage from './NFC';
-import Profile from './Profile'; // Import the Profile component
+import Profile from './Profile';
 import states from '../data/stateAndDistrict.json';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
