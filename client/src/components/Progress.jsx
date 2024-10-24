@@ -25,7 +25,7 @@ export default function Progress() {
         <img
           src='https://via.placeholder.com/150'
           alt='Profile'
-          className='w-full md:w-1/3 h-auto object-cover mb-4 md:mb-0 md:mr-4'
+          className='w-300 h-300 md:w-1/3 h-auto object-cover mb-4 md:mb-0 md:mr-4 rounded'
         />
         <div className='w-full md:w-2/3'>
           <input

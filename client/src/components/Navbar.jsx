@@ -14,7 +14,7 @@ export default function Navbar() {
   ]
 
   return (
-    <header className='fixed top-0 w-full z-10 shadow-lg rounded-lg bg-medium-green'>
+    <header className='fixed top-0 w-full z-10 shadow-lg rounded-b-lg bg-medium-green'> {/* Apply rounded only at the bottom */}
       <div className='mx-auto px-4 flex items-center justify-between'>
         <div
           style={{ backgroundImage: 'url(/1.png)' }}
