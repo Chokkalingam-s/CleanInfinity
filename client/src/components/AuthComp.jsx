@@ -258,6 +258,7 @@ export default function AuthComponent({ states, wards }) {
                     value={formData.ward}
                     onChange={handleChange}
                     className='input-field'
+                    placeholder='Select Ward'
                   >
                     {wards.map((ward, index) => (
                       <option

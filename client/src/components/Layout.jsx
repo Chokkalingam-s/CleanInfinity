@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function LayoutContent({ data, credits }) {
   const location = useLocation();
   const districts = ['District 1', 'District 2'];
-  const wards = ['Ward 1', 'Ward 2'];
+  const wards = ['Choose Your Ward','Ward 1', 'Ward 2'];
 
   return (
     <div
