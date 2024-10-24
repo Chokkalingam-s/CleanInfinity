@@ -7,7 +7,7 @@ export default function VerticalCard({ titles }) {
           key={i}
         >
           <img
-            src='https://via.placeholder.com/150'
+            src='https://placehold.co/150'
             className='w-full h-32 object-cover rounded-lg mb-4 shadow-lg'
             alt={`${title} Image`}
           />
@@ -15,5 +15,5 @@ export default function VerticalCard({ titles }) {
         </div>
       ))}
     </div>
-  );
+  )
 }
