@@ -10,15 +10,12 @@ import Navbar from './Navbar';
 import Awareness from './Awareness';
 import Progress from './Progress';
 import NFCPage from './NFC';
-import Profile from './Profile'; // Import the Profile component
+import Profile from './Profile';
 import states from '../data/stateAndDistrict.json';
 import { ToastContainer } from 'react-toastify';
-import Home from './Home';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react'; // Import useState for managing theme state
-import ThemeToggle from './ThemeToggle'; // Import your theme toggle button
 
-function LayoutContent({ data, credits, isDarkMode, toggleTheme }) {
+function LayoutContent({ data, credits }) {
   const location = useLocation();
   const districts = ['District 1', 'District 2'];
   const wards = ['Ward 1', 'Ward 2'];
@@ -27,11 +24,10 @@ function LayoutContent({ data, credits, isDarkMode, toggleTheme }) {
     <div
       className={`min-h-screen relative ${
         location.pathname === '/' ? 'pt-0' : 'pt-12'
-      } ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-200 text-black'}`} // Set grey for light mode and black for dark mode
+      } bg-lightest-green`}
     >
       <ToastContainer />
       {location.pathname !== '/' && <Navbar />}
-      <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} /> {/* Include the toggle button */}
       <main>
         <Routes>
           <Route
@@ -41,8 +37,7 @@ function LayoutContent({ data, credits, isDarkMode, toggleTheme }) {
           <Route path="/awareness" element={<Awareness />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/nfc" element={<NFCPage />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path='/home' element={<Home />} />
+          <Route path="/profile" element={<Profile />} /> {/* Correct Profile Component */}
           <Route
             path="/"
             element={
@@ -62,15 +57,10 @@ function LayoutContent({ data, credits, isDarkMode, toggleTheme }) {
 export default function Layout() {
   const data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 80];
   const credits = 500;
-  const [isDarkMode, setIsDarkMode] = useState(false); // State to manage theme
-
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode); // Toggle between light and dark mode
-  };
 
   return (
     <Router>
-      <LayoutContent data={data} credits={credits} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      <LayoutContent data={data} credits={credits} />
     </Router>
   );
 }
