@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  @apply text-dark-green;
+}
 input,
 select {
   @apply rounded-lg p-2 mb-4 hover:shadow-md bg-lightest-green;

@@ -1,5 +1,5 @@
-import BarGraph from './BarChart';
-import VerticalCard from './VerticalCard';
+import BarGraph from './BarChart'
+import VerticalCard from './VerticalCard'
 
 export default function Dashboard({ creditVal, BarGraphVals }) {
   const titles = [
@@ -9,21 +9,24 @@ export default function Dashboard({ creditVal, BarGraphVals }) {
     'Notify',
     'PingMe',
     'Activity',
-  ];
-
+  ]
   return (
     <>
       <div
-        className='w-28 fixed right-4 top-4 flex items-center justify-between p-2 rounded-lg bg-medium-green text-white shadow-lg'
+        className='w-28 fixed right-4 top-16 flex items-center justify-between p-2 rounded-lg bg-medium-green text-white shadow-lg'
         id='credit'
       >
-        <img src='/coins-solid.svg' className='w-6 shadow' alt='Credit Icon' />
+        <img
+          src='/coins-solid.svg'
+          className='w-6 shadow'
+          alt='Credit Icon'
+        />
         <p className='font-bold'>{creditVal}</p>
       </div>
 
       <div className='flex flex-col items-center justify-center w-full p-4 md:p-6 lg:p-8'>
         <div
-          className='w-full max-w-4xl rounded-md shadow-lg p-5 bg-light-green mb-8'
+          className='w-full max-w-4xl rounded-md shadow-lg px-4 py-2 bg-light-green mb-8'
           id='graph'
         >
           <BarGraph data={BarGraphVals} />
@@ -34,5 +37,5 @@ export default function Dashboard({ creditVal, BarGraphVals }) {
         <VerticalCard titles={titles} />
       </div>
     </>
-  );
+  )
 }
