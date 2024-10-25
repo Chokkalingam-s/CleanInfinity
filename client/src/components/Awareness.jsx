@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react';
-import Card from './Card';
-import Article from './Article';
+import { useState, useEffect } from 'react'
+import Card from './Card'
+import Article from './Article'
 
 function Accordion({ title, content }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className='w-full border-b border-green-500'>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='w-full text-left py-3 px-4 flex items-center justify-between text-green-700 transition-all duration-300 hover:bg-green-100'
+        className='w-full text-left py-3 px-4 flex items-center justify-between text-green-700 transition-all duration-300'
       >
         <span className='text-lg font-semibold'>{title}</span>
-        <span className={'ml-2 transform transition-transform duration-300 font-bold'}>
+        <span
+          className={
+            'ml-2 transform transition-transform duration-300 font-bold'
+          }
+        >
           {isOpen ? '-' : '+'}
         </span>
       </button>
-      {isOpen && (
-        <div className='py-2 px-4 text-gray-700 bg-green-50 transition-all duration-300'>
-          {content}
-        </div>
-      )}
+      {isOpen && <div className='py-2 px-4'>{content}</div>}
     </div>
-  );
+  )
 }
 
 export default function Awareness() {
@@ -31,42 +31,38 @@ export default function Awareness() {
     title: `Card Title ${index + 1}`,
     description: 'This is a description of the card.',
     image: 'https://placehold.co/300x150/',
-  }));
+  }))
 
-  const [showMoreVideos, setShowMoreVideos] = useState(false);
-  const [showMoreArticles, setShowMoreArticles] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [showMoreVideos, setShowMoreVideos] = useState(false)
+  const [showMoreArticles, setShowMoreArticles] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Check if the screen is mobile-sized
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setIsMobile(true);
+        setIsMobile(true)
       } else {
-        setIsMobile(false);
+        setIsMobile(false)
       }
-    };
+    }
 
-    // Run once on component mount and also whenever window resizes
-    handleResize();
-    window.addEventListener('resize', handleResize);
+    handleResize()
+    window.addEventListener('resize', handleResize)
 
-    // Cleanup on unmount
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleShowMoreVideos = () => {
-    setShowMoreVideos(!showMoreVideos);
-  };
+    setShowMoreVideos(!showMoreVideos)
+  }
 
   const handleShowMoreArticles = () => {
-    setShowMoreArticles(!showMoreArticles);
-  };
+    setShowMoreArticles(!showMoreArticles)
+  }
 
-  // Determine how many video cards to show based on screen size
   const displayedVideos = isMobile
-    ? cardsData.slice(0, showMoreVideos ? 3 : 1) // Show 1 card on mobile initially, or 3 if 'showMoreVideos' is true
-    : cardsData.slice(0, 3); // Always show 3 cards on larger screens
+    ? cardsData.slice(0, showMoreVideos ? 3 : 1)
+    : cardsData.slice(0, 3)
 
   return (
     <div className='relative max-w-4xl mx-auto p-4 sm:p-6 md:p-8 flex flex-col items-center'>
@@ -74,12 +70,17 @@ export default function Awareness() {
       <h3 className='text-xl text-green-700 mb-6'>How To Use Our App!</h3>
 
       <div className='w-full bg-white p-4 rounded-lg shadow-lg mb-6'>
-        <video className='w-full h-64 bg-gray-200' controls>
+        <video
+          className='w-full h-64 bg-gray-200'
+          controls
+        >
           {/* Add your video source here */}
         </video>
       </div>
 
-      <h3 className='text-2xl font-semibold text-green-600 mb-4'>How Can We Help You?</h3>
+      <h3 className='text-2xl font-semibold text-green-600 mb-4'>
+        How Can We Help You?
+      </h3>
       <div className='relative w-full max-w-md mb-6'>
         <img
           src='/magnifying-glass-solid.svg'
@@ -115,7 +116,12 @@ export default function Awareness() {
       {/* Grid to show 1 card on mobile and 3 on larger screens */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
         {displayedVideos.map((card) => (
-          <Card key={card.id} title={card.title} description={card.description} image={card.image} />
+          <Card
+            key={card.id}
+            title={card.title}
+            description={card.description}
+            image={card.image}
+          />
         ))}
       </div>
 
@@ -129,7 +135,9 @@ export default function Awareness() {
         </button>
       )}
 
-      <h3 className='text-xl font-semibold text-green-600 mt-8 mb-4'>Articles</h3>
+      <h3 className='text-xl font-semibold text-green-600 mt-8 mb-4'>
+        Articles
+      </h3>
       <Article showAll={showMoreArticles} />
 
       {/* Separate button for showing more articles */}
@@ -140,5 +148,5 @@ export default function Awareness() {
         {showMoreArticles ? 'Show Less Articles' : 'Show More Articles'}
       </button>
     </div>
-  );
+  )
 }

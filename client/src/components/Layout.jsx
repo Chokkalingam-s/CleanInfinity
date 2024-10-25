@@ -37,7 +37,7 @@ function LayoutContent({ data, credits }) {
           <Route path="/awareness" element={<Awareness />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/nfc" element={<NFCPage />} />
-          <Route path="/profile" element={<Profile />} /> {/* Correct Profile Component */}
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="/"
             element={

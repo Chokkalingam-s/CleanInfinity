@@ -12,7 +12,7 @@ export default function BarGraph({ data }) {
   }
 
   return (
-    <div className='flex justify-between items-end h-64'>
+    <div className='flex justify-between items-end h-44'>
       {months.map((month, index) => (
         <div
           key={index}
