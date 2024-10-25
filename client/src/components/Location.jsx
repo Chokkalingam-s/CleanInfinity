@@ -13,7 +13,8 @@ const Location = () => {
             longitude: position.coords.longitude,
           });
         },
-        (error) => setError(error.message)
+        (error) => setError(error.message),
+        { enableHighAccuracy: true }  // High precision enabled
       );
     } else {
       setError("Geolocation is not supported by this browser.");
@@ -22,7 +23,7 @@ const Location = () => {
 
   return (
     <div>
-      <button onClick={getLocation}>Get Location</button>
+      <button onClick={getLocation}>Get High-Precision Location</button>
       {location.latitude && (
         <p>
           Latitude: {location.latitude}, Longitude: {location.longitude}
