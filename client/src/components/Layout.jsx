@@ -14,11 +14,12 @@ import Profile from './Profile';
 import states from '../data/stateAndDistrict.json';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NFCCard from './NFC-Card'
 
 function LayoutContent({ data, credits }) {
   const location = useLocation();
   const districts = ['District 1', 'District 2'];
-  const wards = ['Ward 1', 'Ward 2'];
+  const wards = ['Choose Your Ward','Ward 1', 'Ward 2'];
 
   return (
     <div
@@ -37,7 +38,12 @@ function LayoutContent({ data, credits }) {
           <Route path="/awareness" element={<Awareness />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/nfc" element={<NFCPage />} />
+<<<<<<< HEAD
           <Route path="/profile" element={<Profile />} />
+=======
+          <Route path="/nfc-card" element={<NFCCard />} />
+          <Route path="/profile" element={<Profile />} /> {/* Correct Profile Component */}
+>>>>>>> 75ca438d6435c78ac7b10a767f4d0d5121547d2a
           <Route
             path="/"
             element={

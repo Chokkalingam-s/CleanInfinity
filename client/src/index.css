@@ -65,3 +65,7 @@ h5 {
 .button-disabled {
   @apply bg-gray-300 text-gray-500 cursor-not-allowed;
 }
+.middle{
+display: flex;
+justify-content: center;
+}
