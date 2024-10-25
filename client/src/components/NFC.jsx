@@ -1,4 +1,5 @@
 
+import Location from './Location';
 import NFCCard from './NFC-Card';
 export default function NFCPage() {
   const NFCtitles = ['Pair with BioDegradable', 'Pair with NonDegradable'];
@@ -11,6 +12,7 @@ export default function NFCPage() {
       <div className="flex flex-col md:flex-row justify-center align-content-center  mb-1 w-full">
         <div className="w-full md:w-1/2 lg:w-1/3 p-2">
           {/* Content for the first card can go here */}
+          <Location />
         </div>
       </div>
 
