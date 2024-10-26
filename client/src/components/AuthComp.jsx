@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react' 
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 export default function AuthComponent({ states, wards }) {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -15,68 +15,63 @@ export default function AuthComponent({ states, wards }) {
     ward: '',
     captchaInput: '',
     otp: '',
-  });
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpVerified, setOtpVerified] = useState(false);
-  const [districtsArr, setDistricts] = useState(states.states[0].districts);
-  const [captcha, setCaptcha] = useState('');
-  const [captchaVerified, setCaptchaVerified] = useState(false);
+  })
+  const [otpSent, setOtpSent] = useState(false)
+  const [otpVerified, setOtpVerified] = useState(false)
+  const [districtsArr, setDistricts] = useState(states.states[0].districts)
+  const [captcha, setCaptcha] = useState('')
+  const [captchaVerified, setCaptchaVerified] = useState(false)
 
   useEffect(() => {
-    generateCaptcha();
-  }, []);
+    generateCaptcha()
+  }, [])
 
   const generateCaptcha = () => {
     const randomCaptcha = Math.random()
       .toString(36)
       .substring(2, 8)
-      .toUpperCase();
-    setCaptcha(randomCaptcha);
-  };
+      .toUpperCase()
+    setCaptcha(randomCaptcha)
+  }
 
   const verifyCaptcha = () => {
     if (formData.captchaInput === captcha) {
-      setCaptchaVerified(true);
-      toast.success('Captcha verified successfully!');
+      setCaptchaVerified(true)
+      toast.success('Captcha verified successfully!')
     } else {
-      toast.error('Captcha is incorrect, please try again.');
-      setCaptchaVerified(false);
-      generateCaptcha();
+      toast.error('Captcha is incorrect, please try again.')
+      setCaptchaVerified(false)
+      generateCaptcha()
     }
-  };
+  }
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
     if (name === 'state') {
       const selectedState = states.states.find(
         (stateObj) => stateObj.state === value
-      );
-      if (selectedState) {
-        setDistricts(selectedState.districts);
-      } else {
-        setDistricts([]);
-      }
+      )
+      if (selectedState) setDistricts(selectedState.districts)
+      else setDistricts([])
     }
-  };
+  }
 
   const sendOtp = () => {
-    setOtpSent(true);
-    toast.success('OTP sent successfully!');
-  };
+    setOtpSent(true)
+    toast.success('OTP sent successfully!')
+  }
 
   const verifyOtp = () => {
-    setOtpVerified(true);
-    toast.success('OTP verified successfully!');
-  };
+    setOtpVerified(true)
+    toast.success('OTP verified successfully!')
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       if (isSignUp) {
-        // Sign Up Logic
         const response = await axios.post('http://localhost:5000/signup', {
           name: formData.name,
           mobile: formData.mobile,
@@ -86,10 +81,9 @@ export default function AuthComponent({ states, wards }) {
           district: formData.district,
           ward: formData.ward,
           password: formData.password,
-        });
+        })
 
-        toast.success(response.data || 'User registered successfully');
-        // Reset form after signup
+        toast.success(response.data || 'User registered successfully')
         setFormData({
           email: '',
           password: '',
@@ -101,27 +95,24 @@ export default function AuthComponent({ states, wards }) {
           ward: '',
           captchaInput: '',
           otp: '',
-        });
+        })
       } else {
-        // Sign In Logic
         const response = await axios.post('http://localhost:5000/signin', {
           mobile: formData.mobile,
           password: formData.password,
-        });
-
-        toast.success(response.data || 'User logged in successfully');
+        })
+        toast.success(response.data || 'User logged in successfully')
       }
     } catch (error) {
       if (error.response && error.response.data) {
-        toast.error(error.response.data);
+        toast.error(error.response.data)
       } else {
-        if (error.response && error.response.status === 409) {
-        toast.error(error.response.data.message);
-    } else {
-        toast.error('An error occurred while processing your request.');
-    }}
+        if (error.response && error.response.status === 409)
+          toast.error(error.response.data.message)
+        else toast.error('An error occurred while processing your request.')
+      }
     }
-  };
+  }
 
   return (
     <div className='min-h-screen flex items-center justify-center'>
@@ -197,14 +188,14 @@ export default function AuthComponent({ states, wards }) {
 
               {otpVerified && (
                 <>
-                 <input
-                type='password'
-                name='password'
-                placeholder='Password'
-                value={formData.password}
-                onChange={handleChange}
-                className='input-field'
-              />
+                  <input
+                    type='password'
+                    name='password'
+                    placeholder='Password'
+                    value={formData.password}
+                    onChange={handleChange}
+                    className='input-field'
+                  />
                   <input
                     type='email'
                     name='email'
@@ -291,12 +282,12 @@ export default function AuthComponent({ states, wards }) {
                 className='input-field'
               />
 
-              <div className='flex items-center gap-x-2'>
+              <div className='flex items-center gap-x-2 text-sm'>
                 <input
                   type='text'
                   value={captcha}
                   readOnly
-                  className='w-1/2 py-2 mt-2 rounded-lg border text-xs text-center'
+                  className='w-10/12 mt-2 rounded-lg text-center'
                 />
                 <input
                   type='text'
@@ -304,14 +295,14 @@ export default function AuthComponent({ states, wards }) {
                   placeholder='Enter Captcha'
                   value={formData.captchaInput}
                   onChange={handleChange}
-                  className='w-1/2 input-field text-sm'
+                  className='w-1/2 input-field text-center'
                 />
                 <button
                   type='button'
-                  className='button-common bg-medium-green text-sm'
+                  className='button-common bg-medium-green font-bold'
                   onClick={verifyCaptcha}
                 >
-                  Verify Captcha
+                  Verify
                 </button>
               </div>
             </>
@@ -332,5 +323,5 @@ export default function AuthComponent({ states, wards }) {
         </form>
       </div>
     </div>
-  );
+  )
 }
