@@ -1,41 +1,25 @@
 import BarGraph from './BarChart'
 import VerticalCard from './VerticalCard'
 
-export default function Dashboard({ creditVal, BarGraphVals }) {
-  const titles = [
-    'Knowledge',
-    'Progress',
-    'Pair Dustbin',
-    'Notify',
-    'PingMe',
-    'Activity',
-  ]
+export default function Dashboard({ creditVal, BarGraphVals, titles }) {
   return (
-    <>
-      <div
-        className='w-28 fixed right-4 top-16 flex items-center justify-between p-2 rounded-lg bg-medium-green shadow-lg text-lightest-green cursor-pointer'
-        id='credit'
-      >
+    <div className='container'>
+      <div className='w-24 flex items-center justify-around p-2 rounded-lg mb-4 bg-medium-green shadow-lg text-lightest-green float-right'>
         <img
           src='/coins-solid.svg'
-          className='w-6 shadow'
+          className='w-6'
           alt='Credit Icon'
         />
         <p className='font-bold'>{creditVal}</p>
       </div>
 
-      <div className='flex flex-col items-center justify-center w-full p-4 md:p-6 lg:p-8'>
-        <div
-          className='w-full max-w-4xl rounded-md shadow-lg px-4 py-2 bg-light-green mb-8'
-          id='graph'
-        >
+      <div className='flex flex-col items-center justify-center w-full gap-y-4'>
+        <div className='w-full max-w-4xl rounded-md shadow-lg py-2 bg-light-green'>
           <BarGraph data={BarGraphVals} />
         </div>
-
-        <h3 className='text-2xl font-bold text-green-700 mb-6'>How to use?</h3>
-
+        <h3 className='text-2xl font-bold'>How to use?</h3>
         <VerticalCard titles={titles} />
       </div>
-    </>
+    </div>
   )
 }

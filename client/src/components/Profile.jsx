@@ -25,9 +25,7 @@ export default function ProfileForm() {
   return (
     <div className='w-full min-h-screen flex items-center justify-center'>
       <div className='bg-light-green p-4 shadow-lg rounded-lg font-medium'>
-        <h2 className='font-semibold text-dark-green mb-6 text-start'>
-          Profile
-        </h2>
+        <h2 className='font-semibold mb-6 text-start'>Profile</h2>
         <form className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <label
             htmlFor='photo-upload'
@@ -41,7 +39,7 @@ export default function ProfileForm() {
               />
             ) : (
               <div className='w-32 h-32 flex items-center justify-center bg-green-100 rounded-full shadow-md'>
-                <span className='text-green-700'>Upload Photo</span>
+                <span>Upload Photo</span>
               </div>
             )}
             <input
@@ -51,58 +49,39 @@ export default function ProfileForm() {
               className='hidden'
             />
           </label>
-
-          <input
-            type='text'
-            name='id'
-            value={profile.id}
-            placeholder='ID'
-            className='input-field'
-            disabled
-          />
-
           <input
             type='text'
             name='name'
             value={profile.name}
             placeholder='Name'
-            className='input-field'
             disabled
           />
-
           <input
             type='text'
             name='mobileNumber'
             value={profile.mobileNumber}
             placeholder='Mobile Number'
-            className='input-field'
             disabled
           />
-
           <input
             type='email'
             name='mailId'
             value={profile.mailId}
             placeholder='Mail ID'
-            className='input-field'
             disabled
           />
-
           <input
             type='text'
             name='address'
             value={profile.address}
             placeholder='Address'
-            className='input-field'
             disabled
           />
-
           <input
             type='text'
             name='state'
             value={profile.state}
             placeholder='State'
-            className='input-field'
             disabled
           />
           <input
@@ -110,7 +89,6 @@ export default function ProfileForm() {
             name='district'
             value={profile.district}
             placeholder='District'
-            className='input-field'
             disabled
           />
           <input
@@ -118,7 +96,6 @@ export default function ProfileForm() {
             name='ward'
             value={profile.ward}
             placeholder='Ward'
-            className='input-field'
             disabled
           />
           <input
@@ -126,7 +103,6 @@ export default function ProfileForm() {
             name='mappedTvmobileNumber'
             value={profile.mappedTvmobileNumber}
             placeholder='Mapped Mobile Number'
-            className='input-field'
             disabled
           />
           <input
@@ -134,7 +110,6 @@ export default function ProfileForm() {
             name='nfcDid'
             value={profile.nfcDid}
             placeholder='NFC ID'
-            className='input-field'
             disabled
           />
           <input
@@ -142,12 +117,11 @@ export default function ProfileForm() {
             name='nfcDPoints'
             value={profile.nfcDPoints}
             placeholder='NFC Points'
-            className='input-field'
             disabled
           />
           <button
             type='button'
-            className='button-common bg-medium-green text-lightest-green'
+            className='btn'
             disabled
           >
             🏅 Credits: {profile.credits}
