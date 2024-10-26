@@ -115,8 +115,8 @@ export default function AuthComponent({ states, wards }) {
   }
 
   return (
-    <div className='min-h-screen flex items-center justify-center'>
-      <div className='max-w-sm p-8 bg-light-green rounded-xl shadow-lg'>
+    <div className='min-h-screen flex items-center justify-center container'>
+      <div className='p-8 bg-light-green rounded-xl shadow-lg md:w-1/3 lg:w-4/12'>
         <div className='mb-6 w-full slider-btn border-2 border-medium-green rounded-xl shadow-lg flex overflow-hidden'>
           <button
             type='button'
@@ -146,21 +146,19 @@ export default function AuthComponent({ states, wards }) {
                 placeholder='Name'
                 value={formData.name}
                 onChange={handleChange}
-                className='input-field'
               />
-              <div className='flex mb-4 gap-x-2'>
+              <div className='flex gap-x-2'>
                 <input
                   type='number'
                   name='mobile'
                   placeholder='Mobile Number'
                   value={formData.mobile}
                   onChange={handleChange}
-                  className='input-field'
                 />
                 <button
                   type='button'
                   onClick={sendOtp}
-                  className='bg-medium-green text-white hover:bg-green-400 button-common'
+                  className='btn'
                 >
                   Send OTP
                 </button>
@@ -174,12 +172,11 @@ export default function AuthComponent({ states, wards }) {
                     placeholder='Enter OTP'
                     value={formData.otp}
                     onChange={handleChange}
-                    className='input-field'
                   />
                   <button
                     type='button'
                     onClick={verifyOtp}
-                    className='button-common bg-medium-green text-white hover:bg-green-400'
+                    className='btn'
                   >
                     Verify OTP
                   </button>
@@ -194,7 +191,6 @@ export default function AuthComponent({ states, wards }) {
                     placeholder='Password'
                     value={formData.password}
                     onChange={handleChange}
-                    className='input-field'
                   />
                   <input
                     type='email'
@@ -202,7 +198,6 @@ export default function AuthComponent({ states, wards }) {
                     placeholder='Email'
                     value={formData.email}
                     onChange={handleChange}
-                    className='input-field'
                   />
                   <input
                     type='text'
@@ -210,14 +205,12 @@ export default function AuthComponent({ states, wards }) {
                     placeholder='Address'
                     value={formData.address}
                     onChange={handleChange}
-                    className='input-field'
                   />
-                  <div className='flex mb-4 gap-x-2'>
+                  <div className='flex gap-x-2 text-sm'>
                     <select
                       name='state'
                       value={formData.state}
                       onChange={handleChange}
-                      className='w-1/2 input-field'
                     >
                       {states.states.map((stateObj, index) => (
                         <option
@@ -232,7 +225,6 @@ export default function AuthComponent({ states, wards }) {
                       name='district'
                       value={formData.district}
                       onChange={handleChange}
-                      className='w-1/2 input-field'
                     >
                       {districtsArr.map((district, index) => (
                         <option
@@ -248,7 +240,6 @@ export default function AuthComponent({ states, wards }) {
                     name='ward'
                     value={formData.ward}
                     onChange={handleChange}
-                    className='input-field'
                     placeholder='Select Ward'
                   >
                     {wards.map((ward, index) => (
@@ -271,7 +262,6 @@ export default function AuthComponent({ states, wards }) {
                 placeholder='Mobile No'
                 value={formData.mobile}
                 onChange={handleChange}
-                className='input-field'
               />
               <input
                 type='password'
@@ -279,15 +269,14 @@ export default function AuthComponent({ states, wards }) {
                 placeholder='Password'
                 value={formData.password}
                 onChange={handleChange}
-                className='input-field'
               />
 
-              <div className='flex items-center gap-x-2 text-sm'>
+              <div className='flex items-center gap-x-1 text-sm'>
                 <input
                   type='text'
                   value={captcha}
-                  readOnly
-                  className='w-10/12 mt-2 rounded-lg text-center'
+                  disabled
+                  className='text-center'
                 />
                 <input
                   type='text'
@@ -295,11 +284,11 @@ export default function AuthComponent({ states, wards }) {
                   placeholder='Enter Captcha'
                   value={formData.captchaInput}
                   onChange={handleChange}
-                  className='w-1/2 input-field text-center'
+                  className='text-center'
                 />
                 <button
                   type='button'
-                  className='button-common bg-medium-green font-bold'
+                  className='btn'
                   onClick={verifyCaptcha}
                 >
                   Verify
@@ -312,7 +301,7 @@ export default function AuthComponent({ states, wards }) {
             disabled={
               (isSignUp && !otpVerified) || (!isSignUp && !captchaVerified)
             }
-            className={`button-common mt-4 ${
+            className={`btn mt-4 ${
               (isSignUp && otpVerified) || (!isSignUp && captchaVerified)
                 ? 'bg-green-hover'
                 : 'button-disabled'

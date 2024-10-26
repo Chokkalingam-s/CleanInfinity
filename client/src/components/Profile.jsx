@@ -23,10 +23,10 @@ export default function ProfileForm() {
     }))
   }, [])
   return (
-    <div className='w-full min-h-screen flex items-center justify-center'>
-      <div className='bg-light-green p-4 shadow-lg rounded-lg font-medium'>
-        <h2 className='font-semibold mb-6 text-start'>Profile</h2>
-        <form className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+    <div className='flex items-center justify-center container'>
+      <div className='bg-light-green p-4 shadow-lg rounded-lg md:w-1/2'>
+        <h2 className='font-semibold mb-2 text-start'>Profile</h2>
+        <form className='grid grid-cols-1 md:grid-cols-2 gap-2 items-center'>
           <label
             htmlFor='photo-upload'
             className='col-span-full md:col-span-1 cursor-pointer flex justify-center'
@@ -49,27 +49,29 @@ export default function ProfileForm() {
               className='hidden'
             />
           </label>
-          <input
-            type='text'
-            name='name'
-            value={profile.name}
-            placeholder='Name'
-            disabled
-          />
-          <input
-            type='text'
-            name='mobileNumber'
-            value={profile.mobileNumber}
-            placeholder='Mobile Number'
-            disabled
-          />
-          <input
-            type='email'
-            name='mailId'
-            value={profile.mailId}
-            placeholder='Mail ID'
-            disabled
-          />
+          <span>
+            <input
+              type='text'
+              name='name'
+              value={profile.name}
+              placeholder='Name'
+              disabled
+            />
+            <input
+              type='text'
+              name='mobileNumber'
+              value={profile.mobileNumber}
+              placeholder='Mobile Number'
+              disabled
+            />
+            <input
+              type='email'
+              name='mailId'
+              value={profile.mailId}
+              placeholder='Mail ID'
+              disabled
+            />
+          </span>
           <input
             type='text'
             name='address'
@@ -119,13 +121,13 @@ export default function ProfileForm() {
             placeholder='NFC Points'
             disabled
           />
-          <button
+          <span
             type='button'
-            className='btn'
+            className='btn text-center'
             disabled
           >
             🏅 Credits: {profile.credits}
-          </button>
+          </span>
         </form>
       </div>
     </div>

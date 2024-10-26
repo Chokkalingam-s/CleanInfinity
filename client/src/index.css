@@ -6,7 +6,7 @@ body {
 }
 input,
 select {
-  @apply rounded-lg p-2 mb-4 hover:shadow-md bg-lightest-green w-full focus:outline-none focus:ring-2 focus:ring-medium-green transition font-semibold;
+  @apply rounded-lg p-2 mb-2 hover:shadow-md bg-lightest-green w-full focus:outline-none focus:ring-2 focus:ring-medium-green transition font-semibold;
 }
 .animate {
   @apply transition-all duration-700 ease-in-out;
@@ -15,7 +15,7 @@ select {
   @apply w-1/2 p-2;
 }
 .container {
-  @apply bg-black p-6 mx-auto;
+  @apply p-6 mx-auto;
 }
 .notActivebtn {
   @apply text-dark-green border-2 border-medium-green border-solid;
@@ -29,21 +29,7 @@ header button {
 header a {
   @apply font-medium px-2 hover:text-dark-green;
 }
-h1 {
-  @apply text-4xl font-bold;
-}
-h2 {
-  @apply text-3xl font-semibold;
-}
-h3 {
-  @apply text-2xl font-medium;
-}
-h4 {
-  @apply text-xl font-medium;
-}
-h5 {
-  @apply text-lg font-medium;
-}
+
 .slider-btn p {
   @apply font-semibold;
 }
@@ -61,8 +47,4 @@ h5 {
 }
 .button-disabled {
   @apply bg-gray-300 text-gray-500 cursor-not-allowed;
-}
-.middle {
-  display: flex;
-  justify-content: center;
 }
