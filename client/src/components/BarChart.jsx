@@ -19,11 +19,16 @@ export default function BarGraph({ data }) {
           className='flex flex-col items-center'
         >
           <div
+<<<<<<< HEAD
+            style={{ height: `${data[index]}px` }}
+            className='w-8 bg-medium-green rounded-lg hover:bg-dark-green shadow-lg'
+=======
             style={{
               height: `${data[index]}px`,
               transition: 'height 0.3s ease',
             }}
             className='bg-gradient-to-t from-dark-green to-medium-green rounded-lg shadow-md hover:shadow-lg w-4 md:w-8 lg:w-8'
+>>>>>>> 0b16e13df160191590e604409c4dd4aa6c00fce3
           ></div>
           <span className='mt-2 text-sm font-medium text-center lg:text-xl'>
             {month}
