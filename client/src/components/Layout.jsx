@@ -32,7 +32,7 @@ function LayoutContent() {
   const [loading, setLoading] = useState(true)
   const location = useLocation()
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 10000)
+    const timer = setTimeout(() => setLoading(false), 3000)
     return () => clearTimeout(timer)
   }, [])
   return (
