@@ -30,8 +30,8 @@ importers:
         specifier: ^3.1.7
         version: 3.1.7
       sequelize:
-        specifier: ^6.37.4
-        version: 6.37.4(mysql2@3.11.3)
+        specifier: ^6.37.5
+        version: 6.37.5(mysql2@3.11.3)
       server:
         specifier: 'file:'
         version: 'file:'
@@ -48,8 +48,8 @@ packages:
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
-  '@types/node@22.7.9':
-    resolution: {integrity: sha512-jrTfRC7FM6nChvU7X2KqcrgquofrWLFDeYC1hKfwNWomVvrn7JIksqf344WN2X/y8xrgqBd2dJATZV4GbatBfg==}
+  '@types/node@22.8.1':
+    resolution: {integrity: sha512-k6Gi8Yyo8EtrNtkHXutUu2corfDf9su95VYVP10aGYMMROM6SAItZi0w1XszA6RtWTHSVp5OeFof37w0IEqCQg==}
 
   '@types/validator@13.12.2':
     resolution: {integrity: sha512-6SlHBzUW8Jhf3liqrGGXyTJSIFe4nqlJ5A5KaMZ2l/vbM3Wh3KSybots/wfWVzNLK4D1NZluDlSQIbIEPx6oyA==}
@@ -600,8 +600,8 @@ packages:
     resolution: {integrity: sha512-G9c0qlIWQSK29pR/5U2JF5dDQeqqHRragoyahj/Nx4KOOQ3CPPfzxnfqFPCSB7x5UgjOgnZ61nSxz+fjDpRlJg==}
     engines: {node: '>= 10.0.0'}
 
-  sequelize@6.37.4:
-    resolution: {integrity: sha512-+8B0p00EKmxJpwwruDI0drxh4wNSC0YB9pVhOajRzfMI+uIDi5V7rJPC8RTTkLmKUoAIatJZn6lW9gj6bmmYKQ==}
+  sequelize@6.37.5:
+    resolution: {integrity: sha512-10WA4poUb3XWnUROThqL2Apq9C2NhyV1xHPMZuybNMCucDsbbFuKg51jhmyvvAUyUqCiimwTZamc3AHhMoBr2Q==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       ibm_db: '*'
@@ -787,7 +787,7 @@ snapshots:
 
   '@types/ms@0.7.34': {}
 
-  '@types/node@22.7.9':
+  '@types/node@22.8.1':
     dependencies:
       undici-types: 6.19.8
 
@@ -1349,7 +1349,7 @@ snapshots:
 
   sequelize-pool@7.1.0: {}
 
-  sequelize@6.37.4(mysql2@3.11.3):
+  sequelize@6.37.5(mysql2@3.11.3):
     dependencies:
       '@types/debug': 4.1.12
       '@types/validator': 13.12.2
@@ -1390,7 +1390,7 @@ snapshots:
       mysql: 2.18.1
       mysql2: 3.11.3
       nodemon: 3.1.7
-      sequelize: 6.37.4(mysql2@3.11.3)
+      sequelize: 6.37.5(mysql2@3.11.3)
     transitivePeerDependencies:
       - encoding
       - ibm_db
@@ -1512,7 +1512,7 @@ snapshots:
 
   wkx@0.5.0:
     dependencies:
-      '@types/node': 22.7.9
+      '@types/node': 22.8.1
 
   wrappy@1.0.2: {}
 
