@@ -116,7 +116,7 @@ export default function AuthComponent({ states, wards }) {
 
   return (
     <div className='min-h-screen flex items-center justify-center container'>
-      <div className='p-8 bg-light-green rounded-xl shadow-lg md:w-1/3 lg:w-4/12'>
+      <div className='p-8 bg-light-green rounded-xl shadow-lg w-full md:w-1/2 lg:w-1/2'>
         <div className='mb-6 w-full slider-btn border-2 border-medium-green rounded-xl shadow-lg flex overflow-hidden'>
           <button
             type='button'
