@@ -18,7 +18,6 @@ import NFCCard from './NFC-Card'
 import {
   dashboard_data,
   dashboard_credits,
-  auth_districts,
   auth_wards,
   dashboard_titles,
   awareness_video_link,
@@ -26,9 +25,16 @@ import {
   progress_users,
   progress_BarStyles,
 } from '../data/config'
+import SplashScreen from './Splash'
+import { useEffect, useState } from 'react'
 
 function LayoutContent() {
+  const [loading, setLoading] = useState(true)
   const location = useLocation()
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 10000)
+    return () => clearTimeout(timer)
+  }, [])
   return (
     <div
       className={`min-h-screen relative ${
@@ -78,11 +84,14 @@ function LayoutContent() {
           <Route
             path='/'
             element={
-              <AuthComponent
-                districts={auth_districts}
-                states={auth_states}
-                wards={auth_wards}
-              />
+              loading ? (
+                <SplashScreen />
+              ) : (
+                <AuthComponent
+                  states={auth_states}
+                  wards={auth_wards}
+                />
+              )
             }
           />
         </Routes>
