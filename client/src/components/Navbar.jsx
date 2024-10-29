@@ -10,10 +10,10 @@ export default function Navbar() {
     { href: '/progress', label: 'Progress' },
     { href: '/nfc', label: 'NFC Pairing' },
     { href: '/profile', label: 'Profile' },
-    { href: '/', label: 'Log out' },
+    { href: '/', label: 'Log out' }
   ]
   return (
-    <header className='fixed top-0 w-full z-10 shadow-lg rounded-ee-lg rounded-es-lg bg-medium-green h-12'>
+    <header className='fixed top-0 w-full shadow-lg rounded-ee-lg rounded-es-lg bg-medium-green h-12 z-20'>
       <div className='flex items-center justify-between'>
         <div
           style={{ backgroundImage: 'url(/1.png)' }}
@@ -23,10 +23,13 @@ export default function Navbar() {
           className='lg:hidden md:hidden focus:outline-none bg-transparent w-12'
           onClick={() => setIsOpen(!isOpen)}
         >
-          <img src={isOpen ? './xmark-solid.svg' : './bars-solid.svg'} />
+          <img
+            src={isOpen ? './xmark-solid.svg' : './bars-solid.svg'}
+            className='w-4/12'
+          />
         </button>
         <nav
-          className={`flex-col absolute right-0 top-12 rounded-lg ${
+          className={`flex-col absolute right-0 top-12 z-20 rounded-lg ${
             isOpen ? 'flex' : 'hidden'
           } md:flex-row lg:flex-row md:flex lg:flex md:relative md:top-0 lg:relative lg:top-0 bg-medium-green md:bg-transparent lg:bg-transparent`}
         >

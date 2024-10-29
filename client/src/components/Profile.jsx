@@ -13,35 +13,29 @@ export default function ProfileForm() {
     nfcDid: '',
     credits: '',
     nfcDPoints: '',
-    photo: null,
+    photo: null
   })
   useEffect(() => {
     setProfile((prevProfile) => ({
       ...prevProfile,
       id: Math.floor(Math.random() * 1000000),
-      credits: Math.floor(Math.random() * 5000),
+      credits: Math.floor(Math.random() * 5000)
     }))
   }, [])
   return (
-    <div className='flex items-center justify-center container'>
-      <div className='bg-light-green p-4 shadow-lg rounded-lg md:w-1/2'>
-        <h2 className='font-semibold mb-2 text-start'>Profile</h2>
+    <div className='flex items-center justify-center container min-h-screen'>
+      <div className='drop p-4 shadow-lg rounded-lg md:w-1/2'>
+        <h2 className='font-semibold text-xl mb-2 text-start'>Profile</h2>
         <form className='grid grid-cols-1 md:grid-cols-2 gap-2 items-center'>
           <label
             htmlFor='photo-upload'
             className='col-span-full md:col-span-1 cursor-pointer flex justify-center'
           >
-            {profile.photo ? (
-              <img
-                src={profile.photo}
-                alt='Profile'
-                className='w-32 h-32 rounded-full object-cover shadow-md'
-              />
-            ) : (
-              <div className='w-32 h-32 flex items-center justify-center bg-green-100 rounded-full shadow-md'>
-                <span>Upload Photo</span>
-              </div>
-            )}
+            <img
+              src={profile.photo || 'https://placehold.co/150'}
+              alt='Profile'
+              className='w-32 h-32 rounded-full object-cover shadow-md'
+            />
             <input
               id='photo-upload'
               type='file'
@@ -79,20 +73,22 @@ export default function ProfileForm() {
             placeholder='Address'
             disabled
           />
-          <input
-            type='text'
-            name='state'
-            value={profile.state}
-            placeholder='State'
-            disabled
-          />
-          <input
-            type='text'
-            name='district'
-            value={profile.district}
-            placeholder='District'
-            disabled
-          />
+          <span className='flex gap-2'>
+            <input
+              type='text'
+              name='state'
+              value={profile.state}
+              placeholder='State'
+              disabled
+            />
+            <input
+              type='text'
+              name='district'
+              value={profile.district}
+              placeholder='District'
+              disabled
+            />
+          </span>
           <input
             type='text'
             name='ward'

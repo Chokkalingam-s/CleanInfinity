@@ -3,7 +3,7 @@ export default function NFCCard({ titles }) {
     <div className='flex p-2 gap-2 items-center'>
       {titles.map((title, i) => (
         <div
-          className='p-2 flex flex-col items-center justify-center bg-light-green rounded-lg shadow-xl hover:shadow-md transition-shadow duration-300'
+          className='p-2 flex flex-col items-center justify-center drop rounded-lg shadow-xl hover:shadow-md transition-shadow duration-300'
           key={i}
         >
           <img

@@ -3,7 +3,7 @@ export default function VerticalCard({ titles }) {
     <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 items-center gap-4 max-w-4xl'>
       {titles.map((title, i) => (
         <div
-          className='p-2 w-28 flex flex-col items-center justify-center bg-light-green rounded-lg shadow-lg hover:shadow-md transition-shadow duration-1500'
+          className='p-2 w-28 flex flex-col items-center justify-center drop rounded-lg shadow-lg hover:shadow-md transition-shadow'
           key={i}
         >
           <img

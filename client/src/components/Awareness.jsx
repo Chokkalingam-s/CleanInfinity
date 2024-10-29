@@ -6,15 +6,15 @@ function Accordion({ title, content }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className='w-full border-b-2 border-dark-green'>
+    <div className='w-full border-b-2 bg-light-green/40 backdrop-blur-sm rounded-lg border-dark-green mb-2'>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className='w-full text-left py-3 px-4 flex items-center justify-between transition-all duration-200'
       >
-        <span className='text-lg font-semibold'>{title}</span>
+        <span className='font-semibold'>{title}</span>
         <span
           className={
-            'ml-2 transform transition-transform duration-300 font-bold'
+            'ml-2 transform transition-transform duration-300 font-bold text-2xl'
           }
         >
           {isOpen ? '-' : '+'}
@@ -28,9 +28,9 @@ function Accordion({ title, content }) {
 export default function Awareness({ src }) {
   const cardsData = Array.from({ length: 9 }, (_, index) => ({
     id: index + 1,
-    title: `Card Title ${index + 1}`,
+    title: `Card ${index + 1}`,
     description: 'This is a description of the card.',
-    image: 'https://placehold.co/150',
+    image: 'https://placehold.co/150'
   }))
 
   const [showMoreVideos, setShowMoreVideos] = useState(false)
@@ -60,31 +60,28 @@ export default function Awareness({ src }) {
     : cardsData.slice(0, 3)
 
   return (
-    <div className='mx-auto gap-y-6 flex flex-col items-center justify-center container'>
-      <h2 className='text-3xl font-bold'>Guide Me</h2>
+    <div className='mx-auto gap-y-4 flex flex-col items-center justify-center container'>
+      <h1 className='font-bold text-3xl'>Guide Me</h1>
       <h3 className='text-xl'>How To Use Our App!</h3>
       <iframe
         src={src}
         title='YouTube video player'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;'
         allowFullScreen
-        className='w-full aspect-video shadow-lg rounded-lg'
+        className='w-full lg:w-8/12 md:w-8/12 aspect-video shadow-xl rounded-lg relative -z-10'
       ></iframe>
-      <h3 className='text-2xl font-semibold'>How Can We Help You?</h3>
+      <h2>How Can We Help You?</h2>
       <div className='relative w-full max-w-md'>
         <img
           src='/magnifying-glass-solid.svg'
-          className='w-5 absolute left-3 top-1/2 transform -translate-y-4'
-          alt='Search Icon'
+          className='w-5 absolute right-3 top-1/2 transform -translate-y-4'
         />
         <input
           type='text'
           placeholder='Ask your question'
-          className='w-full pl-10 py-3 border border-medium-green rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-light-green'
         />
       </div>
-
-      <h3 className='text-2xl font-semibold'>FAQs</h3>
+      <h2>FAQs</h2>
       <div className='w-full max-w-md'>
         <Accordion
           title='What is this app about?'
@@ -100,9 +97,8 @@ export default function Awareness({ src }) {
         />
       </div>
 
-      <h2 className='text-3xl font-bold text-dark-green'>Resources</h2>
-
-      <h3 className='text-xl font-semibold text-dark-green'>Videos</h3>
+      <h2 className='text-3xl font-bold'>Resources</h2>
+      <h3 className='text-xl font-semibold'>Videos</h3>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
         {displayedVideos.map((card) => (
           <Card

@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        'lightest-green': '#def9c4',
+        'lightest-green': '#DDF9C3',
         'light-green': '#9cdba6',
         'medium-green': '#50b498',
-        'dark-green': '#468585',
-      },
-    },
+        'dark-green': '#215848'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }

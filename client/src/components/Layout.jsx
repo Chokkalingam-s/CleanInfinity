@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
+  useLocation
 } from 'react-router-dom'
 import AuthComponent from './AuthComp'
 import Dashboard from './Dashboard'
@@ -23,7 +23,7 @@ import {
   awareness_video_link,
   progress_data,
   progress_users,
-  progress_BarStyles,
+  progress_BarStyles
 } from '../data/config'
 import SplashScreen from './Splash'
 import { useEffect, useState } from 'react'
@@ -36,11 +36,19 @@ function LayoutContent() {
     return () => clearTimeout(timer)
   }, [])
   return (
-    <div
-      className={`min-h-screen relative ${
-        location.pathname === '/' ? 'pt-0' : 'pt-12'
-      }`}
-    >
+    <div className={'min-h-screen w-screen'}>
+      <div
+        className='fixed top-0 w-full h-full -z-10'
+        style={{
+          backgroundImage:
+            'url(/0ba822008116c4db07f85b772a5dcea9-Photoroom.png)',
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          filter:
+            'invert(1) sepia(1) hue-rotate(75deg) saturate(3) brightness(0.4)',
+          opacity: 0.1
+        }}
+      />
       <ToastContainer />
       {location.pathname !== '/' && <Navbar />}
       <main>
@@ -99,6 +107,7 @@ function LayoutContent() {
     </div>
   )
 }
+
 export default function Layout() {
   return (
     <Router>
