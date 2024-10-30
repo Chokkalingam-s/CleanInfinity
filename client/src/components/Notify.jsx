@@ -24,34 +24,38 @@ export default function Notify() {
   return (
     <div className='container flex flex-col relative'>
       <h1 className='text-3xl font-bold fixed top-14 left-1/2 -translate-x-1/2 z-10'>Notify</h1>
-      {Object.entries(dummyNotifications).reverse().map(([year, months]) => (
-        <div key={year} className='flex flex-col mt-12'>
-          <YearToggle year={year} expanded={yearExpanded[year]} onClick={toggleYear} />
-          {yearExpanded[year] && (
-            <div className='flex flex-col pl-4'>
-              {Object.entries(months).reverse().map(([month, days]) => (
-                <div key={month} className='flex flex-col'>
-                  <MonthToggle
-                    month={month}
-                    expanded={monthExpanded[month]}
-                    onClick={toggleMonth}
-                  />
-                  {monthExpanded[month] && (
-                    <div className='flex flex-col pl-4'>
-                      {days
-                        .slice()
-                        .reverse()
-                        .map(({date, notifications}) => (
-                          <NotificationList key={date} date={`${month} ${date}`} notifications={notifications.slice().reverse()} />
-                        ))}
+      {Object.entries(dummyNotifications)
+        .reverse()
+        .map(([year, months]) => (
+          <div key={year} className='flex flex-col mt-12'>
+            <YearToggle year={year} expanded={yearExpanded[year]} onClick={toggleYear} />
+            {yearExpanded[year] && (
+              <div className='flex flex-col pl-4'>
+                {Object.entries(months)
+                  .reverse()
+                  .map(([month, days]) => (
+                    <div key={month} className='flex flex-col'>
+                      <MonthToggle month={month} expanded={monthExpanded[month]} onClick={toggleMonth} />
+                      {monthExpanded[month] && (
+                        <div className='flex flex-col pl-4'>
+                          {days
+                            .slice()
+                            .reverse()
+                            .map(({date, notifications}) => (
+                              <NotificationList
+                                key={date}
+                                date={`${month} ${date}`}
+                                notifications={notifications.slice().reverse()}
+                              />
+                            ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+                  ))}
+              </div>
+            )}
+          </div>
+        ))}
     </div>
   )
 }
@@ -60,7 +64,7 @@ const YearToggle = ({year, expanded, onClick}) => (
   <div className='flex items-center justify-between px-4 py-2 rounded-lg drop mb-2 shadow'>
     <p className='font-bold text-2xl'>{year}</p>
     <button className='text-xs font-bold text-dark-green/80 tracking-wide' onClick={() => onClick(year)}>
-      {expanded ? 'Hide' : 'Show'}
+      <img src={expanded ? '/eye-slash-regular.svg' : '/eye-regular.svg'} className='w-6' />
     </button>
   </div>
 )
@@ -69,7 +73,7 @@ const MonthToggle = ({month, expanded, onClick}) => (
   <div className='flex items-center justify-between px-4 py-2 rounded-lg drop mb-2 shadow'>
     <p className='font-bold text-xl'>{month}</p>
     <button className='text-xs font-bold text-dark-green/80 tracking-wide' onClick={() => onClick(month)}>
-      {expanded ? 'Hide' : 'Show'}
+      <img src={expanded ? '/eye-slash-regular.svg' : '/eye-regular.svg'} className='w-6' />
     </button>
   </div>
 )
@@ -92,5 +96,3 @@ const NotificationItem = ({timestamp, message, title}) => (
     <p className='text-xs font-bold text-dark-green/80 tracking-wide'>{timestamp}</p>
   </div>
 )
-
-
