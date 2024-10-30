@@ -28,31 +28,31 @@ export const dummyNotifications = {
       {
         date: '01',
         notifications: [
-          {message: 'Notification 1', timestamp: '10:00 AM'},
-          {message: 'Notification 2', timestamp: '11:00 AM'},
-          {message: 'Notification 3', timestamp: '12:00 PM'},
-          {message: 'Notification 4', timestamp: '1:00 PM'},
-          {message: 'Notification 5', timestamp: '2:00 PM'}
+          {message: 'Notification 1', timestamp: '10:00 AM', title: 'Test Notification'},
+          {message: 'Notification 2', timestamp: '11:00 AM', title: 'Test Notification'},
+          {message: 'Notification 3', timestamp: '12:00 PM', title: 'Test Notification'},
+          {message: 'Notification 4', timestamp: '1:00 PM', title: 'Test Notification'},
+          {message: 'Notification 5', timestamp: '2:00 PM', title: 'Test Notification'}
         ]
       },
       {
         date: '02',
         notifications: [
-          {message: 'Notification 6', timestamp: '3:00 PM'},
-          {message: 'Notification 7', timestamp: '4:00 PM'},
-          {message: 'Notification 8', timestamp: '5:00 PM'},
-          {message: 'Notification 9', timestamp: '6:00 PM'},
-          {message: 'Notification 10', timestamp: '7:00 PM'}
+          {message: 'Notification 6', timestamp: '3:00 PM', title: 'Test Notification'},
+          {message: 'Notification 7', timestamp: '4:00 PM', title: 'Test Notification'},
+          {message: 'Notification 8', timestamp: '5:00 PM', title: 'Test Notification'},
+          {message: 'Notification 9', timestamp: '6:00 PM', title: 'Test Notification'},
+          {message: 'Notification 10', timestamp: '7:00 PM', title: 'Test Notification'}
         ]
       },
       {
         date: '03',
         notifications: [
-          {message: 'Notification 11', timestamp: '8:00 PM'},
-          {message: 'Notification 12', timestamp: '9:00 PM'},
-          {message: 'Notification 13', timestamp: '10:00 PM'},
-          {message: 'Notification 14', timestamp: '11:00 PM'},
-          {message: 'Notification 15', timestamp: '12:00 AM'}
+          {message: 'Notification 11', timestamp: '8:00 PM', title: 'Test Notification'},
+          {message: 'Notification 12', timestamp: '9:00 PM', title: 'Test Notification'},
+          {message: 'Notification 13', timestamp: '10:00 PM', title: 'Test Notification'},
+          {message: 'Notification 14', timestamp: '11:00 PM', title: 'Test Notification'},
+          {message: 'Notification 15', timestamp: '12:00 AM', title: 'Test Notification'}
         ]
       }
     ]
@@ -62,31 +62,31 @@ export const dummyNotifications = {
       {
         date: '01',
         notifications: [
-          {message: 'Notification 16', timestamp: '1:00 AM'},
-          {message: 'Notification 17', timestamp: '2:00 AM'},
-          {message: 'Notification 18', timestamp: '3:00 AM'},
-          {message: 'Notification 19', timestamp: '4:00 AM'},
-          {message: 'Notification 20', timestamp: '5:00 AM'}
+          {message: 'Notification 16', timestamp: '1:00 AM', title: 'Test Notification'},
+          {message: 'Notification 17', timestamp: '2:00 AM', title: 'Test Notification'},
+          {message: 'Notification 18', timestamp: '3:00 AM', title: 'Test Notification'},
+          {message: 'Notification 19', timestamp: '4:00 AM', title: 'Test Notification'},
+          {message: 'Notification 20', timestamp: '5:00 AM', title: 'Test Notification'}
         ]
       },
       {
         date: '02',
         notifications: [
-          {message: 'Notification 21', timestamp: '6:00 AM'},
-          {message: 'Notification 22', timestamp: '7:00 AM'},
-          {message: 'Notification 23', timestamp: '8:00 AM'},
-          {message: 'Notification 24', timestamp: '9:00 AM'},
-          {message: 'Notification 25', timestamp: '10:00 AM'}
+          {message: 'Notification 21', timestamp: '6:00 AM', title: 'Test Notification'},
+          {message: 'Notification 22', timestamp: '7:00 AM', title: 'Test Notification'},
+          {message: 'Notification 23', timestamp: '8:00 AM', title: 'Test Notification'},
+          {message: 'Notification 24', timestamp: '9:00 AM', title: 'Test Notification'},
+          {message: 'Notification 25', timestamp: '10:00 AM', title: 'Test Notification'}
         ]
       },
       {
         date: '03',
         notifications: [
-          {message: 'Notification 26', timestamp: '11:00 AM'},
-          {message: 'Notification 27', timestamp: '12:00 PM'},
-          {message: 'Notification 28', timestamp: '1:00 PM'},
-          {message: 'Notification 29', timestamp: '2:00 PM'},
-          {message: 'Notification 30', timestamp: '3:00 PM'}
+          {message: 'Notification 26', timestamp: '11:00 AM', title: 'Test Notification'},
+          {message: 'Notification 27', timestamp: '12:00 PM', title: 'Test Notification'},
+          {message: 'Notification 28', timestamp: '1:00 PM', title: 'Test Notification'},
+          {message: 'Notification 29', timestamp: '2:00 PM', title: 'Test Notification'},
+          {message: 'Notification 30', timestamp: '3:00 PM', title: 'Test Notification'}
         ]
       }
     ]
