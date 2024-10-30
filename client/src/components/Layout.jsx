@@ -18,7 +18,8 @@ import {
   awareness_video_link,
   progress_data,
   progress_users,
-  progress_BarStyles
+  progress_BarStyles,
+  article_data
 } from '../data/config'
 import SplashScreen from './Splash'
 import {useEffect, useState} from 'react'
@@ -53,7 +54,7 @@ function LayoutContent() {
               <Dashboard BarGraphVals={dashboard_data} creditVal={dashboard_credits} titles={dashboard_titles} />
             }
           />
-          <Route path='/awareness' element={<Awareness src={awareness_video_link} />} />
+          <Route path='/awareness' element={<Awareness src={awareness_video_link} data={article_data} />} />
           <Route
             path='/progress'
             element={<Progress data={progress_data} users={progress_users} progressBarStyles={progress_BarStyles} />}

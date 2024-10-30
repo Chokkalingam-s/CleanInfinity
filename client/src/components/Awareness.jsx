@@ -25,7 +25,7 @@ function Accordion({ title, content }) {
   )
 }
 
-export default function Awareness({ src }) {
+export default function Awareness({ src ,data}) {
   const cardsData = Array.from({ length: 9 }, (_, index) => ({
     id: index + 1,
     title: `Card ${index + 1}`,
@@ -118,7 +118,7 @@ export default function Awareness({ src }) {
         </button>
       )}
       <h3 className='text-3xl font-semibold text-dark-green'>Articles</h3>
-      <Article showAll={showMoreArticles} />
+      <Article showAll={showMoreArticles} articles_data={data}/>
       <div className='w-44'>
         <button
           onClick={handleShowMoreArticles}

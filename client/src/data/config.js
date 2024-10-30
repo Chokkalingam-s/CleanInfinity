@@ -93,3 +93,9 @@ export const dummyNotifications = {
   }
 }
 
+export const article_data = [
+  {title: 'Article 1', description: 'Description for article 1.'},
+  {title: 'Article 2', description: 'Description for article 2.'},
+  {title: 'Article 3', description: 'Description for article 3.'},
+  {title: 'Article 4', description: 'Description for article 4.'}
+]
