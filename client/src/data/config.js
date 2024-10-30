@@ -18,8 +18,11 @@ export const progress_users = [
 ]
 export const progress_BarStyles = {
   root: {width: '120px', height: '120px'},
-  path: {stroke: '#4CAF50'},
-  text: {fill: '#4CAF50', fontSize: '1rem'}
+  path: {stroke: '#215848'},
+  text: {fill: '#215848', fontSize: '1rem'},
+  trail: {
+    stroke: '#9cdba6'
+  }
 }
 
 export const dummyNotifications = {

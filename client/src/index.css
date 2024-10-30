@@ -49,7 +49,7 @@ header a {
   @apply w-full;
 }
 .btn {
-  @apply w-full py-2 rounded-lg bg-medium-green mb-2 shadow-lg hover:shadow-md hover:bg-dark-green transition-colors duration-150 text-lightest-green;
+  @apply w-full py-2 rounded-xl bg-medium-green mb-2 shadow-lg hover:shadow-md hover:bg-dark-green transition-colors duration-150 text-lightest-green;
 }
 .button-disabled {
   @apply bg-gray-300 text-gray-500 cursor-not-allowed;
