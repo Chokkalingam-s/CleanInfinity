@@ -17,16 +17,16 @@ export default function NFCPage() {
         <NFCCard titles={NFCtitles} />
       </div>
 
-      <div className='p-4 flex flex-col bg-light-green rounded-lg shadow-xl hover:shadow-md transition-shadow duration-300 mt-4 md:w-3/4 lg:w-1/2'>
+      <div className='p-4 flex flex-col drop rounded-lg shadow-xl hover:shadow-md transition-shadow duration-150 mt-4 md:w-3/4 lg:w-1/2'>
         <div className='p-5'>
-          <h2 className='text-2xl font-bold'>What is NFC?</h2>
+          <h2>What is NFC?</h2>
           <p className='mt-2'>
             NFC (Near Field Communication) is used to get coins based on the
             waste we segregate and put in the dustbin.
           </p>
         </div>
         <div className='p-5'>
-          <h3 className='text-xl font-semibold'>Benefits:</h3>
+          <h3>Benefits:</h3>
           <p className='mt-2'>
             - Encourages waste segregation
             <br />

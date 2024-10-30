@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
+import {useState, useEffect} from 'react'
+import {toast} from 'react-toastify'
 import axios from 'axios'
 
-export default function AuthComponent({ states, wards }) {
+export default function AuthComponent({states, wards}) {
   const [isSignUp, setIsSignUp] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -14,7 +14,7 @@ export default function AuthComponent({ states, wards }) {
     district: '',
     ward: '',
     captchaInput: '',
-    otp: '',
+    otp: ''
   })
   const [otpSent, setOtpSent] = useState(false)
   const [otpVerified, setOtpVerified] = useState(false)
@@ -27,10 +27,7 @@ export default function AuthComponent({ states, wards }) {
   }, [])
 
   const generateCaptcha = () => {
-    const randomCaptcha = Math.random()
-      .toString(36)
-      .substring(2, 8)
-      .toUpperCase()
+    const randomCaptcha = Math.random().toString(36).substring(2, 8).toUpperCase()
     setCaptcha(randomCaptcha)
   }
 
@@ -45,13 +42,11 @@ export default function AuthComponent({ states, wards }) {
     }
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+  const handleChange = e => {
+    const {name, value} = e.target
+    setFormData({...formData, [name]: value})
     if (name === 'state') {
-      const selectedState = states.states.find(
-        (stateObj) => stateObj.state === value
-      )
+      const selectedState = states.states.find(stateObj => stateObj.state === value)
       if (selectedState) setDistricts(selectedState.districts)
       else setDistricts([])
     }
@@ -67,7 +62,7 @@ export default function AuthComponent({ states, wards }) {
     toast.success('OTP verified successfully!')
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     try {
@@ -80,7 +75,7 @@ export default function AuthComponent({ states, wards }) {
           state: formData.state,
           district: formData.district,
           ward: formData.ward,
-          password: formData.password,
+          password: formData.password
         })
 
         toast.success(response.data || 'User registered successfully')
@@ -94,12 +89,12 @@ export default function AuthComponent({ states, wards }) {
           district: '',
           ward: '',
           captchaInput: '',
-          otp: '',
+          otp: ''
         })
       } else {
         const response = await axios.post('http://localhost:5000/signin', {
           mobile: formData.mobile,
-          password: formData.password,
+          password: formData.password
         })
         toast.success(response.data || 'User logged in successfully')
       }
@@ -107,8 +102,7 @@ export default function AuthComponent({ states, wards }) {
       if (error.response && error.response.data) {
         toast.error(error.response.data)
       } else {
-        if (error.response && error.response.status === 409)
-          toast.error(error.response.data.message)
+        if (error.response && error.response.status === 409) toast.error(error.response.data.message)
         else toast.error('An error occurred while processing your request.')
       }
     }
@@ -116,23 +110,21 @@ export default function AuthComponent({ states, wards }) {
 
   return (
     <div className='min-h-screen flex items-center justify-center container'>
-      <div className='p-8 bg-light-green rounded-xl shadow-lg w-full md:w-1/2 lg:w-4/12'>
+      <div className='p-8 bg-light-green rounded-xl shadow-lg w-full md:w-1/2 lg:w-5/12'>
         <div className='mb-6 w-full slider-btn border-2 border-medium-green rounded-xl shadow-lg flex overflow-hidden'>
           <button
             type='button'
             className={`transition-colors duration-300
               ${!isSignUp ? 'notActiveBtn' : 'activeBtn'}`}
-            onClick={() => setIsSignUp(false)}
-          >
+            onClick={() => setIsSignUp(false)}>
             <p>Sign In</p>
             <p>(Existing User)</p>
           </button>
           <button
             type='button'
-            className={`transition-colors duration-300 
+            className={`transition-colors duration-300
               ${isSignUp ? 'notActiveBtn' : 'activeBtn'}`}
-            onClick={() => setIsSignUp(true)}
-          >
+            onClick={() => setIsSignUp(true)}>
             <p>Sign Up</p>
             <p>(New User!)</p>
           </button>
@@ -140,13 +132,7 @@ export default function AuthComponent({ states, wards }) {
         <form onSubmit={handleSubmit}>
           {isSignUp ? (
             <>
-              <input
-                type='text'
-                name='name'
-                placeholder='Name'
-                value={formData.name}
-                onChange={handleChange}
-              />
+              <input type='text' name='name' placeholder='Name' value={formData.name} onChange={handleChange} />
               <div className='flex gap-x-2'>
                 <input
                   type='number'
@@ -155,11 +141,7 @@ export default function AuthComponent({ states, wards }) {
                   value={formData.mobile}
                   onChange={handleChange}
                 />
-                <button
-                  type='button'
-                  onClick={sendOtp}
-                  className='btn'
-                >
+                <button type='button' onClick={sendOtp} className='btn'>
                   Send OTP
                 </button>
               </div>
@@ -173,11 +155,7 @@ export default function AuthComponent({ states, wards }) {
                     value={formData.otp}
                     onChange={handleChange}
                   />
-                  <button
-                    type='button'
-                    onClick={verifyOtp}
-                    className='btn'
-                  >
+                  <button type='button' onClick={verifyOtp} className='btn'>
                     Verify OTP
                   </button>
                 </>
@@ -192,13 +170,7 @@ export default function AuthComponent({ states, wards }) {
                     value={formData.password}
                     onChange={handleChange}
                   />
-                  <input
-                    type='email'
-                    name='email'
-                    placeholder='Email'
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
+                  <input type='email' name='email' placeholder='Email' value={formData.email} onChange={handleChange} />
                   <input
                     type='text'
                     name='address'
@@ -207,46 +179,24 @@ export default function AuthComponent({ states, wards }) {
                     onChange={handleChange}
                   />
                   <div className='flex gap-x-2 text-sm'>
-                    <select
-                      name='state'
-                      value={formData.state}
-                      onChange={handleChange}
-                    >
+                    <select name='state' value={formData.state} onChange={handleChange}>
                       {states.states.map((stateObj, index) => (
-                        <option
-                          key={index}
-                          value={stateObj.state}
-                        >
+                        <option key={index} value={stateObj.state}>
                           {stateObj.state}
                         </option>
                       ))}
                     </select>
-                    <select
-                      name='district'
-                      value={formData.district}
-                      onChange={handleChange}
-                    >
+                    <select name='district' value={formData.district} onChange={handleChange}>
                       {districtsArr.map((district, index) => (
-                        <option
-                          key={`${index}`}
-                          value={district}
-                        >
+                        <option key={`${index}`} value={district}>
                           {district}
                         </option>
                       ))}
                     </select>
                   </div>
-                  <select
-                    name='ward'
-                    value={formData.ward}
-                    onChange={handleChange}
-                    placeholder='Select Ward'
-                  >
+                  <select name='ward' value={formData.ward} onChange={handleChange} placeholder='Select Ward'>
                     {wards.map((ward, index) => (
-                      <option
-                        key={index}
-                        value={ward}
-                      >
+                      <option key={index} value={ward}>
                         {ward}
                       </option>
                     ))}
@@ -272,12 +222,7 @@ export default function AuthComponent({ states, wards }) {
               />
 
               <div className='flex items-center gap-x-1 text-sm'>
-                <input
-                  type='text'
-                  value={captcha}
-                  disabled
-                  className='text-center'
-                />
+                <input type='text' value={captcha} disabled className='text-center' />
                 <input
                   type='text'
                   name='captchaInput'
@@ -286,11 +231,7 @@ export default function AuthComponent({ states, wards }) {
                   onChange={handleChange}
                   className='text-center'
                 />
-                <button
-                  type='button'
-                  className='btn'
-                  onClick={verifyCaptcha}
-                >
+                <button type='button' className='btn' onClick={verifyCaptcha}>
                   Verify
                 </button>
               </div>
@@ -298,15 +239,10 @@ export default function AuthComponent({ states, wards }) {
           )}
           <button
             type='submit'
-            disabled={
-              (isSignUp && !otpVerified) || (!isSignUp && !captchaVerified)
-            }
+            disabled={(isSignUp && !otpVerified) || (!isSignUp && !captchaVerified)}
             className={`btn mt-4 ${
-              (isSignUp && otpVerified) || (!isSignUp && captchaVerified)
-                ? 'bg-green-hover'
-                : 'button-disabled'
-            }`}
-          >
+              (isSignUp && otpVerified) || (!isSignUp && captchaVerified) ? 'bg-green-hover' : 'button-disabled'
+            }`}>
             {!isSignUp ? 'Log In' : 'Get Started'}
           </button>
         </form>

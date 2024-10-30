@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation
-} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom'
 import AuthComponent from './AuthComp'
 import Dashboard from './Dashboard'
 import Navbar from './Navbar'
@@ -12,7 +7,7 @@ import Progress from './Progress'
 import NFCPage from './NFC'
 import Profile from './Profile'
 import auth_states from '../data/stateAndDistrict.json'
-import { ToastContainer } from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import NFCCard from './NFC-Card'
 import {
@@ -26,7 +21,8 @@ import {
   progress_BarStyles
 } from '../data/config'
 import SplashScreen from './Splash'
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
+import Notify from './Notify'
 
 function LayoutContent() {
   const [loading, setLoading] = useState(true)
@@ -40,12 +36,10 @@ function LayoutContent() {
       <div
         className='fixed top-0 w-full h-full -z-10'
         style={{
-          backgroundImage:
-            'url(/0ba822008116c4db07f85b772a5dcea9-Photoroom.png)',
+          backgroundImage: 'url(/0ba822008116c4db07f85b772a5dcea9-Photoroom.png)',
           backgroundSize: 'contain',
           backgroundPosition: 'center',
-          filter:
-            'invert(1) sepia(1) hue-rotate(75deg) saturate(3) brightness(0.4)',
+          filter: 'invert(1) sepia(1) hue-rotate(75deg) saturate(3) brightness(0.4)',
           opacity: 0.1
         }}
       />
@@ -56,51 +50,21 @@ function LayoutContent() {
           <Route
             path='/dashboard'
             element={
-              <Dashboard
-                BarGraphVals={dashboard_data}
-                creditVal={dashboard_credits}
-                titles={dashboard_titles}
-              />
+              <Dashboard BarGraphVals={dashboard_data} creditVal={dashboard_credits} titles={dashboard_titles} />
             }
           />
-          <Route
-            path='/awareness'
-            element={<Awareness src={awareness_video_link} />}
-          />
+          <Route path='/awareness' element={<Awareness src={awareness_video_link} />} />
           <Route
             path='/progress'
-            element={
-              <Progress
-                data={progress_data}
-                users={progress_users}
-                progressBarStyles={progress_BarStyles}
-              />
-            }
+            element={<Progress data={progress_data} users={progress_users} progressBarStyles={progress_BarStyles} />}
           />
-          <Route
-            path='/nfc'
-            element={<NFCPage />}
-          />
-          <Route
-            path='/nfc-card'
-            element={<NFCCard />}
-          />
-          <Route
-            path='/profile'
-            element={<Profile />}
-          />
+          <Route path='/nfc' element={<NFCPage />} />
+          <Route path='/nfc-card' element={<NFCCard />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/notify' element={<Notify />} />
           <Route
             path='/'
-            element={
-              loading ? (
-                <SplashScreen />
-              ) : (
-                <AuthComponent
-                  states={auth_states}
-                  wards={auth_wards}
-                />
-              )
-            }
+            element={loading ? <SplashScreen /> : <AuthComponent states={auth_states} wards={auth_wards} />}
           />
         </Routes>
       </main>
