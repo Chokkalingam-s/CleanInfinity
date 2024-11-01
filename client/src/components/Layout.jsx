@@ -19,11 +19,13 @@ import {
   progress_data,
   progress_users,
   progress_BarStyles,
-  article_data
+  article_data,
+  awareness_cardsData
 } from '../data/config'
 import SplashScreen from './Splash'
 import {useEffect, useState} from 'react'
 import Notify from './Notify'
+import PingMe from './PingMe'
 
 function LayoutContent() {
   const [loading, setLoading] = useState(true)
@@ -54,7 +56,10 @@ function LayoutContent() {
               <Dashboard BarGraphVals={dashboard_data} creditVal={dashboard_credits} titles={dashboard_titles} />
             }
           />
-          <Route path='/awareness' element={<Awareness src={awareness_video_link} data={article_data} />} />
+          <Route
+            path='/awareness'
+            element={<Awareness src={awareness_video_link} data={article_data} cardsData={awareness_cardsData} />}
+          />
           <Route
             path='/progress'
             element={<Progress data={progress_data} users={progress_users} progressBarStyles={progress_BarStyles} />}
@@ -63,6 +68,7 @@ function LayoutContent() {
           <Route path='/nfc-card' element={<NFCCard />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/notify' element={<Notify />} />
+          <Route path='/ping-me' element={<PingMe />} />
           <Route
             path='/'
             element={loading ? <SplashScreen /> : <AuthComponent states={auth_states} wards={auth_wards} />}

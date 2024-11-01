@@ -9,7 +9,7 @@ export default function BarGraph({ data }) {
     months.push(previousMonth.toLocaleString('default', { month: 'short' }))
   }
   return (
-    <div className='w-full max-w-4xl rounded-md shadow-lg py-2 drop'>
+    <div className='w-full max-w-4xl py-2 drop'>
       <div className='flex justify-between items-end h-44 px-4'>
         {months.map((month, index) => (
           <div

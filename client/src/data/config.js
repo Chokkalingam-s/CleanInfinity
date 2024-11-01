@@ -10,6 +10,12 @@ export const dashboard_titles = [
   {title: 'Activity', path: '/activity'}
 ]
 export const awareness_video_link = 'https://www.youtube.com/embed/DHfRfU3XUEo?si=2Tw6Xk_Xs3Ihwak3'
+export const awareness_cardsData = Array.from({length: 9}, (_, index) => ({
+  id: index + 1,
+  title: `Card ${index + 1}`,
+  description: 'This is a description of the card.',
+  image: 'https://placehold.co/150'
+}))
 export const progress_data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 75]
 export const progress_users = [
   {name: 'User 1', value: 66},

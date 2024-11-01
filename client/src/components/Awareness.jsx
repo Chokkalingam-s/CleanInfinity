@@ -25,14 +25,7 @@ function Accordion({ title, content }) {
   )
 }
 
-export default function Awareness({ src ,data}) {
-  const cardsData = Array.from({ length: 9 }, (_, index) => ({
-    id: index + 1,
-    title: `Card ${index + 1}`,
-    description: 'This is a description of the card.',
-    image: 'https://placehold.co/150'
-  }))
-
+export default function Awareness({ src ,data,cardsData}) {
   const [showMoreVideos, setShowMoreVideos] = useState(false)
   const [showMoreArticles, setShowMoreArticles] = useState(false)
   const [isMobile, setIsMobile] = useState(false)

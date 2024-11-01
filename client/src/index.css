@@ -9,11 +9,12 @@ body::after {
   @apply fixed top-0 w-full h-full bg-black bg-opacity-20 -z-10;
 }
 .drop {
-  @apply bg-medium-green/30 backdrop-blur-sm;
+  @apply bg-medium-green/30 backdrop-blur-sm rounded-lg shadow-lg;
 }
 input,
+textarea,
 select {
-  @apply rounded-lg p-2 mb-2 hover:shadow-md bg-lightest-green/80 w-full focus:outline-none focus:ring-2 focus:ring-medium-green transition font-semibold shadow-lg;
+  @apply rounded-lg p-2 mb-2 hover:shadow-md bg-lightest-green w-full focus:outline-none focus:ring-2 focus:ring-medium-green transition font-semibold shadow-lg;
 }
 input::placeholder {
   @apply text-medium-green text-center;
@@ -25,7 +26,7 @@ input::placeholder {
   @apply w-1/2 p-2;
 }
 .container {
-  @apply px-6 mx-auto min-h-screen lg:w-8/12 pt-14 shadow-lg;
+  @apply p-6 mx-auto min-h-screen lg:w-7/12 pt-14;
 }
 .notActivebtn {
   @apply text-dark-green border-2 border-medium-green border-solid;
@@ -49,7 +50,7 @@ header a {
   @apply w-full;
 }
 .btn {
-  @apply w-full py-2 rounded-xl bg-medium-green mb-2 shadow-lg hover:shadow-md hover:bg-dark-green transition-colors duration-150 text-lightest-green;
+  @apply w-full py-2 rounded-xl bg-medium-green mb-2 shadow-lg hover:shadow-md hover:bg-dark-green transition-colors duration-150 text-black font-medium;
 }
 .button-disabled {
   @apply bg-gray-300 text-gray-500 cursor-not-allowed;

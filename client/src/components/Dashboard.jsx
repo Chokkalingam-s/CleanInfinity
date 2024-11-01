@@ -4,7 +4,7 @@ import VerticalCard from './VerticalCard'
 export default function Dashboard({ creditVal, BarGraphVals, titles }) {
   return (
     <div className='container'>
-      <div className='w-24 flex items-center justify-around p-2 rounded-lg drop shadow-lg absolute bottom-6 right-2 '>
+      <div className='w-24 flex items-center justify-around p-2 drop absolute bottom-6 right-2'>
         <img
           src='/coins-solid.svg'
           className='w-6'
