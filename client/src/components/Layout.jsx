@@ -20,12 +20,14 @@ import {
   progress_users,
   progress_BarStyles,
   article_data,
-  awareness_cardsData
+  awareness_cardsData,
+  activity_posts
 } from '../data/config'
 import SplashScreen from './Splash'
 import {useEffect, useState} from 'react'
 import Notify from './Notify'
 import PingMe from './PingMe'
+import Activity from './Activity'
 
 function LayoutContent() {
   const [loading, setLoading] = useState(true)
@@ -68,6 +70,7 @@ function LayoutContent() {
           <Route path='/nfc-card' element={<NFCCard />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/notify' element={<Notify />} />
+          <Route path='/activity' element={<Activity posts={activity_posts} />} />
           <Route path='/ping-me' element={<PingMe />} />
           <Route
             path='/'

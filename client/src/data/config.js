@@ -31,6 +31,21 @@ export const progress_BarStyles = {
   }
 }
 
+export const activity_posts = [
+  {
+    name: 'john_doe',
+    time: '2 hours ago',
+    image: 'https://placehold.co/300x200',
+    description: 'This is a sample post'
+  },
+  {
+    name: 'jane_doe',
+    time: '1 hour ago',
+    image: 'https://placehold.co/300x200',
+    description: 'This is another sample post'
+  }
+]
+
 export const dummyNotifications = {
   2023: {
     March: [
