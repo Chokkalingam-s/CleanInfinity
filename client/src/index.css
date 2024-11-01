@@ -4,10 +4,6 @@
 body {
   @apply text-dark-green bg-lightest-green min-h-screen relative -z-10;
 }
-body::after {
-  content: '';
-  @apply fixed top-0 w-full h-full bg-black bg-opacity-20 -z-10;
-}
 .drop {
   @apply bg-medium-green/30 backdrop-blur-sm rounded-lg shadow-lg;
 }
@@ -16,7 +12,9 @@ textarea,
 select {
   @apply rounded-lg p-2 mb-2 hover:shadow-md bg-lightest-green w-full focus:outline-none focus:ring-2 focus:ring-medium-green transition font-semibold shadow-lg;
 }
-input::placeholder {
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
   @apply text-medium-green text-center;
 }
 .animate {

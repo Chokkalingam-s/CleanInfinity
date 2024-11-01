@@ -5,23 +5,24 @@ export default function PingMe() {
   const [description, setDescription] = useState('')
 
   return (
-    <div className='flex flex-col items-center container max-w-md'>
+    <div className='flex flex-col justify-center items-center container max-w-md'>
       <div className='drop p-4'>
-        <h1 className='text-3xl font-bold mb-4'>Ping Me - Contact Us</h1>
+        <h1 className='text-2xl font-bold text-center mb-4'>Ping Me</h1>
         <div className='flex flex-col w-full'>
           <input type='text' placeholder='Your name' value={name} onChange={e => setName(e.target.value)} />
           <input type='text' placeholder='Problem subject' value={subject} onChange={e => setSubject(e.target.value)} />
-          <span className='flex items-center relative'>
+          <div className='flex gap-x-2 my-2'>
+            <span className='relative flex-grow aspect-square w-full'>
+              <input type='file' multiple className='absolute inset-0 z-10 opacity-0 cursor-pointer' />
+              <span className='flex items-center justify-center drop h-full'>Add images</span>
+            </span>
             <textarea
               placeholder='Brief description'
               rows={5}
               value={description}
-              onChange={e => setDescription(e.target.value)}></textarea>
-            <input type='file' multiple className='hidden' />
-            <span className='cursor-pointer absolute inset-0 flex items-center justify-center w-24 aspect-square rounded-full bg-gray-200'>
-              Add images
-            </span>
-          </span>
+              onChange={e => setDescription(e.target.value)}
+              className='w-full mb-0'></textarea>
+          </div>
           <button className='btn'>Submit</button>
         </div>
       </div>
