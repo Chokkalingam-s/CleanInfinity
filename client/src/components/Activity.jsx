@@ -7,7 +7,7 @@ function Post({ name, time, image, description }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
           <img
-            src={image}
+            src="https://placehold.co/50"
             alt="Profile"
             className="w-12 h-12 object-cover shadow-lg rounded-full mr-4"
           />
@@ -42,9 +42,10 @@ function Post({ name, time, image, description }) {
   );
 }
 
-export default function Activity({ posts }) {
+export default function Activity({ initialPosts }) {
+  const [posts, setPosts] = useState(initialPosts);
   const [showPopup, setShowPopup] = useState(false);
-  const [newPost, setNewPost] = useState({ text: "", image: null });
+  const [newPost, setNewPost] = useState({ name: "New User", time: "Just now", text: "", image: null });
 
   const handleImageChange = (e) => {
     setNewPost({ ...newPost, image: URL.createObjectURL(e.target.files[0]) });
@@ -52,6 +53,14 @@ export default function Activity({ posts }) {
 
   const handleKeyPress = (e) => {
     if (e.key === "Escape") setShowPopup(false);
+  };
+
+  const handleShare = () => {
+    if (newPost.text || newPost.image) {
+      setPosts([{ name: newPost.name, time: newPost.time, image: newPost.image, description: newPost.text }, ...posts]);
+      setShowPopup(false);
+      setNewPost({ name: "New User", time: "Just now", text: "", image: null });
+    }
   };
 
   useEffect(() => {
@@ -64,7 +73,7 @@ export default function Activity({ posts }) {
   return (
     <div className="container mb-20 lg:mb-10">
       <div className="text-2xl font-bold text-center">Activity</div>
-      {posts.map((post) => <Post {...post} key={post.name} />)}
+      {posts.map((post, index) => <Post {...post} key={index} />)}
       <button
         onClick={() => setShowPopup(true)}
         className="fixed top-14 right-2 bg-medium-green font-medium px-4 py-2 rounded-lg shadow-lg"
@@ -105,7 +114,7 @@ export default function Activity({ posts }) {
             )}
             <div className="flex gap-2">
               <button
-                onClick={() => setShowPopup(false)}
+                onClick={handleShare}
                 className="btn"
               >
                 Share
@@ -123,3 +132,4 @@ export default function Activity({ posts }) {
     </div>
   );
 }
+
