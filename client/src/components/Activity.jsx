@@ -18,7 +18,7 @@ function Post({ name, time, image, description }) {
       <img
         src={image}
         alt="Post"
-        className="w-full h-64 object-cover rounded-lg shadow-lg my-4"
+        className="w-full h-64 object-contain rounded-lg shadow-lg my-4"
       />
       <div className="mt-4 ml-2">
         <div className="flex items-center justify-between">
@@ -45,7 +45,12 @@ function Post({ name, time, image, description }) {
 export default function Activity({ initialPosts }) {
   const [posts, setPosts] = useState(initialPosts);
   const [showPopup, setShowPopup] = useState(false);
-  const [newPost, setNewPost] = useState({ name: "New User", time: "Just now", text: "", image: null });
+  const [newPost, setNewPost] = useState({
+    name: "New User",
+    time: "Just now",
+    text: "",
+    image: null,
+  });
 
   const handleImageChange = (e) => {
     setNewPost({ ...newPost, image: URL.createObjectURL(e.target.files[0]) });
@@ -57,7 +62,12 @@ export default function Activity({ initialPosts }) {
 
   const handleShare = () => {
     if (newPost.text || newPost.image) {
-      setPosts([{ name: newPost.name, time: newPost.time, image: newPost.image, description: newPost.text }, ...posts]);
+      setPosts([{
+        name: newPost.name,
+        time: newPost.time,
+        image: newPost.image,
+        description: newPost.text,
+      }, ...posts]);
       setShowPopup(false);
       setNewPost({ name: "New User", time: "Just now", text: "", image: null });
     }
@@ -82,7 +92,7 @@ export default function Activity({ initialPosts }) {
       </button>
       {showPopup && (
         <div className="fixed inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-          <div className="drop p-4 w-11/12">
+          <div className="drop p-4 w-11/12 lg:w-3/12">
             <h3 className="mb-2 text-lightest-green">New Post</h3>
             <textarea
               placeholder="Write something..."
@@ -132,4 +142,3 @@ export default function Activity({ initialPosts }) {
     </div>
   );
 }
-
