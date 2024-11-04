@@ -9,7 +9,7 @@ export default function NFCPage() {
 
       <div className='flex flex-col md:flex-row justify-center align-content-center mb-1 w-full'>
         <div className='w-full md:w-1/2 lg:w-1/3 p-2'>
-          <Location />
+          
         </div>
       </div>
 
