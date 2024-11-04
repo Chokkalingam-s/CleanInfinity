@@ -6,7 +6,7 @@ export default function PingMe() {
 
   return (
     <div className="flex items-center justify-center container">
-      <div className="drop p-4 w-full">
+      <div className="drop p-4 w-full lg:w-1/2">
         <h1 className="text-2xl font-bold text-center mb-4">Ping Me</h1>
         <div className="flex flex-col w-full">
           <input
