@@ -4,6 +4,11 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto'); 
 const Users = require('./models/Users'); 
 const cors = require('cors');
+
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = 'your_secret_key';
+
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -38,8 +43,10 @@ app.post('/signup', async (req, res) => {
       nfcDId: nfcDId,
       nfcNDId: nfcNDId,
     });
+    const token = jwt.sign({ mobile: newUser.mobileNumber, email: newUser.mailId }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(201).send('User registered successfully');
+    // Send success response with token
+    res.status(201).json({ message: 'User registered successfully', token });
   } catch (error) {
     console.error('Error during signup:', error);
     if (error.name === 'SequelizeUniqueConstraintError') {
@@ -49,6 +56,7 @@ app.post('/signup', async (req, res) => {
     }
   }
 });
+
 
 
 // Sign In API
@@ -67,7 +75,9 @@ app.post('/signin', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (isMatch) {
-      res.status(200).send('Authenticated successfully');
+      const token = jwt.sign({ mobile: user.mobileNumber, email: user.mailId }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(200).json({ message: 'Authenticated successfully', token });
     } else {
       res.status(401).send('Incorrect password');
     }
@@ -108,6 +118,34 @@ app.post('/verify-otp', (req, res) => {
     return res.status(200).send('OTP verified successfully');
   }
   res.status(400).send('OTP verification failed');
+});
+
+const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+
+  if (!token) return res.status(401).send('Access token is missing');
+
+  jwt.verify(token, 'your_secret_key', (err, decoded) => {
+    if (err) return res.status(403).send('Invalid token');
+    
+    req.mobile = decoded.mobile; // Add mobile number to the request object
+    next();
+  });
+};
+app.get('/get-username', authenticateToken, async (req, res) => {
+  try {
+    // Use the mobile number from the token (attached by the middleware)
+    const user = await Users.findOne({ where: { mobileNumber: req.mobile } });
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    res.status(200).json({ username: user.name });
+  } catch (error) {
+    console.error('Error fetching username:', error);
+    res.status(500).send('Server error');
+  }
 });
 
 

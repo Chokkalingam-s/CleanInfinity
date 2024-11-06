@@ -100,6 +100,7 @@ export default function AuthComponent({states, wards}) {
         })
 
         toast.success(response.data || 'User registered successfully')
+        localStorage.setItem('token', response.data.token);
         
         setFormData({
           email: '',
@@ -120,6 +121,7 @@ export default function AuthComponent({states, wards}) {
           password: formData.password
         })
         toast.success(response.data || 'User logged in successfully')
+        localStorage.setItem('token', response.data.token);
         navigate('/dashboard');
       }
     } catch (error) {

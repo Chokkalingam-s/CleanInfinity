@@ -1,15 +1,34 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import BarGraph from "./BarChart";
 import VerticalCard from "./VerticalCard";
 
 export default function Dashboard({ creditVal, BarGraphVals, titles }) {
+  const [username, setUsername] = useState('');
+
+  // Fetch the username from the backend when the component mounts
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/get-username', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error('Error fetching username:', error);
+      }
+    };
+
+    fetchUsername();
+  }, []);
+
   return (
     <div className="container">
+      <p>Hi, {username}!</p>
       <div className="w-24 flex items-center justify-around p-2 drop absolute top-15 right-2 z-10">
-        <img
-          src="/coins-solid.svg"
-          className="w-6"
-          alt="Credit Icon"
-        />
+        <img src="/coins-solid.svg" className="w-6" alt="Credit Icon" />
         <p className="font-bold">{creditVal}</p>
       </div>
       <div className="flex flex-col items-center justify-center w-full gap-y-6 mt-12 md:mt-0 lg:mt-0">
