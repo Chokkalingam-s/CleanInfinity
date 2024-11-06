@@ -1,5 +1,7 @@
 const express = require('express');
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto'); 
 const Users = require('./models/Users'); 
 const cors = require('cors');
 const app = express();
@@ -20,6 +22,9 @@ app.post('/signup', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const nfcDId = mobile + '0';
+    const nfcNDId = mobile + '1';
+
     const newUser = await Users.create({
       name,
       mobileNumber: mobile,
@@ -28,7 +33,10 @@ app.post('/signup', async (req, res) => {
       state,
       district,
       ward,
-      password: hashedPassword, // Store hashed password
+      password: hashedPassword,
+      mappedMobileNumber: mobile,
+      nfcDId: nfcDId,
+      nfcNDId: nfcNDId,
     });
 
     res.status(201).send('User registered successfully');
@@ -41,6 +49,7 @@ app.post('/signup', async (req, res) => {
     }
   }
 });
+
 
 // Sign In API
 app.post('/signin', async (req, res) => {
@@ -67,6 +76,40 @@ app.post('/signin', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+const transporter = nodemailer.createTransport({
+  service: 'gmail', 
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+app.post('/send-otp', (req, res) => {
+  const email = req.body.email;
+  const otp = crypto.randomBytes(3).toString('hex').toUpperCase();
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Your OTP Code',
+    text: `Welcome to CleanInfinity - Greener and Sustainable Environment Mission. Your OTP code is ${otp} . Kindly do not share it with others. Thank you! - Team CleanInfinity`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).send('Error sending OTP');
+    }
+    res.status(200).send({ otp });
+  });
+});
+app.post('/verify-otp', (req, res) => {
+  const { enteredOtp, generatedOtp } = req.body;
+  if (enteredOtp.toUpperCase() === generatedOtp.toUpperCase()) {
+    return res.status(200).send('OTP verified successfully');
+  }
+  res.status(400).send('OTP verification failed');
+});
+
 
 // Start the server
 app.listen(PORT, () => {

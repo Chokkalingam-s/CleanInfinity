@@ -52,15 +52,33 @@ export default function AuthComponent({states, wards}) {
     }
   }
 
-  const sendOtp = () => {
-    setOtpSent(true)
-    toast.success('OTP sent successfully!')
-  }
 
-  const verifyOtp = () => {
-    setOtpVerified(true)
-    toast.success('OTP verified successfully!')
-  }
+  const sendOtp = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/send-otp', {
+        email: formData.email,
+      });
+      setFormData((prevData) => ({
+        ...prevData,
+        generatedOtp: response.data.otp, 
+      }));
+      setOtpSent(true);
+      toast.success('OTP sent to Entered Mail Successfully!')
+    } catch (error) {
+      toast.error('Error sending OTP');
+    }
+  };
+  
+  const verifyOtp = async () => {
+    if (formData.otp.toUpperCase() === formData.generatedOtp.toUpperCase()) {
+      setOtpVerified(true);
+      toast.success('OTP verified successfully!');
+    } else {
+      toast.error('OTP verification failed');
+    }
+  };
+  
+
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -133,14 +151,8 @@ export default function AuthComponent({states, wards}) {
           {isSignUp ? (
             <>
               <input type='text' name='name' placeholder='Name' value={formData.name} onChange={handleChange} />
-              <div className='flex gap-x-2'>
-                <input
-                  type='number'
-                  name='mobile'
-                  placeholder='Mobile Number'
-                  value={formData.mobile}
-                  onChange={handleChange}
-                />
+              <div className='flex gap-x-1'>
+              <input type='email' name='email' placeholder='Email' value={formData.email} onChange={handleChange} />
                 <button type='button' onClick={sendOtp} className='btn'>
                   Send OTP
                 </button>
@@ -149,7 +161,7 @@ export default function AuthComponent({states, wards}) {
               {otpSent && !otpVerified && (
                 <>
                   <input
-                    type='number'
+                    type='text'
                     name='otp'
                     placeholder='Enter OTP'
                     value={formData.otp}
@@ -170,7 +182,14 @@ export default function AuthComponent({states, wards}) {
                     value={formData.password}
                     onChange={handleChange}
                   />
-                  <input type='email' name='email' placeholder='Email' value={formData.email} onChange={handleChange} />
+                  
+                  <input
+                  type='number'
+                  name='mobile'
+                  placeholder='Mobile Number'
+                  value={formData.mobile}
+                  onChange={handleChange}
+                />
                   <input
                     type='text'
                     name='address'
