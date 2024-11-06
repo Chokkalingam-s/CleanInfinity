@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {toast} from 'react-toastify'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 export default function AuthComponent({states, wards}) {
   const [isSignUp, setIsSignUp] = useState(false)
@@ -21,6 +22,8 @@ export default function AuthComponent({states, wards}) {
   const [districtsArr, setDistricts] = useState(states.states[0].districts)
   const [captcha, setCaptcha] = useState('')
   const [captchaVerified, setCaptchaVerified] = useState(false)
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     generateCaptcha()
@@ -97,6 +100,7 @@ export default function AuthComponent({states, wards}) {
         })
 
         toast.success(response.data || 'User registered successfully')
+        
         setFormData({
           email: '',
           password: '',
@@ -109,12 +113,14 @@ export default function AuthComponent({states, wards}) {
           captchaInput: '',
           otp: ''
         })
+        navigate('/dashboard');
       } else {
         const response = await axios.post('http://localhost:5000/signin', {
           mobile: formData.mobile,
           password: formData.password
         })
         toast.success(response.data || 'User logged in successfully')
+        navigate('/dashboard');
       }
     } catch (error) {
       if (error.response && error.response.data) {
