@@ -15,9 +15,11 @@ export default function Navbar() {
   return (
     <header className='fixed top-0 w-full shadow-lg rounded-ee-lg rounded-es-lg bg-medium-green h-12 z-20'>
       <div className='flex items-center justify-between'>
+      <Link to="/dashboard">
         <div
-          style={{backgroundImage: 'url(/1.png)'}}
-          className='w-24 h-12 bg-contain bg-no-repeat bg-center ml-2'></div>
+          style={{ backgroundImage: 'url(/1.png)' }}
+          className="w-24 h-12 bg-contain bg-no-repeat bg-center ml-2"></div>
+      </Link>
         <button
           className='lg:hidden md:hidden focus:outline-none bg-transparent w-12'
           onClick={() => setIsOpen(!isOpen)}>

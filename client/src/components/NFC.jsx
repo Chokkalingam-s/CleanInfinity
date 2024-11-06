@@ -1,4 +1,3 @@
-import Location from './Location'
 import NFCCard from './NFC-Card'
 export default function NFCPage() {
   const NFCtitles = ['Pair with BioDegradable', 'Pair with NonDegradable']
