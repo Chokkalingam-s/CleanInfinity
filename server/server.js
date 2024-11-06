@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
   res.send('Server is running...');
 });
 
-// Sign Up API
 app.post('/signup', async (req, res) => {
   const { name, mobile, email, address, state, district, ward, password } = req.body;
 
@@ -45,7 +44,6 @@ app.post('/signup', async (req, res) => {
     });
     const token = jwt.sign({ mobile: newUser.mobileNumber, email: newUser.mailId }, JWT_SECRET, { expiresIn: '1h' });
 
-    // Send success response with token
     res.status(201).json({ message: 'User registered successfully', token });
   } catch (error) {
     console.error('Error during signup:', error);
@@ -64,14 +62,12 @@ app.post('/signin', async (req, res) => {
   const { mobile, password } = req.body;
 
   try {
-    // Find the user by mobile number
     const user = await Users.findOne({ where: { mobileNumber: mobile } });
 
     if (!user) {
       return res.status(401).send('User not found');
     }
 
-    // Compare the provided password with the stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (isMatch) {
@@ -132,24 +128,41 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-app.get('/get-username', authenticateToken, async (req, res) => {
+
+
+app.get('/get-profile', authenticateToken, async (req, res) => {
   try {
-    // Use the mobile number from the token (attached by the middleware)
     const user = await Users.findOne({ where: { mobileNumber: req.mobile } });
 
     if (!user) {
       return res.status(404).send('User not found');
     }
 
-    res.status(200).json({ username: user.name });
+    res.status(200).json({
+      id: user.id,
+      name: user.name,
+      mobileNumber: user.mobileNumber,
+      mailId: user.mailId,
+      address: user.address,
+      state: user.state,
+      district: user.district,
+      ward: user.ward,
+      mappedMobileNumber: user.mappedMobileNumber,
+      nfcDId: user.nfcDId,
+      nfcNDId: user.nfcNDId,
+      credits: user.credits,
+      nfcDPoints: user.nfcDPoints,
+      nfcNDPoints: user.nfcNDPoints,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    });
   } catch (error) {
-    console.error('Error fetching username:', error);
+    console.error('Error fetching profile:', error);
     res.status(500).send('Server error');
   }
 });
 
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

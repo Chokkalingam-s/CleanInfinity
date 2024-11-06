@@ -3,25 +3,27 @@ import axios from 'axios';
 import BarGraph from "./BarChart";
 import VerticalCard from "./VerticalCard";
 
-export default function Dashboard({ creditVal, BarGraphVals, titles }) {
+export default function Dashboard({ BarGraphVals, titles }) {
   const [username, setUsername] = useState('');
+  const [credits, setCredits] = useState(0);
 
-  // Fetch the username from the backend when the component mounts
+  // Fetch the user data (username and credits) from the backend when the component mounts
   useEffect(() => {
-    const fetchUsername = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/get-username', {
+        const response = await axios.get('http://localhost:5000/get-profile', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        setUsername(response.data.username);
+        setUsername(response.data.name);
+        setCredits(response.data.credits); // Set credits from the response
       } catch (error) {
-        console.error('Error fetching username:', error);
+        console.error('Error fetching user data:', error);
       }
     };
 
-    fetchUsername();
+    fetchUserData();
   }, []);
 
   return (
@@ -29,7 +31,7 @@ export default function Dashboard({ creditVal, BarGraphVals, titles }) {
       <p>Hi, {username}!</p>
       <div className="w-24 flex items-center justify-around p-2 drop absolute top-15 right-2 z-10">
         <img src="/coins-solid.svg" className="w-6" alt="Credit Icon" />
-        <p className="font-bold">{creditVal}</p>
+        <p className="font-bold">{credits}</p> {/* Display dynamic credits */}
       </div>
       <div className="flex flex-col items-center justify-center w-full gap-y-6 mt-12 md:mt-0 lg:mt-0">
         <BarGraph data={BarGraphVals} />

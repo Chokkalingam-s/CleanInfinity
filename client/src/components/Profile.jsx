@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function ProfileForm() {
   const [profile, setProfile] = useState({
@@ -10,20 +11,34 @@ export default function ProfileForm() {
     state: '',
     district: '',
     ward: '',
-    mappedTvmobileNumber: ['12345', '12345', '12345'],
-    nfcDid: '',
+    mappedMobileNumber: '',
+    nfcDId: '',
+    nfcNDId: '',
     credits: '',
     nfcDPoints: '',
+    nfcNDPoints: '',
+    createdAt: '',
+    updatedAt: '',
     photo: null
-  })
+  });
 
   useEffect(() => {
-    setProfile(prevProfile => ({
-      ...prevProfile,
-      id: Math.floor(Math.random() * 1000),
-      credits: Math.floor(Math.random() * 1000)
-    }))
-  }, [])
+    // Fetch user profile details from the backend
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/get-profile', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        setProfile(response.data); // Set the fetched profile data
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   return (
     <div className='flex items-center justify-center container min-h-screen'>
@@ -56,32 +71,32 @@ export default function ProfileForm() {
             <input type='text' name='district' value={profile.district} placeholder='District' disabled />
           </span>
           <input type='text' name='ward' value={profile.ward} placeholder='Ward' disabled className='col-span-2' />
-          <input
-            type='text'
-            name='nfcDid'
-            value={profile.nfcDid}
-            placeholder='NFC ID'
-            disabled
-            className='col-span-2'
-          />
-
-          <div className='flex flex-col md:flex-row gap-2 md:gap-4 col-span-2'>
+          <label>NFC Degradable & Non-Degradable  ID's</label>
+          <span className='flex gap-2 col-span-2'>
             <input
               type='text'
-              name='nfcDPoints'
-              value={profile.nfcDPoints}
-              placeholder='NFC Points'
+              name='nfcDId'
+              value={profile.nfcDId}
+              placeholder='NFC Degradable ID'
               disabled
-              className='flex-1 col-span-2'
             />
+            <input
+              type='text'
+              name='nfcNDId'
+              value={profile.nfcNDId}
+              placeholder='NFC Non-Degradable ID'
+              disabled
+            />
+          </span>
+          <div className='flex flex-col md:flex-row gap-2 md:gap-4 col-span-2'>
             <div type='button' className='btn text-center flex-1' disabled>
               🏅 Credits: {profile.credits}
             </div>
           </div>
           <div className='col-span-2 text-center'>
-            <p className='mb-2'>Mapped TV Mobile Number</p>
+            <p className='mb-2'>Mapped Mobile Number</p>
             <div className='flex gap-2 justify-center'>
-              {profile.mappedTvmobileNumber.map(number => (
+              {profile.mappedMobileNumber.split(',').map(number => (
                 <span key={number} className='drop px-2 py-1 text-sm'>
                   {number}
                 </span>
@@ -91,5 +106,5 @@ export default function ProfileForm() {
         </form>
       </div>
     </div>
-  )
+  );
 }
