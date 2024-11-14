@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // unique file name
+    cb(null, Date.now() + path.extname(file.originalname)); 
   },
 });
 const upload = multer({ storage });
@@ -34,11 +34,11 @@ const upload = multer({ storage });
 const storageActivity = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadDir = 'uploadsActivity';
-    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir); // Ensure directory exists
+    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir); 
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    const uniqueFilename = Date.now() + path.extname(file.originalname); // unique filename
+    const uniqueFilename = Date.now() + path.extname(file.originalname); +
     cb(null, uniqueFilename);
   },
 });
@@ -51,7 +51,6 @@ if (!fs.existsSync('uploadsActivity')) {
   fs.mkdirSync('uploadsActivity');
 }
 
-// Routes
 app.get('/', (req, res) => {
   res.send('Server is running...');
 });
