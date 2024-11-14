@@ -2,9 +2,9 @@ export const dashboard_data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 80]
 export const dashboard_credits = 500
 export const auth_wards = ['Choose Your Ward', 'Ward 1', 'Ward 2']
 export const dashboard_titles = [
-  {title: 'Knowledge', path: '/knowledge'},
+  {title: 'Knowledge', path: '/awareness'},
   {title: 'Progress', path: '/progress'},
-  {title: 'Pair Dustbin', path: '/pair-dustbin'},
+  {title: 'Pair Dustbin', path: '/nfc'},
   {title: 'Notify', path: '/notify'},
   {title: 'PingMe', path: '/ping-me'},
   {title: 'Activity', path: '/activity'}
