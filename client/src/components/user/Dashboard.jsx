@@ -7,7 +7,6 @@ export default function Dashboard({ BarGraphVals, titles }) {
   const [username, setUsername] = useState('');
   const [credits, setCredits] = useState(0);
 
-  // Fetch the user data (username and credits) from the backend when the component mounts
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -17,7 +16,7 @@ export default function Dashboard({ BarGraphVals, titles }) {
           },
         });
         setUsername(response.data.name);
-        setCredits(response.data.credits); // Set credits from the response
+        setCredits(response.data.credits);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -28,7 +27,7 @@ export default function Dashboard({ BarGraphVals, titles }) {
 
   return (
     <div className="container">
-      <p>Hi, {username}!</p>
+      <h2 className="my-2">Hi, {username}!</h2>
       <div className="w-24 flex items-center justify-around p-2 drop absolute top-15 right-2 z-10">
         <img src="/coins-solid.svg" className="w-6" alt="Credit Icon" />
         <p className="font-bold">{credits}</p> {/* Display dynamic credits */}

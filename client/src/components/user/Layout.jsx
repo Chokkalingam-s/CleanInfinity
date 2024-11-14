@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import AuthComponent from "./AuthComp";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
@@ -11,7 +6,7 @@ import Awareness from "./Awareness";
 import Progress from "./Progress";
 import NFCPage from "./NFC";
 import Profile from "./Profile";
-import auth_states from "../data/stateAndDistrict.json";
+import auth_states from "../../data/stateAndDistrict.json";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NFCCard from "./NFC-Card";
@@ -27,7 +22,7 @@ import {
   progress_BarStyles,
   progress_data,
   progress_users,
-} from "../data/config";
+} from "../../data/config";
 import SplashScreen from "./Splash";
 import { useEffect, useState } from "react";
 import Notify from "./Notify";
@@ -42,7 +37,7 @@ function LayoutContent() {
     return () => clearTimeout(timer);
   }, []);
   return (
-    <div className={"min-h-screen w-screen"}>
+    <div className="min-h-screen w-screen">
       <div
         className="fixed top-0 w-full h-full -z-10"
         style={{
@@ -117,3 +112,4 @@ export default function Layout() {
     </Router>
   );
 }
+

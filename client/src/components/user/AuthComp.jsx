@@ -55,7 +55,6 @@ export default function AuthComponent({states, wards}) {
     }
   }
 
-
   const sendOtp = async () => {
     try {
       const response = await axios.post('http://localhost:5000/send-otp', {
@@ -63,7 +62,7 @@ export default function AuthComponent({states, wards}) {
       });
       setFormData((prevData) => ({
         ...prevData,
-        generatedOtp: response.data.otp, 
+        generatedOtp: response.data.otp,
       }));
       setOtpSent(true);
       toast.success('OTP sent to Entered Mail Successfully!')
@@ -71,7 +70,7 @@ export default function AuthComponent({states, wards}) {
       toast.error('Error sending OTP');
     }
   };
-  
+
   const verifyOtp = async () => {
     if (formData.otp.toUpperCase() === formData.generatedOtp.toUpperCase()) {
       setOtpVerified(true);
@@ -80,8 +79,6 @@ export default function AuthComponent({states, wards}) {
       toast.error('OTP verification failed');
     }
   };
-  
-
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -101,7 +98,7 @@ export default function AuthComponent({states, wards}) {
 
         toast.success(response.data || 'User registered successfully')
         localStorage.setItem('token', response.data.token);
-        
+
         setFormData({
           email: '',
           password: '',
@@ -132,6 +129,10 @@ export default function AuthComponent({states, wards}) {
         else toast.error('An error occurred while processing your request.')
       }
     }
+  }
+
+  const handleAdmin = () => {
+    navigate('/admin/dashboard');
   }
 
   return (
@@ -190,7 +191,7 @@ export default function AuthComponent({states, wards}) {
                     value={formData.password}
                     onChange={handleChange}
                   />
-                  
+
                   <input
                   type='number'
                   name='mobile'
@@ -273,7 +274,14 @@ export default function AuthComponent({states, wards}) {
             {!isSignUp ? 'Log In' : 'Get Started'}
           </button>
         </form>
+
+        <div className='mt-2 flex items-center justify-center'>
+          <button type='button' onClick={handleAdmin} className='btn bg-medium-green'>
+            Admin
+          </button>
+        </div>
       </div>
     </div>
   )
 }
+

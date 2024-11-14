@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { dummyNotifications } from "../data/config";
+import { dummyNotifications } from "../../data/config";
 
 export default function Notify() {
   const [monthExpanded, setMonthExpanded] = useState(
