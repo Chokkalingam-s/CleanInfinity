@@ -3,7 +3,11 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto'); 
 const Users = require('./models/Users'); 
+const PingMe = require('./models/pingMe');
 const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
+
 
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'your_secret_key';
@@ -14,6 +18,22 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // unique file name
+  },
+});
+const upload = multer({ storage });
+
+// Ensure the uploads directory exists
+const fs = require('fs');
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');
+}
 
 // Routes
 app.get('/', (req, res) => {
@@ -158,6 +178,32 @@ app.get('/get-profile', authenticateToken, async (req, res) => {
     });
   } catch (error) {
     console.error('Error fetching profile:', error);
+    res.status(500).send('Server error');
+  }
+});
+
+app.post('/pingme', authenticateToken, upload.array('images', 5), async (req, res) => {
+  const { subject, description } = req.body;
+  const imagePaths = req.files.map(file => file.path); // Store file paths in an array
+
+  try {
+    const user = await Users.findOne({ where: { mobileNumber: req.mobile } });
+    if (!user) return res.status(404).send('User not found');
+
+    await PingMe.create({
+      name: user.name,
+      phoneNumber: user.mobileNumber,
+      state: user.state,
+      district: user.district,
+      ward: user.ward,
+      subject,
+      description,
+      images: JSON.stringify(imagePaths), // Store paths as JSON in the database
+    });
+
+    res.status(201).json({ message: 'Ping Me request stored successfully' });
+  } catch (error) {
+    console.error('Error storing Ping Me data:', error);
     res.status(500).send('Server error');
   }
 });

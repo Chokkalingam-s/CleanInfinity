@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('./db'); // Import the sequelize instance
-
-// Define the Users model
+const sequelize = require('./db'); 
 const Users = sequelize.define('Users', {
     // User details filled during registration
     name: {
