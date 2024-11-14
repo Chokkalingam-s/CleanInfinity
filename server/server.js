@@ -4,9 +4,11 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto'); 
 const Users = require('./models/Users'); 
 const PingMe = require('./models/pingMe');
+const Activity = require('./models/activity');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 
 const jwt = require('jsonwebtoken');
@@ -29,10 +31,24 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Ensure the uploads directory exists
-const fs = require('fs');
+const storageActivity = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadDir = 'uploadsActivity';
+    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir); // Ensure directory exists
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueFilename = Date.now() + path.extname(file.originalname); // unique filename
+    cb(null, uniqueFilename);
+  },
+});
+
+const uploadActivity = multer({ storage: storageActivity });
 if (!fs.existsSync('uploads')) {
   fs.mkdirSync('uploads');
+}
+if (!fs.existsSync('uploadsActivity')) {
+  fs.mkdirSync('uploadsActivity');
 }
 
 // Routes
@@ -198,7 +214,7 @@ app.post('/pingme', authenticateToken, upload.array('images', 5), async (req, re
       ward: user.ward,
       subject,
       description,
-      images: JSON.stringify(imagePaths), // Store paths as JSON in the database
+      images: JSON.stringify(imagePaths), 
     });
 
     res.status(201).json({ message: 'Ping Me request stored successfully' });
@@ -208,7 +224,44 @@ app.post('/pingme', authenticateToken, upload.array('images', 5), async (req, re
   }
 });
 
+app.post('/activity', authenticateToken, uploadActivity.single('image'), async (req, res) => {
+  const { description } = req.body;
+  const imagePath = req.file ? req.file.path : null;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  try {
+    const user = await Users.findOne({ where: { mobileNumber: req.mobile } });
+    if (!user) return res.status(404).send('User not found');
+
+    const newActivity = await Activity.create({
+      name: user.name,
+      state: user.state,
+      district: user.district,
+      ward: user.ward,
+      description,
+      image: imagePath,
+      likes: 0,
+    });
+
+    res.status(201).json(newActivity);
+  } catch (error) {
+    console.error('Error creating activity:', error);
+    res.status(500).send('Error creating activity');
+  }
+});
+app.use('/uploadsActivity', express.static(path.join(__dirname, 'uploadsActivity')));
+
+app.get('/activity', async (req, res) => {
+  try {
+    const activities = await Activity.findAll({
+      order: [['createdAt', 'DESC']],
+    });
+    res.status(200).json(activities);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    res.status(500).send('Server error');
+  }
+});
+
+app.listen(5000, () => {
+  console.log('Server running on http://localhost:5000');
 });

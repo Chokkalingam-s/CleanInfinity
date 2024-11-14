@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Post({ name, time, image, description }) {
   const [liked, setLiked] = useState(false);
+  const imageUrl = image ? `http://localhost:5000/${image}` : 'https://placehold.co/50';
+
   return (
     <div className="bg-light-green/50 drop-shadow-sm p-4 rounded-xl shadow-lg my-4 mx-4 md:mx-16">
       <div className="flex items-center justify-between">
@@ -16,7 +19,7 @@ function Post({ name, time, image, description }) {
         <p className="font-extrabold">. . .</p>
       </div>
       <img
-        src={image}
+        src={imageUrl}
         alt="Post"
         className="w-full h-64 object-contain rounded-lg shadow-lg my-4"
       />
@@ -42,43 +45,70 @@ function Post({ name, time, image, description }) {
   );
 }
 
-export default function Activity({ initialPosts }) {
-  const [posts, setPosts] = useState(initialPosts);
+export default function Activity() {
+  const [posts, setPosts] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [newPost, setNewPost] = useState({
-    name: "New User",
-    time: "Just now",
-    text: "",
+    description: "",
     image: null,
   });
 
-  const handleImageChange = (e) => {
-    setNewPost({ ...newPost, image: URL.createObjectURL(e.target.files[0]) });
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Escape") setShowPopup(false);
-  };
-
-  const handleShare = () => {
-    if (newPost.text || newPost.image) {
-      setPosts([{
-        name: newPost.name,
-        time: newPost.time,
-        image: newPost.image,
-        description: newPost.text,
-      }, ...posts]);
-      setShowPopup(false);
-      setNewPost({ name: "New User", time: "Just now", text: "", image: null });
+  const fetchPosts = async () => {
+    try {
+      const token = localStorage.getItem("token"); // Retrieve the token from local storage
+      const response = await axios.get('http://localhost:5000/activity', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ensure token is included
+        },
+      });
+      setPosts(response.data);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
     }
   };
 
   useEffect(() => {
-    if (showPopup) {
-      window.addEventListener("keydown", handleKeyPress);
-      return () => window.removeEventListener("keydown", handleKeyPress);
+    fetchPosts();
+  }, []);
+
+  const handleImageChange = (e) => {
+    setNewPost({ ...newPost, image: e.target.files[0] });
+  };
+
+  const handleShare = async () => {
+    const formData = new FormData();
+    formData.append("description", newPost.description);
+    if (newPost.image) formData.append("image", newPost.image);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:5000/activity", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setPosts([
+          {
+            ...result,
+            image: URL.createObjectURL(newPost.image),
+            time: "Just now",
+          },
+          ...posts,
+        ]);
+        setShowPopup(false);
+        setNewPost({ description: "", image: null });
+      } else {
+        console.error("Error sharing post:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error sharing post:", error);
     }
-  }, [showPopup]);
+  };
 
   return (
     <div className="container mb-20 lg:mb-10">
@@ -96,19 +126,16 @@ export default function Activity({ initialPosts }) {
             <h3 className="mb-2 text-lightest-green">New Post</h3>
             <textarea
               placeholder="Write something..."
-              value={newPost.text}
-              onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
-            >
-            </textarea>
-            <label htmlFor="file-upload" className="hidden">
-              <input
-                type="file"
-                accept="image/*"
-                id="file-upload"
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </label>
+              value={newPost.description}
+              onChange={(e) => setNewPost({ ...newPost, description: e.target.value })}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+              id="file-upload"
+            />
             <button
               className="btn"
               onClick={() => document.getElementById("file-upload").click()}
@@ -117,7 +144,7 @@ export default function Activity({ initialPosts }) {
             </button>
             {newPost.image && (
               <img
-                src={newPost.image}
+                src={URL.createObjectURL(newPost.image)}
                 alt="Preview"
                 className="mx-auto"
               />
