@@ -1,15 +1,20 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
-import AuthComponent from "./AuthComp";
-import Dashboard from "./Dashboard";
-import Navbar from "./Navbar";
-import Awareness from "./Awareness";
-import Progress from "./Progress";
-import NFCPage from "./NFC";
-import Profile from "./Profile";
-import auth_states from "../../data/stateAndDistrict.json";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import NFCCard from "./NFC-Card";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom"
+import AuthComponent from "./AuthComp"
+import Dashboard from "./Dashboard"
+import Navbar from "./Navbar"
+import Awareness from "./Awareness"
+import Progress from "./Progress"
+import NFCPage from "./NFC"
+import Profile from "./Profile"
+import auth_states from "../../data/stateAndDistrict.json"
+import {ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import NFCCard from "./NFC-Card"
 import {
   activity_posts,
   article_data,
@@ -22,24 +27,25 @@ import {
   progress_BarStyles,
   progress_data,
   progress_users,
-} from "../../data/config";
-import SplashScreen from "./Splash";
-import { useEffect, useState } from "react";
-import Notify from "./Notify";
-import PingMe from "./PingMe";
-import Activity from "./Activity";
+} from "../../data/config"
+import SplashScreen from "./Splash"
+import {useEffect, useState} from "react"
+import Notify from "./Notify"
+import PingMe from "./PingMe"
+import Activity from "./Activity"
+import AdminAuth from "../admin/AdminAuth"
 
 function LayoutContent() {
-  const [loading, setLoading] = useState(true);
-  const location = useLocation();
+  const [loading, setLoading] = useState(true)
+  const location = useLocation()
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    const timer = setTimeout(() => setLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
   return (
-    <div className="min-h-screen w-screen">
+    <div className='min-h-screen w-screen'>
       <div
-        className="fixed top-0 w-full h-full -z-10"
+        className='fixed top-0 w-full h-full -z-10'
         style={{
           backgroundImage:
             "url(/0ba822008116c4db07f85b772a5dcea9-Photoroom.png)",
@@ -51,11 +57,13 @@ function LayoutContent() {
         }}
       />
       <ToastContainer />
-      {location.pathname !== "/" && <Navbar />}
+      {location.pathname !== "/" && location.pathname !== "/adminAuth" && (
+        <Navbar />
+      )}
       <main>
         <Routes>
           <Route
-            path="/dashboard"
+            path='/dashboard'
             element={
               <Dashboard
                 BarGraphVals={dashboard_data}
@@ -65,7 +73,7 @@ function LayoutContent() {
             }
           />
           <Route
-            path="/awareness"
+            path='/awareness'
             element={
               <Awareness
                 src={awareness_video_link}
@@ -75,7 +83,7 @@ function LayoutContent() {
             }
           />
           <Route
-            path="/progress"
+            path='/progress'
             element={
               <Progress
                 data={progress_data}
@@ -84,25 +92,33 @@ function LayoutContent() {
               />
             }
           />
-          <Route path="/nfc" element={<NFCPage />} />
-          <Route path="/nfc-card" element={<NFCCard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/notify" element={<Notify />} />
+          <Route path='/nfc' element={<NFCPage />} />
+          <Route path='/nfc-card' element={<NFCCard />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/notify' element={<Notify />} />
           <Route
-            path="/activity"
+            path='/activity'
             element={<Activity initialPosts={activity_posts} />}
           />
-          <Route path="/ping-me" element={<PingMe />} />
+          <Route path='/ping-me' element={<PingMe />} />
           <Route
-            path="/"
-            element={loading
-              ? <SplashScreen />
-              : <AuthComponent states={auth_states} wards={auth_wards} />}
+            path='/adminAuth'
+            element={<AdminAuth states={auth_states} wards={auth_wards} />}
+          />
+          <Route
+            path='/'
+            element={
+              loading ? (
+                <SplashScreen />
+              ) : (
+                <AuthComponent states={auth_states} wards={auth_wards} />
+              )
+            }
           />
         </Routes>
       </main>
     </div>
-  );
+  )
 }
 
 export default function Layout() {
@@ -110,6 +126,5 @@ export default function Layout() {
     <Router>
       <LayoutContent />
     </Router>
-  );
+  )
 }
-
