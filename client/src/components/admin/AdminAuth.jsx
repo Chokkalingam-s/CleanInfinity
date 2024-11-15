@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Seperator from "../common/seperator";
-import { toast } from "react-toastify";
+import {useState} from "react"
+import {useNavigate} from "react-router-dom"
+import Seperator from "../common/seperator"
+import {toast} from "react-toastify"
 
-export default function AdminAuth({ states, wards }) {
+export default function AdminAuth({states, wards}) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,50 +15,50 @@ export default function AdminAuth({ states, wards }) {
     ward: "",
     captchaInput: "",
     otp: "",
-  });
+  })
 
-  const navigate = useNavigate();
-  const [districtsArr, setDistricts] = useState(states.states[0].districts);
+  const navigate = useNavigate()
+  const [districtsArr, setDistricts] = useState(states.states[0].districts)
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = e => {
+    const {name, value} = e.target
+    setFormData({...formData, [name]: value})
 
     if (name === "state") {
       const selectedState = states.states.find(
-        (stateObj) => stateObj.state === value
-      );
-      if (selectedState) setDistricts(selectedState.districts);
-      else setDistricts([]);
+        stateObj => stateObj.state === value
+      )
+      if (selectedState) setDistricts(selectedState.districts)
+      else setDistricts([])
     }
-  };
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault()
 
     // Extract state and district initials
-    const stateInitial = formData.state.charAt(0).toUpperCase();
-    const districtInitial = formData.district.charAt(0).toUpperCase();
-    const expectedPassword = `CleanInfinity${stateInitial}${districtInitial}`;
+    const stateInitial = formData.state.charAt(0).toUpperCase()
+    const districtInitial = formData.district.charAt(0).toUpperCase()
+    const expectedPassword = `CleanInfinity${stateInitial}${districtInitial}`
 
     // Validate password
     if (formData.password === expectedPassword) {
-      toast.success("Password verification successful!");
+      toast.success("Password verification successful!")
       let timeout = setTimeout(() => {
-        navigate("/AdminDashboard");
-        clearTimeout(timeout);
-      }, 2000);
+        navigate("/admin/dashboard")
+        clearTimeout(timeout)
+      }, 2000)
     } else {
-      toast.error("Invalid password. Please try again.");
+      toast.error("Invalid password. Please try again.")
     }
-  };
+  }
 
   return (
-    <div className="flex items-center justify-center container">
-      <div className="p-4 w-full md:w-1/2 drop">
-        <h2 className="mb-4 pl-1">Welcome Admin!</h2>
+    <div className='flex items-center justify-center container'>
+      <div className='p-4 w-full md:w-1/2 drop'>
+        <h2 className='mb-4 pl-1'>Welcome Admin!</h2>
         <form>
-          <select name="state" value={formData.state} onChange={handleChange}>
+          <select name='state' value={formData.state} onChange={handleChange}>
             {states.states.map((stateObj, index) => (
               <option key={index} value={stateObj.state}>
                 {stateObj.state}
@@ -66,10 +66,9 @@ export default function AdminAuth({ states, wards }) {
             ))}
           </select>
           <select
-            name="district"
+            name='district'
             value={formData.district}
-            onChange={handleChange}
-          >
+            onChange={handleChange}>
             {districtsArr.map((district, index) => (
               <option key={`${index}`} value={district}>
                 {district}
@@ -77,11 +76,10 @@ export default function AdminAuth({ states, wards }) {
             ))}
           </select>
           <select
-            name="ward"
+            name='ward'
             value={formData.ward}
             onChange={handleChange}
-            placeholder="Select Ward"
-          >
+            placeholder='Select Ward'>
             {wards.map((ward, index) => (
               <option key={index} value={ward}>
                 {ward}
@@ -89,21 +87,21 @@ export default function AdminAuth({ states, wards }) {
             ))}
           </select>
           <input
-            type="password"
-            name="password"
-            placeholder="Password"
+            type='password'
+            name='password'
+            placeholder='Password'
             value={formData.password}
             onChange={handleChange}
           />
-          <button type="submit" className="btn mt-4" onClick={handleSubmit}>
+          <button type='submit' className='btn mt-4' onClick={handleSubmit}>
             Login
           </button>
           <Seperator />
-          <button className="btn" type="button" onClick={() => navigate("/")}>
+          <button className='btn' type='button' onClick={() => navigate("/")}>
             Switch to User
           </button>
         </form>
       </div>
     </div>
-  );
+  )
 }

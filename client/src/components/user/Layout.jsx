@@ -30,6 +30,8 @@ import {
   admin_details_of_ward_items,
   admin_leaderboard,
   admin_totalUsersInWard,
+  user_navbar,
+  admin_navbar,
 } from "../../data/config"
 import SplashScreen from "./Splash"
 import {useEffect, useState} from "react"
@@ -61,11 +63,16 @@ function LayoutContent() {
         }}
       />
       <ToastContainer />
-      {location.pathname !== "/" && location.pathname !== "/adminAuth" && (
-        <Navbar />
-      )}
+      {location.pathname !== "/auth" &&
+        (location.pathname.startsWith("/admin") &&
+        location.pathname !== "/admin/Authentication" ? (
+          <Navbar links={admin_navbar} />
+        ) : (
+          <Navbar links={user_navbar} />
+        ))}
       <main>
         <Routes>
+          {/* Non-Admin Routes */}
           <Route
             path='/dashboard'
             element={
@@ -106,11 +113,7 @@ function LayoutContent() {
           />
           <Route path='/ping-me' element={<PingMe />} />
           <Route
-            path='/adminAuth'
-            element={<AdminAuth states={auth_states} wards={auth_wards} />}
-          />
-          <Route
-            path='/'
+            path='/auth'
             element={
               loading ? (
                 <SplashScreen />
@@ -119,15 +122,23 @@ function LayoutContent() {
               )
             }
           />
-          <Route
-            path='/AdminDashboard'
-            element={
-              <AdminDashboard
-                detailsOfWardsArr={admin_details_of_ward_items}
-                leaderboard={admin_leaderboard}
-                totalUsersInWard={admin_totalUsersInWard}
-              />
-            }></Route>
+          {/* Admin Routes */}
+          <Route path='/admin'>
+            <Route
+              path='dashboard'
+              element={
+                <AdminDashboard
+                  detailsOfWardsArr={admin_details_of_ward_items}
+                  leaderboard={admin_leaderboard}
+                  totalUsersInWard={admin_totalUsersInWard}
+                />
+              }
+            />
+            <Route
+              path='auth'
+              element={<AdminAuth states={auth_states} wards={auth_wards} />}
+            />
+          </Route>
         </Routes>
       </main>
     </div>

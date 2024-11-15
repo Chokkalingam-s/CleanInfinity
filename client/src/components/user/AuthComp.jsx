@@ -313,7 +313,7 @@ export default function AuthComponent({states, wards}) {
           <Seperator />
           <button
             className='btn'
-            onClick={() => navigate("/adminAuth")}
+            onClick={() => navigate("/admin/auth")}
             type='button'>
             Switch to Admin
           </button>

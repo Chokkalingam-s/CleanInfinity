@@ -197,3 +197,20 @@ export const admin_leaderboard = [
   {name: "User 9", score: 45},
   {name: "User 10", score: 40},
 ]
+export const user_navbar = [
+  {href: "/dashboard", label: "Dashboard"},
+  {href: "/awareness", label: "Awareness"},
+  {href: "/progress", label: "Progress"},
+  {href: "/nfc", label: "NFC Pairing"},
+  {href: "/profile", label: "Profile"},
+  {href: "/auth", label: "Log out"},
+]
+
+export const admin_navbar = [
+  {href: "/AdminDashboard", label: "Dashboard"},
+  {href: "/inbox", label: "Inbox"},
+  {href: "/notifications", label: "Notifications"},
+  {href: "/state_progress", label: "State_Progress"},
+  {href: "/profile", label: "Profile"},
+  {href: "/auth", label: "Log out"},
+]
