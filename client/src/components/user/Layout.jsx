@@ -34,6 +34,7 @@ import Notify from "./Notify"
 import PingMe from "./PingMe"
 import Activity from "./Activity"
 import AdminAuth from "../admin/AdminAuth"
+import AdminDashboard from "../admin/AdminDashboard"
 
 function LayoutContent() {
   console.log("dashboard_data", dashboard_data)
@@ -117,15 +118,7 @@ function LayoutContent() {
               )
             }
           />
-          <Route
-            path='/AdminDashboard'
-            element={
-              <Dashboard
-                BarGraphVals={dashboard_data}
-                creditVal={dashboard_credits}
-                titles={dashboard_titles}
-              />
-            }></Route>
+          <Route path='/AdminDashboard' element={<AdminDashboard />}></Route>
         </Routes>
       </main>
     </div>
