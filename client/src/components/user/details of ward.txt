@@ -1,6 +1,6 @@
 details of ward
 
-ward1 - admin only not a super admin header type
+ward1 - admin(there specifc ward) only not a super admin header type
 total no. of users
 leaderboard top10 users - name - credits adhula top 3 highlight
 

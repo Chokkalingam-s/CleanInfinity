@@ -27,6 +27,9 @@ import {
   progress_BarStyles,
   progress_data,
   progress_users,
+  admin_details_of_ward_items,
+  admin_leaderboard,
+  admin_totalUsersInWard,
 } from "../../data/config"
 import SplashScreen from "./Splash"
 import {useEffect, useState} from "react"
@@ -37,8 +40,6 @@ import AdminAuth from "../admin/AdminAuth"
 import AdminDashboard from "../admin/AdminDashboard"
 
 function LayoutContent() {
-  console.log("dashboard_data", dashboard_data)
-
   const [loading, setLoading] = useState(true)
   const location = useLocation()
   useEffect(() => {
@@ -118,7 +119,15 @@ function LayoutContent() {
               )
             }
           />
-          <Route path='/AdminDashboard' element={<AdminDashboard />}></Route>
+          <Route
+            path='/AdminDashboard'
+            element={
+              <AdminDashboard
+                detailsOfWardsArr={admin_details_of_ward_items}
+                leaderboard={admin_leaderboard}
+                totalUsersInWard={admin_totalUsersInWard}
+              />
+            }></Route>
         </Routes>
       </main>
     </div>

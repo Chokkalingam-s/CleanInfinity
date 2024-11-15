@@ -63,3 +63,8 @@ h3 {
 .hr {
   @apply border-2 border-medium-green/60 w-full rounded-lg;
 }
+.details {
+  p {
+    @apply text-lg font-medium tracking-wider border-r-2 border-medium-green/70 pr-4 mt-4;
+  }
+}
