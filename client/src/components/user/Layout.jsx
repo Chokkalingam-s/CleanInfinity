@@ -6,7 +6,7 @@ import {
 } from "react-router-dom"
 import AuthComponent from "./AuthComp"
 import Dashboard from "./Dashboard"
-import Navbar from "./Navbar"
+import Navbar from "../common/Navbar"
 import Awareness from "./Awareness"
 import Progress from "./Progress"
 import NFCPage from "./NFC"
