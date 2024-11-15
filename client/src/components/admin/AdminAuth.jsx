@@ -97,7 +97,10 @@ export default function AdminAuth({states, wards}) {
             Login
           </button>
           <Seperator />
-          <button className='btn' type='button' onClick={() => navigate("/")}>
+          <button
+            className='btn'
+            type='button'
+            onClick={() => navigate("/auth")}>
             Switch to User
           </button>
         </form>

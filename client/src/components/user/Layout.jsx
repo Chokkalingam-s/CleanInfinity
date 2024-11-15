@@ -64,6 +64,7 @@ function LayoutContent() {
       />
       <ToastContainer />
       {location.pathname !== "/auth" &&
+        location.pathname !== "/admin/auth" &&
         (location.pathname.startsWith("/admin") &&
         location.pathname !== "/admin/Authentication" ? (
           <Navbar links={admin_navbar} />
