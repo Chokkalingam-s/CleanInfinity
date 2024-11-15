@@ -1,0 +1,19 @@
+details of ward
+
+ward1 - admin only not a super admin header type
+total no. of users
+leaderboard top10 users - name - credits adhula top 3 highlight
+
+
+state progress
+ranking ward instate - overall credit points
+leaderboard
+
+important
+
+dashboard
+inbox
+notifications
+state progress
+activity
+navbar

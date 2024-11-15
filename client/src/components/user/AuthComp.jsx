@@ -49,12 +49,12 @@ export default function AuthComponent({states, wards}) {
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const {name, value} = e.target
     setFormData({...formData, [name]: value})
     if (name === "state") {
       const selectedState = states.states.find(
-        (stateObj) => stateObj.state === value
+        stateObj => stateObj.state === value
       )
       if (selectedState) setDistricts(selectedState.districts)
       else setDistricts([])
@@ -67,7 +67,7 @@ export default function AuthComponent({states, wards}) {
       const response = await axios.post("http://localhost:5000/send-otp", {
         email: formData.email,
       })
-      setFormData((prevData) => ({
+      setFormData(prevData => ({
         ...prevData,
         generatedOtp: response.data.otp,
       }))
@@ -89,7 +89,7 @@ export default function AuthComponent({states, wards}) {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     try {
