@@ -1,6 +1,7 @@
 import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 import Seperator from "../common/seperator"
+import {toast} from "react-toastify"
 
 export default function AdminAuth({states, wards}) {
   const [formData, setFormData] = useState({
@@ -28,6 +29,15 @@ export default function AdminAuth({states, wards}) {
       if (selectedState) setDistricts(selectedState.districts)
       else setDistricts([])
     }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    toast.success("Password verification Complete!")
+    let timeout = setTimeout(() => {
+      navigate("/AdminDashboard")
+      clearTimeout(timeout)
+    }, 2000)
   }
   return (
     <div className='flex items-center justify-center container'>
@@ -69,10 +79,7 @@ export default function AdminAuth({states, wards}) {
             value={formData.password}
             onChange={handleChange}
           />
-          <button
-            type='submit'
-            className={"btn mt-4"}
-            onClick={() => navigate("/AdminDashboard")}>
+          <button type='submit' className={"btn mt-4"} onClick={handleSubmit}>
             Login
           </button>
           <Seperator />

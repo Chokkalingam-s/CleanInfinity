@@ -6,6 +6,7 @@ import VerticalCard from "./VerticalCard"
 export default function Dashboard({BarGraphVals, titles}) {
   const [username, setUsername] = useState("")
   const [credits, setCredits] = useState(0)
+  console.log("dash:", BarGraphVals, titles)
 
   useEffect(() => {
     const fetchUserData = async () => {

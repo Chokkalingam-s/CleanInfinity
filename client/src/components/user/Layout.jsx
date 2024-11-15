@@ -36,6 +36,8 @@ import Activity from "./Activity"
 import AdminAuth from "../admin/AdminAuth"
 
 function LayoutContent() {
+  console.log("dashboard_data", dashboard_data)
+
   const [loading, setLoading] = useState(true)
   const location = useLocation()
   useEffect(() => {
@@ -115,6 +117,15 @@ function LayoutContent() {
               )
             }
           />
+          <Route
+            path='/AdminDashboard'
+            element={
+              <Dashboard
+                BarGraphVals={dashboard_data}
+                creditVal={dashboard_credits}
+                titles={dashboard_titles}
+              />
+            }></Route>
         </Routes>
       </main>
     </div>
