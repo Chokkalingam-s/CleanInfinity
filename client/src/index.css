@@ -68,3 +68,7 @@ h3 {
     @apply text-lg font-medium tracking-wider border-r-2 border-medium-green/70 pr-4 mt-4;
   }
 }
+
+::-webkit-scrollbar-track {
+  @apply w-2;
+}

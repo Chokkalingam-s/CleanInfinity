@@ -213,9 +213,22 @@ export const user_navbar = [
 ]
 
 export const admin_navbar = [
-  {href: "/AdminDashboard", label: "Dashboard"},
+  {href: "/admin/dashboard", label: "Dashboard"},
   {href: "/admin/inbox", label: "Inbox"},
   {href: "/admin/notifications", label: "Notifications"},
   {href: "/admin/state_progress", label: "State_Progress"},
   {href: "/auth", label: "Log out"},
 ]
+
+export const admin_leaderboardData = [
+  {name: "Ward 1", score: 120},
+  {name: "Ward 2", score: 110},
+  {name: "Ward 3", score: 105},
+  {name: "Ward 4", score: 100},
+  {name: "Ward 5", score: 95},
+  {name: "Ward 6", score: 90},
+  {name: "Ward 7", score: 85},
+  {name: "Ward 8", score: 80},
+]
+
+export const admin_state_progress_page = "Tamil Nadu"

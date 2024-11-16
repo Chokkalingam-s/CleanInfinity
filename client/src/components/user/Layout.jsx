@@ -33,6 +33,8 @@ import {
   admin_totalUsersInWard,
   user_navbar,
   admin_navbar,
+  admin_leaderboardData,
+  admin_state_progress_page,
 } from "../../data/config"
 import SplashScreen from "./Splash"
 import {useEffect, useState} from "react"
@@ -139,7 +141,13 @@ function LayoutContent() {
             />
             <Route
               path='state_progress'
-              element={<StateProgress totalUsersInWard={500} />}
+              element={
+                <StateProgress
+                  wardRank={1}
+                  leaderboardData={admin_leaderboardData}
+                  stateName={admin_state_progress_page}
+                />
+              }
             />
             <Route
               path='auth'

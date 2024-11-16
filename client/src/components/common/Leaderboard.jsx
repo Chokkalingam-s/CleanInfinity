@@ -1,18 +1,38 @@
-export default function Leaderboard({leaderboardData}) {
+export default function Leaderboard({leaderboardData, wardRank}) {
+  const getOrdinalSuffix = rank => {
+    const j = rank % 10,
+      k = rank % 100
+    if (j === 1 && k !== 11) return "st"
+    if (j === 2 && k !== 12) return "nd"
+    if (j === 3 && k !== 13) return "rd"
+    return "th"
+  }
+
   return (
     <div className='w-full'>
-      <h2 className='mb-4'>Leaderboard</h2>
+      <h3 className='mb-4 text-xl font-semibold'>Leaderboard</h3>
       <ol className='list'>
-        {leaderboardData.map(({name, score, image}, index) => (
-          <li
-            key={index}
-            className='mb-4 grid grid-cols-[20%_10%_35%_35%] items-center p-2 justify-center font-bold drop'>
-            <p className='rank'>{index + 1}</p>
-            <img src={image} className='w-10 h-10 rounded-full' />
-            <p className='name'>{name}</p>
-            <p className='points'>{score} pts</p>
-          </li>
-        ))}
+        {leaderboardData.map(({name, score}, index) => {
+          const rank = index + 1
+          const isHighlighted = rank === wardRank
+
+          return (
+            <li
+              key={index}
+              className={`flex justify-between items-center p-4 rounded-md mb-2 shadow-sm ${
+                isHighlighted
+                  ? "bg-medium-green font-bold text-lightest-green"
+                  : "drop odd:bg-light"
+              }`}>
+              <span>
+                {rank}
+                {getOrdinalSuffix(rank)}
+              </span>
+              <span>{name}</span>
+              <span className='text-right'>{score} pts</span>
+            </li>
+          )
+        })}
       </ol>
     </div>
   )
