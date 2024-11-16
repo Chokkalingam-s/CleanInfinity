@@ -1,25 +1,23 @@
-import Card from "../common/Card"
-
 export default function Leaderboard({leaderboardData}) {
   return (
-    <div className='leaderboard'>
-      <h3>Leaderboard</h3>
+    <div className='w-full'>
+      <h2 className='mb-4'>Leaderboard</h2>
       <ol className='list'>
-        <span className='flex gap-x-4'>
-          {leaderboardData.slice(0, 3).map(({name, score}, index) => (
-            <Card
-              title={score}
-              description={name}
-              image={
-                "https://images.unsplash.com/photo-1488034976201-ffbaa99cbf5c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              buttonEnable={false}
-              key={index}
-            />
-          ))}
-        </span>
-        {leaderboardData.slice(3).map(({name, score}, index) => (
-          <li key={index + 3}>{`${name} - ${score}`}</li>
+        {leaderboardData.map(({name, score, image}, index) => (
+          <li
+            key={index}
+            className='w-11/12 mx-auto mb-4 grid grid-cols-3 items-center gap-x-4 p-2 justify-center font-bold drop'>
+            <p className='rank'>{index + 1}</p>
+            <span className='grid grid-cols-2 gap-x-2 items-center justify-center'>
+              <img
+                src={image}
+                alt={`${name}'s avatar`}
+                className='w-10 h-10 rounded-full'
+              />
+              <p className='name'>{name}</p>
+            </span>
+            <p className='points'>{score} pts</p>
+          </li>
         ))}
       </ol>
     </div>

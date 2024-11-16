@@ -186,17 +186,23 @@ export const admin_details_of_ward_items = ["Ward 1", "Tamil Nadu", "Chennai"]
 export const admin_totalUsersInWard = 150
 
 export const admin_leaderboard = [
-  {name: "User 1", score: 100},
-  {name: "User 2", score: 90},
-  {name: "User 3", score: 80},
-  {name: "User 4", score: 70},
-  {name: "User 5", score: 65},
-  {name: "User 6", score: 60},
-  {name: "User 7", score: 55},
-  {name: "User 8", score: 50},
-  {name: "User 9", score: 45},
-  {name: "User 10", score: 40},
+  {
+    name: "Alice",
+    score: 250,
+    image: "https://via.placeholder.com/40",
+  },
+  {
+    name: "Bob",
+    score: 200,
+    image: "https://via.placeholder.com/40",
+  },
+  {
+    name: "Charlie",
+    score: 150,
+    image: "https://via.placeholder.com/40",
+  },
 ]
+
 export const user_navbar = [
   {href: "/dashboard", label: "Dashboard"},
   {href: "/awareness", label: "Awareness"},
