@@ -9,16 +9,18 @@ export default function AdminDashboard({
     <div className='container flex items-center justify-center'>
       <div className='w-4/5 drop px-6 py-4'>
         <div className='w-10/12 mx-auto'>
-          <h2 className='my-2 text-2xl font-bold'>Welcome Admin!</h2>
-          <div className='w-10/12 mx-auto'>
-            <h3 className='text-lg font-semibold '>Details of Ward</h3>
-            <span className='flex items-center justify-center gap-x-4 details'>
+          <h2 className='my-2'>Welcome Admin!</h2>
+          <div className='mx-auto drop p-6 my-4'>
+            <h3 className='mb-4'>Details of Ward</h3>
+            <div className='grid grid-cols-3 gap-4'>
               {detailsOfWardsArr.map((info, i) => (
-                <p key={i} className='text-sm text-gray-700'>
+                <p
+                  key={i}
+                  className='text-sm bg-light-green rounded-md p-2 text-center shadow-sm'>
                   {info}
                 </p>
               ))}
-            </span>
+            </div>
           </div>
           <div className='drop rounded-lg shadow-md p-6 my-4'>
             <p className='text-lg font-medium text-center'>
