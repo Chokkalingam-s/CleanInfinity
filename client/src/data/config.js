@@ -208,9 +208,8 @@ export const user_navbar = [
 
 export const admin_navbar = [
   {href: "/AdminDashboard", label: "Dashboard"},
-  {href: "/inbox", label: "Inbox"},
-  {href: "/notifications", label: "Notifications"},
-  {href: "/state_progress", label: "State_Progress"},
-  {href: "/profile", label: "Profile"},
+  {href: "/admin/inbox", label: "Inbox"},
+  {href: "/admin/notifications", label: "Notifications"},
+  {href: "/admin/state_progress", label: "State_Progress"},
   {href: "/auth", label: "Log out"},
 ]
