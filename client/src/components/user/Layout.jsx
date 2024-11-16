@@ -2,7 +2,8 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useLocation,Navigate
+  useLocation,
+  Navigate,
 } from "react-router-dom"
 import AuthComponent from "./AuthComp"
 import Dashboard from "./Dashboard"
@@ -40,6 +41,7 @@ import PingMe from "./PingMe"
 import Activity from "./Activity"
 import AdminAuth from "../admin/AdminAuth"
 import AdminDashboard from "../admin/AdminDashboard"
+import StateProgress from "../admin/StateProgress"
 
 function LayoutContent() {
   const [loading, setLoading] = useState(true)
@@ -73,8 +75,7 @@ function LayoutContent() {
         ))}
       <main>
         <Routes>
-          {/* Non-Admin Routes */}
-          <Route path="/" element={<Navigate to="/auth" replace />} />
+          <Route path='/' element={<Navigate to='/auth' replace />} />
           <Route
             path='/dashboard'
             element={
@@ -114,7 +115,7 @@ function LayoutContent() {
             element={<Activity initialPosts={activity_posts} />}
           />
           <Route path='/ping-me' element={<PingMe />} />
-          
+
           <Route
             path='/auth'
             element={
@@ -125,7 +126,6 @@ function LayoutContent() {
               )
             }
           />
-          {/* Admin Routes */}
           <Route path='/admin'>
             <Route
               path='dashboard'
@@ -136,6 +136,10 @@ function LayoutContent() {
                   totalUsersInWard={admin_totalUsersInWard}
                 />
               }
+            />
+            <Route
+              path='state_progress'
+              element={<StateProgress totalUsersInWard={500} />}
             />
             <Route
               path='auth'
