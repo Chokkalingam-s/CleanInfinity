@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useLocation,
+  useLocation,Navigate
 } from "react-router-dom"
 import AuthComponent from "./AuthComp"
 import Dashboard from "./Dashboard"
@@ -74,6 +74,7 @@ function LayoutContent() {
       <main>
         <Routes>
           {/* Non-Admin Routes */}
+          <Route path="/" element={<Navigate to="/auth" replace />} />
           <Route
             path='/dashboard'
             element={
@@ -113,6 +114,7 @@ function LayoutContent() {
             element={<Activity initialPosts={activity_posts} />}
           />
           <Route path='/ping-me' element={<PingMe />} />
+          
           <Route
             path='/auth'
             element={
