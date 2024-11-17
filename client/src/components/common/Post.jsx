@@ -27,14 +27,14 @@ export default function Post({
             className='w-12 h-12 object-cover shadow-lg rounded-full mr-4'
           />
           <h4 className='font-bold'>{name}</h4>
-          {deleteEnabled && (
-            <button
-              onClick={() => handleDelete(id)}
-              className='absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded'>
-              Delete
-            </button>
-          )}
         </div>
+        {deleteEnabled && (
+          <button
+            onClick={() => handleDelete(id)}
+            className='font-medium bg-medium-green shadow-lg px-3 py-1 rounded'>
+            Delete
+          </button>
+        )}
       </div>
       <img
         src={imageUrl}

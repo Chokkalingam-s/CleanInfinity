@@ -2,7 +2,7 @@ import {useState, useEffect} from "react"
 import axios from "axios"
 import Post from "./Post"
 
-export default function Activity({deleteBtnStatus}) {
+export default function Activity({featuresStatus = false}) {
   const [posts, setPosts] = useState([])
   const [showPopup, setShowPopup] = useState(false)
   const [newPost, setNewPost] = useState({
@@ -74,14 +74,16 @@ export default function Activity({deleteBtnStatus}) {
       <div className='text-2xl font-bold text-center'>Activity</div>
       {posts.map(post => (
         <div key={post.id} className='relative flex justify-center'>
-          <Post {...post} deleteEnabled={deleteBtnStatus} />
+          <Post {...post} deleteEnabled={featuresStatus} />
         </div>
       ))}
-      <button
-        onClick={() => setShowPopup(true)}
-        className='fixed top-14 right-2 font-medium px-4 py-2 drop'>
-        Create a Post +
-      </button>
+      {featuresStatus && (
+        <button
+          onClick={() => setShowPopup(true)}
+          className='fixed top-14 right-2 font-medium px-4 py-2 drop'>
+          Create a Post +
+        </button>
+      )}
       {showPopup && (
         <div className='fixed inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50'>
           <div className='drop p-4 w-11/12 lg:w-3/12'>

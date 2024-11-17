@@ -156,10 +156,7 @@ function LayoutContent() {
             <Route
               path='activity'
               element={
-                <Activity
-                  initialPosts={activity_posts}
-                  deleteBtnStatus={true}
-                />
+                <Activity initialPosts={activity_posts} featuresStatus={true} />
               }
             />
             <Route
