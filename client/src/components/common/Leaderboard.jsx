@@ -11,11 +11,10 @@ export default function Leaderboard({leaderboardData, wardRank}) {
   return (
     <div className='w-full'>
       <h3 className='mb-4 text-xl font-semibold'>Leaderboard</h3>
-      <ol className='list'>
+      <ol className='list font-bold'>
         {leaderboardData.map(({name, score}, index) => {
           const rank = index + 1
           const isHighlighted = rank === wardRank
-
           return (
             <li
               key={index}

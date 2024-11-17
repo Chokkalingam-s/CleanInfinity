@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import axios from "axios"
-import Post from "../common/Post"
+import Post from "./Post"
 
 export default function Activity({deleteBtnStatus}) {
   const [posts, setPosts] = useState([])

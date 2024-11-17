@@ -38,9 +38,9 @@ import {
 } from "../../data/config"
 import SplashScreen from "./Splash"
 import {useEffect, useState} from "react"
-import Notify from "./Notify"
+import Notify from "../common/Notify"
 import PingMe from "./PingMe"
-import Activity from "./Activity"
+import Activity from "../common/Activity"
 import AdminAuth from "../admin/AdminAuth"
 import AdminDashboard from "../admin/AdminDashboard"
 import StateProgress from "../admin/StateProgress"
@@ -161,6 +161,10 @@ function LayoutContent() {
                   deleteBtnStatus={true}
                 />
               }
+            />
+            <Route
+              path='notify'
+              element={<Notify enableCreateNotification={true} />}
             />
           </Route>
         </Routes>
