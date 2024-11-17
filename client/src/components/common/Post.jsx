@@ -1,13 +1,24 @@
 import {useState} from "react"
 
-export default function Post({name, time, image, description}) {
+export default function Post({
+  name,
+  time,
+  image,
+  description,
+  id,
+  deleteEnabled = false,
+}) {
+  //deleteBtnStatus
   const [liked, setLiked] = useState(false)
   const imageUrl = image
     ? `http://localhost:5000/${image}`
     : "https://placehold.co/50"
 
+  function handleDelete(postId) {
+    console.log("delete function ran with post id:", postId)
+  }
   return (
-    <div className='bg-light-green/50 drop-shadow-sm p-4 rounded-xl shadow-lg my-4 mx-4 md:mx-16'>
+    <div className='drop p-4 my-4 mx-4 w-8/12'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center justify-center'>
           <img
@@ -16,8 +27,14 @@ export default function Post({name, time, image, description}) {
             className='w-12 h-12 object-cover shadow-lg rounded-full mr-4'
           />
           <h4 className='font-bold'>{name}</h4>
+          {deleteEnabled && (
+            <button
+              onClick={() => handleDelete(id)}
+              className='absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded'>
+              Delete
+            </button>
+          )}
         </div>
-        <p className='font-extrabold'>. . .</p>
       </div>
       <img
         src={imageUrl}

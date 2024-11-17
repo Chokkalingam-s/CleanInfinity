@@ -153,6 +153,15 @@ function LayoutContent() {
               path='auth'
               element={<AdminAuth states={auth_states} wards={auth_wards} />}
             />
+            <Route
+              path='activity'
+              element={
+                <Activity
+                  initialPosts={activity_posts}
+                  deleteBtnStatus={true}
+                />
+              }
+            />
           </Route>
         </Routes>
       </main>

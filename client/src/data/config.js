@@ -215,6 +215,7 @@ export const user_navbar = [
 export const admin_navbar = [
   {href: "/admin/dashboard", label: "Dashboard"},
   {href: "/admin/inbox", label: "Inbox"},
+  {href: "/admin/activity", label: "Activity"},
   {href: "/admin/notifications", label: "Notifications"},
   {href: "/admin/state_progress", label: "State_Progress"},
   {href: "/auth", label: "Log out"},

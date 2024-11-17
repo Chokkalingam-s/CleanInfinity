@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react"
+import {useState, useEffect} from "react"
 import axios from "axios"
 import Post from "../common/Post"
 
-export default function Activity() {
+export default function Activity({deleteBtnStatus}) {
   const [posts, setPosts] = useState([])
   const [showPopup, setShowPopup] = useState(false)
   const [newPost, setNewPost] = useState({
@@ -18,6 +18,8 @@ export default function Activity() {
           Authorization: `Bearer ${token}`,
         },
       })
+      console.log(response.data)
+
       setPosts(response.data)
     } catch (error) {
       console.error("Error fetching posts:", error)
@@ -70,13 +72,15 @@ export default function Activity() {
   return (
     <div className='container mb-20 lg:mb-10'>
       <div className='text-2xl font-bold text-center'>Activity</div>
-      {posts.map((post, index) => (
-        <Post {...post} key={index} />
+      {posts.map(post => (
+        <div key={post.id} className='relative flex justify-center'>
+          <Post {...post} deleteEnabled={deleteBtnStatus} />
+        </div>
       ))}
       <button
         onClick={() => setShowPopup(true)}
-        className='fixed top-14 right-2 bg-medium-green font-medium px-4 py-2 rounded-lg shadow-lg'>
-        Create a Post
+        className='fixed top-14 right-2 font-medium px-4 py-2 drop'>
+        Create a Post +
       </button>
       {showPopup && (
         <div className='fixed inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50'>
