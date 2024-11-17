@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react"
+import {useState, useEffect} from "react"
 import axios from "axios"
 import Post from "../common/Post"
 
-export default function Activity() {
+export default function Admin_Activity() {
   const [posts, setPosts] = useState([])
   const [showPopup, setShowPopup] = useState(false)
   const [newPost, setNewPost] = useState({
@@ -67,11 +67,40 @@ export default function Activity() {
     }
   }
 
+  const handleDelete = async postId => {
+    try {
+      const token = localStorage.getItem("token")
+      const response = await axios.delete(
+        `http://localhost:5000/activity/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        setPosts(posts.filter(post => post.id !== postId))
+      } else {
+        console.error("Error deleting post:", response.statusText)
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error)
+    }
+  }
+
   return (
     <div className='container mb-20 lg:mb-10'>
       <div className='text-2xl font-bold text-center'>Activity</div>
-      {posts.map((post, index) => (
-        <Post {...post} key={index} />
+      {posts.map(post => (
+        <div key={post.id} className='relative'>
+          <Post {...post} />
+          <button
+            onClick={() => handleDelete(post.id)}
+            className='absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded'>
+            Delete
+          </button>
+        </div>
       ))}
       <button
         onClick={() => setShowPopup(true)}

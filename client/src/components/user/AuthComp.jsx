@@ -143,7 +143,7 @@ export default function AuthComponent({states, wards}) {
 
   return (
     <div className='flex items-center justify-center container'>
-      <div className='p-4 bg-light-green shadow-lg w-full md:w-1/2 rounded-xl'>
+      <div className='p-4 drop w-full md:w-5/12'>
         <div className='mb-6 w-full slider-btn border-2 border-medium-green rounded-xl shadow-lg flex overflow-hidden'>
           <button
             type='button'
