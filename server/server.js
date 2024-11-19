@@ -24,6 +24,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'));
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -227,7 +229,9 @@ app.post('/pingme', authenticateToken, upload.array('images', 5), async (req, re
 
 app.get("/pingme", async (req, res) => {
   try {
-    const requests = await PingMe.findAll();
+    const requests = await PingMe.findAll({
+      order: [['createdAt', 'DESC']],
+    });
     res.json(requests);
   } catch (error) {
     console.error("Error fetching PingMe data:", error);

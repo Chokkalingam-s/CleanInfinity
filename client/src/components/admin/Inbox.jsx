@@ -3,10 +3,9 @@ import axios from "axios";
 
 export default function Inbox() {
   const [cards, setCards] = useState([]);
-  const [modalImage, setModalImage] = useState(null);
+  const [modalImage, setModalImage] = useState();
   const [completedCards, setCompletedCards] = useState([]);
 
-  // Fetch PingMe data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,8 +23,8 @@ export default function Inbox() {
     fetchData();
   }, []);
 
-  const handleViewImage = (image) => {
-    setModalImage(image);
+  const handleViewImages = (images) => {
+    setModalImage(images); // Store all images
   };
 
   const handleMarkAsDone = (id) => {
@@ -53,11 +52,11 @@ export default function Inbox() {
             <p>{card.description}</p>
           </div>
           <button
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            onClick={() => handleViewImage(card.images ? JSON.parse(card.images)[0] : null)}
-          >
-            View Images
-          </button>
+  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+  onClick={() => handleViewImages(card.images ? JSON.parse(card.images) : [])}
+>
+  View Images
+</button>
           <button
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-2"
             onClick={() => handleMarkAsDone(card.id)}
@@ -69,22 +68,33 @@ export default function Inbox() {
 
       {/* Modal for image preview */}
       {modalImage && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg">
-            <img
-              src={`http://localhost:5000/${modalImage}`}
-              alt="Modal View"
-              className="max-w-full h-auto"
-            />
-            <button
-              className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-              onClick={() => setModalImage(null)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl w-full space-y-4 max-h-[75vh] overflow-y-auto">
+      {/* Render multiple images */}
+      <div className="flex flex-wrap justify-center gap-4">
+        {modalImage.map((image, index) => (
+          <img
+            key={index}
+            src={`http://localhost:5000/${image}`}
+            alt={`Modal View ${index + 1}`}
+            className="max-w-[40%] max-h-[40vh] object-contain"  // Adjusted size
+          />
+        ))}
+      </div>
+      {/* Close Button */}
+      <button
+        className="mt-4 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 mx-auto block"
+        onClick={() => setModalImage(null)}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
+
+
+
     </div>
   );
 }
