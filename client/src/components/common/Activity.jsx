@@ -77,13 +77,11 @@ export default function Activity({featuresStatus = false}) {
           <Post {...post} deleteEnabled={featuresStatus} />
         </div>
       ))}
-      {featuresStatus && (
-        <button
-          onClick={() => setShowPopup(true)}
-          className='fixed top-14 right-2 font-medium px-4 py-2 drop'>
-          Create a Post +
-        </button>
-      )}
+      <button
+        onClick={() => setShowPopup(true)}
+        className='fixed top-14 right-2 font-medium px-4 py-2 drop'>
+        Create a Post +
+      </button>
       {showPopup && (
         <div className='fixed inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50'>
           <div className='drop p-4 w-11/12 lg:w-3/12'>
