@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./db'); 
 const Users = sequelize.define('Users', {
-    // User details filled during registration
-    name: {
+name: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -37,7 +36,6 @@ const Users = sequelize.define('Users', {
         allowNull: false
     },
 
-    // Future details with default values
     mappedMobileNumber: {
         type: DataTypes.STRING,
         allowNull: true

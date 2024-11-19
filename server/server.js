@@ -5,10 +5,12 @@ const crypto = require('crypto');
 const Users = require('./models/Users'); 
 const PingMe = require('./models/pingMe');
 const Activity = require('./models/activity');
+const Notification = require('./models/notify');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
 
 const jwt = require('jsonwebtoken');
@@ -20,6 +22,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+
+app.use(bodyParser.json());
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -261,6 +265,31 @@ app.get('/activity', async (req, res) => {
   }
 });
 
+
+app.get('/api/notifications', async (req, res) => {
+  try {
+    const notifications = await Notification.findAll();
+    res.json(notifications);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/notifications', async (req, res) => {
+  const { title, message } = req.body;
+  const dateObj = new Date();
+  const time = dateObj.toTimeString().split(' ')[0];
+  const date = dateObj.toISOString().split('T')[0];
+  const month = dateObj.toLocaleString('default', { month: 'long' });
+  const year = dateObj.getFullYear();
+
+  try {
+    const newNotification = await Notification.create({ title, message, time, date, month, year });
+    res.status(201).json(newNotification);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
 });
