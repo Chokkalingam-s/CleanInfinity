@@ -225,6 +225,16 @@ app.post('/pingme', authenticateToken, upload.array('images', 5), async (req, re
   }
 });
 
+app.get("/pingme", async (req, res) => {
+  try {
+    const requests = await PingMe.findAll();
+    res.json(requests);
+  } catch (error) {
+    console.error("Error fetching PingMe data:", error);
+    res.status(500).send("Server error");
+  }
+});
+
 app.post('/activity', authenticateToken, uploadActivity.single('image'), async (req, res) => {
   const { description } = req.body;
   const imagePath = req.file ? req.file.path : null;
