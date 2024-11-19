@@ -44,6 +44,7 @@ import Activity from "../common/Activity"
 import AdminAuth from "../admin/AdminAuth"
 import AdminDashboard from "../admin/AdminDashboard"
 import StateProgress from "../admin/StateProgress"
+import Inbox from "../admin/Inbox"
 
 function LayoutContent() {
   const [loading, setLoading] = useState(true)
@@ -149,6 +150,7 @@ function LayoutContent() {
                 />
               }
             />
+            <Route path='inbox' element={<Inbox />} />
             <Route
               path='auth'
               element={<AdminAuth states={auth_states} wards={auth_wards} />}
