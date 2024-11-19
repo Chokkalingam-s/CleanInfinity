@@ -5,10 +5,12 @@ const crypto = require('crypto');
 const Users = require('./models/Users'); 
 const PingMe = require('./models/pingMe');
 const Activity = require('./models/activity');
+const Notification = require('./models/notify');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
 
 const jwt = require('jsonwebtoken');
@@ -20,6 +22,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+
+app.use(bodyParser.json());
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -91,8 +95,6 @@ app.post('/signup', async (req, res) => {
 });
 
 
-
-// Sign In API
 app.post('/signin', async (req, res) => {
   const { mobile, password } = req.body;
 
@@ -159,7 +161,7 @@ const authenticateToken = (req, res, next) => {
   jwt.verify(token, 'your_secret_key', (err, decoded) => {
     if (err) return res.status(403).send('Invalid token');
     
-    req.mobile = decoded.mobile; // Add mobile number to the request object
+    req.mobile = decoded.mobile; 
     next();
   });
 };
@@ -199,7 +201,7 @@ app.get('/get-profile', authenticateToken, async (req, res) => {
 
 app.post('/pingme', authenticateToken, upload.array('images', 5), async (req, res) => {
   const { subject, description } = req.body;
-  const imagePaths = req.files.map(file => file.path); // Store file paths in an array
+  const imagePaths = req.files.map(file => file.path); 
 
   try {
     const user = await Users.findOne({ where: { mobileNumber: req.mobile } });
@@ -261,6 +263,31 @@ app.get('/activity', async (req, res) => {
   }
 });
 
+
+app.get('/api/notifications', async (req, res) => {
+  try {
+    const notifications = await Notification.findAll();
+    res.json(notifications);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/notifications', async (req, res) => {
+  const { title, message } = req.body;
+  const dateObj = new Date();
+  const time = dateObj.toTimeString().split(' ')[0];
+  const date = dateObj.toISOString().split('T')[0];
+  const month = dateObj.toLocaleString('default', { month: 'long' });
+  const year = dateObj.getFullYear();
+
+  try {
+    const newNotification = await Notification.create({ title, message, time, date, month, year });
+    res.status(201).json(newNotification);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
 });

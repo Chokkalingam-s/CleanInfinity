@@ -7,7 +7,6 @@ export default function Leaderboard({leaderboardData, wardRank}) {
     if (j === 3 && k !== 13) return "rd"
     return "th"
   }
-
   return (
     <div className='w-full'>
       <h3 className='mb-4 text-xl font-semibold'>Leaderboard</h3>
