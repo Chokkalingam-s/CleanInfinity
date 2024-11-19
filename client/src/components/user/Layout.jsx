@@ -160,7 +160,7 @@ function LayoutContent() {
               }
             />
             <Route
-              path='notify'
+              path='notifications'
               element={<Notify enableCreateNotification={true} />}
             />
           </Route>
