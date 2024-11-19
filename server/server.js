@@ -95,8 +95,6 @@ app.post('/signup', async (req, res) => {
 });
 
 
-
-// Sign In API
 app.post('/signin', async (req, res) => {
   const { mobile, password } = req.body;
 
@@ -163,7 +161,7 @@ const authenticateToken = (req, res, next) => {
   jwt.verify(token, 'your_secret_key', (err, decoded) => {
     if (err) return res.status(403).send('Invalid token');
     
-    req.mobile = decoded.mobile; // Add mobile number to the request object
+    req.mobile = decoded.mobile; 
     next();
   });
 };
@@ -203,7 +201,7 @@ app.get('/get-profile', authenticateToken, async (req, res) => {
 
 app.post('/pingme', authenticateToken, upload.array('images', 5), async (req, res) => {
   const { subject, description } = req.body;
-  const imagePaths = req.files.map(file => file.path); // Store file paths in an array
+  const imagePaths = req.files.map(file => file.path); 
 
   try {
     const user = await Users.findOne({ where: { mobileNumber: req.mobile } });

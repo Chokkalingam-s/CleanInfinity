@@ -9,7 +9,6 @@ export default function Notify({ enableCreateNotification = false }) {
   });
   const [monthExpanded, setMonthExpanded] = useState({});
 
-  // Fetch notifications from the backend
   useEffect(() => {
     fetch('http://localhost:5000/api/notifications')
       .then(response => response.json())
@@ -39,7 +38,6 @@ export default function Notify({ enableCreateNotification = false }) {
       });
   }, []);
 
-  // Create a new notification
   const handleShare = () => {
     fetch('http://localhost:5000/api/notifications', {
       method: 'POST',
@@ -51,7 +49,6 @@ export default function Notify({ enableCreateNotification = false }) {
         setShowPopup(false);
         setNewNotification({ title: "", message: "" });
 
-        // Refetch notifications
         fetch('/api/notifications')
           .then(response => response.json())
           .then(data => {
@@ -73,8 +70,6 @@ export default function Notify({ enableCreateNotification = false }) {
           });
       });
   };
-
-  // Toggle month expansion
   const toggleMonth = (month) => {
     setMonthExpanded((prev) => ({
       ...prev,
