@@ -22,11 +22,29 @@ const data = [
 ]
 
 export default function Inbox() {
-  const [modalImage, setModalImage] = useState(null)
+  const [cards, setCards] = useState([])
+  const [modalImage, setModalImage] = useState()
   const [completedCards, setCompletedCards] = useState([])
 
-  const handleViewImage = image => {
-    setModalImage(image)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token")
+        const response = await axios.get("http://localhost:5000/pingme", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        setCards(response.data)
+      } catch (error) {
+        console.error("Error fetching PingMe data:", error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  const handleViewImages = images => {
+    setModalImage(images) // Store all images
   }
 
   const handleMarkAsDone = id => {
@@ -46,7 +64,7 @@ export default function Inbox() {
           <span>
             <h3 className='font-bold text-lg'>{card.name}</h3>
             <p>
-              {card.state}, {card.district}
+              {card.state}, {card.district}, {card.ward}
             </p>
           </span>
           <span>
@@ -66,7 +84,7 @@ export default function Inbox() {
         </div>
       ))}
 
-      {/* Modal */}
+      {/* Modal for image preview */}
       {modalImage && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
           <div className='bg-white p-4 rounded-lg shadow-lg'>
