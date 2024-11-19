@@ -4,20 +4,20 @@ const data = [
   {
     id: 1,
     name: "John Doe",
-    state: "California",
-    district: "Los Angeles",
+    state: "Tamil Nadu",
+    district: "Chennai",
     title: "Card Title 1",
     description: "This is the description for card 1.",
-    image: "https://via.placeholder.com/150",
+    image: "https://placehold.co/150",
   },
   {
     id: 2,
     name: "Jane Smith",
-    state: "Texas",
-    district: "Houston",
+    state: "Tamil Nadu",
+    district: "Chennai",
     title: "Card Title 2",
     description: "This is the description for card 2.",
-    image: "https://placeholder.com/150",
+    image: "https://placehold.co/150",
   },
 ]
 
@@ -34,31 +34,32 @@ export default function Inbox() {
   }
 
   return (
-    <div className='container flex flex-col gap-4'>
+    <div className='container flex flex-col gap-y-4 justify-center'>
       {data.map(card => (
         <div
           key={card.id}
-          className={`flex items-center p-4 rounded-lg shadow-md ${
-            completedCards.includes(card.id) ? "bg-green-100" : "bg-white"
+          className={`flex items-center p-4 rounded-lg shadow-md cards ${
+            completedCards.includes(card.id)
+              ? "bg-light-green"
+              : "bg-white/40 backdrop-blur-md"
           }`}>
-          <div className='flex-1'>
+          <span>
             <h3 className='font-bold text-lg'>{card.name}</h3>
             <p>
               {card.state}, {card.district}
             </p>
-          </div>
-          <div className='w-px h-full bg-gray-300 mx-4'></div>
-          <div className='flex-1'>
+          </span>
+          <span>
             <h4 className='font-bold'>{card.title}</h4>
             <p>{card.description}</p>
-          </div>
+          </span>
           <button
-            className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+            className='px-4 py-2 rounded-lg shadow-lg bg-lightest-green ml-4'
             onClick={() => handleViewImage(card.image)}>
             View Images
           </button>
           <button
-            className='px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-2'
+            className='px-4 py-2 bg-red-500 text-white shadow-lg rounded-lg ml-4 hover:bg-red-600'
             onClick={() => handleMarkAsDone(card.id)}>
             Mark as Done
           </button>
@@ -75,7 +76,7 @@ export default function Inbox() {
               className='max-w-full h-auto'
             />
             <button
-              className='mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600'
+              className='mt-2 px-4 float-end py-2 bg-red-500 text-white rounded hover:bg-red-600'
               onClick={() => setModalImage(null)}>
               Close
             </button>
