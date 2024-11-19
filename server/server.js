@@ -288,6 +288,26 @@ app.post('/api/notifications', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+app.delete('/activity/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedRows = await Activity.destroy({
+      where: { id },
+    });
+
+    if (deletedRows === 0) {
+      return res.status(404).send('Post not found');
+    }
+
+    res.status(200).send('Post deleted successfully');
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    res.status(500).send('Error deleting post');
+  }
+});
+
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
 });

@@ -36,12 +36,10 @@ export default function AdminAuth({states, wards}) {
   const handleSubmit = e => {
     e.preventDefault()
 
-    // Extract state and district initials
     const stateInitial = formData.state.charAt(0).toUpperCase()
     const districtInitial = formData.district.charAt(0).toUpperCase()
     const expectedPassword = `CleanInfinity${stateInitial}${districtInitial}`
 
-    // Validate password
     if (formData.password === expectedPassword) {
       toast.success("Password verification successful!")
       let timeout = setTimeout(() => {
