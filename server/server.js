@@ -11,6 +11,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const sequelize = require('./models/db'); 
 
 
 const jwt = require('jsonwebtoken');
@@ -375,7 +376,7 @@ app.get("/api/leaderboard", async (req, res) => {
     }
     const leaderboard = users.map(user => ({
       name: user.name,
-      score: user.credits, // Rename credits to score
+      score: user.credits, 
     }));
     res.json({
       leaderboard:  leaderboard,
@@ -386,6 +387,38 @@ app.get("/api/leaderboard", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+app.get("/api/state-progress", async (req, res) => {
+  const { state } = req.query;
+
+  try {
+     const progressData = await Users.findAll({
+      where: { state },
+      attributes: [
+        "district",
+        "ward",
+        [sequelize.fn("SUM", sequelize.col("credits")), "totalCredits"],
+      ],
+      group: ["district", "ward"],
+      order: [["district", "ASC"], ["ward", "ASC"]],
+    });
+
+    if (!progressData.length) {
+      return res.status(404).json({ message: "No data found for the state" });
+    }
+
+    const leaderboard = progressData.map(row => ({
+      name: `${row.district}-${row.ward}`, 
+      score: row.getDataValue("totalCredits"), 
+    }));
+
+    res.json({ leaderboard });
+  } catch (error) {
+    console.error("Error fetching state progress data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
