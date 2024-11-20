@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 export default function Post({
   name,
   time,
@@ -23,7 +22,7 @@ export default function Post({
 
       if (response.ok) {
         console.log("Post deleted successfully:", postId);
-        if (onDelete) onDelete(postId); 
+        if (onDelete) onDelete(postId);
       } else {
         console.error("Failed to delete post:", await response.text());
       }
@@ -31,9 +30,8 @@ export default function Post({
       console.error("Error deleting post:", error);
     }
   }
-
   return (
-    <div className="drop p-4 my-4 mx-4 w-8/12">
+    <div className="drop p-4 my-4 mx-4 w-full md:w-8/12">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
           <img
