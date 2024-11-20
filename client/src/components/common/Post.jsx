@@ -33,7 +33,7 @@ export default function Post({
   }
 
   return (
-    <div className="drop p-4 my-4 mx-4 w-full">
+    <div className="drop p-4 my-4 mx-4 w-full md:w-8/12">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
           <img
