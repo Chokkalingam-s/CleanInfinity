@@ -23,7 +23,7 @@ export default function Post({
 
       if (response.ok) {
         console.log("Post deleted successfully:", postId);
-        if (onDelete) onDelete(postId); 
+        if (onDelete) onDelete(postId);
       } else {
         console.error("Failed to delete post:", await response.text());
       }
@@ -33,7 +33,7 @@ export default function Post({
   }
 
   return (
-    <div className="drop p-4 my-4 mx-4 w-8/12">
+    <div className="drop p-4 my-4 mx-4 w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
           <img

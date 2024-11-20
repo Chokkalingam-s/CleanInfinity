@@ -1,6 +1,6 @@
-import {useState, useEffect} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Post from "./Post";
 
@@ -74,7 +74,7 @@ export default function Activity({ featuresStatus = false }) {
   };
 
   return (
-    <div className="container mb-20 lg:mb-10">
+    <div className="container w-full mb-20 lg:mb-10">
       <ToastContainer />
       <div className="text-2xl font-bold text-center">Activity</div>
       {posts.map((post) => (
@@ -96,8 +96,7 @@ export default function Activity({ featuresStatus = false }) {
               placeholder="Write something..."
               value={newPost.description}
               onChange={(e) =>
-                setNewPost({ ...newPost, description: e.target.value })
-              }
+                setNewPost({ ...newPost, description: e.target.value })}
             />
             <input
               type="file"
