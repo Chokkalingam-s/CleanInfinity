@@ -1,30 +1,34 @@
-import {Link, useLocation} from "react-router-dom"
-import {useState} from "react"
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 
-export default function Navbar({links}) {
-  const location = useLocation()
-  const [isOpen, setIsOpen] = useState(false)
+export default function Navbar({ links }) {
+  const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className='fixed top-0 w-full shadow-lg rounded-ee-lg rounded-es-lg bg-medium-green h-12 z-20'>
-      <div className='flex items-center justify-between'>
-        <Link to='/dashboard'>
+    <header className="fixed top-0 w-full shadow-lg rounded-ee-lg rounded-es-lg bg-medium-green h-12 z-20">
+      <div className="flex items-center justify-between">
+        <Link to="/dashboard">
           <div
-            style={{backgroundImage: "url(/1.png)"}}
-            className='w-24 h-12 bg-contain bg-no-repeat bg-center ml-2'></div>
+            style={{ backgroundImage: "url(/1.png)" }}
+            className="w-28 h-12 bg-contain bg-no-repeat bg-center ml-2"
+          >
+          </div>
         </Link>
         <button
-          className='lg:hidden md:hidden focus:outline-none bg-transparent w-12'
-          onClick={() => setIsOpen(!isOpen)}>
+          className="lg:hidden md:hidden focus:outline-none bg-transparent w-12"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <img
             src={isOpen ? "./xmark-solid.svg" : "./bars-solid.svg"}
-            className='w-4/12'
+            className="w-4/12"
           />
         </button>
         <nav
           className={`flex-col absolute right-0 top-12 z-20 rounded-lg ${
             isOpen ? "flex" : "hidden"
-          } md:flex-row lg:flex-row md:flex lg:flex md:relative md:top-0 lg:relative lg:top-0 bg-medium-green md:bg-transparent lg:bg-transparent`}>
-          {links.map(({href, label}) => (
+          } md:flex-row lg:flex-row md:flex lg:flex md:relative md:top-0 lg:relative lg:top-0 bg-medium-green md:bg-transparent lg:bg-transparent`}
+        >
+          {links.map(({ href, label }) => (
             <Link
               key={href}
               to={href}
@@ -33,12 +37,13 @@ export default function Navbar({links}) {
                   ? "text-dark-green text-lg"
                   : "text-lightest-green"
               }`}
-              onClick={() => setIsOpen(false)}>
+              onClick={() => setIsOpen(false)}
+            >
               {label}
             </Link>
           ))}
         </nav>
       </div>
     </header>
-  )
+  );
 }
