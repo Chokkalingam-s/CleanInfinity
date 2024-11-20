@@ -133,11 +133,7 @@ function LayoutContent() {
             <Route
               path='dashboard'
               element={
-                <AdminDashboard
-                  detailsOfWardsArr={admin_details_of_ward_items}
-                  leaderboard={admin_leaderboard}
-                  totalUsersInWard={admin_totalUsersInWard}
-                />
+                <AdminDashboard />
               }
             />
             <Route

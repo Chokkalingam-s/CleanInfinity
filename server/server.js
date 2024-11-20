@@ -322,6 +322,71 @@ app.delete('/activity/:id', async (req, res) => {
   }
 });
 
+app.post("/adminLogin", (req, res) => {
+  const { state, district, ward, password } = req.body;
+
+  const stateInitial = state.charAt(0).toUpperCase();
+  const districtInitial = district.charAt(0).toUpperCase();
+  const expectedPassword = `CleanInfinity${stateInitial}${districtInitial}`;
+
+  if (password === expectedPassword) {
+    const token = jwt.sign(
+      { state, district, ward },
+      "your_secret_key", 
+      { expiresIn: "1h" }
+    );
+    res.json({ token });
+  } else {
+    res.status(401).json({ error: "Invalid password" });
+  }
+});
+
+app.get("/api/wardDetails", async (req, res) => {
+  const { state, district, ward } = req.query;
+
+  try {
+    const wardDetails = await Users.findAll({
+      where: { state, district, ward },
+    });
+
+    if (!wardDetails) {
+      return res.status(404).json({ message: "Ward details not found" });
+    }
+
+    res.json({ detailsOfWards: wardDetails.map(w => w.info) });
+  } catch (error) {
+    console.error("Error fetching ward details:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/api/leaderboard", async (req, res) => {
+  const { state, district, ward } = req.query;
+
+  try {
+    const users = await Users.findAll({
+      where: { state, district, ward },
+      attributes: ["name", "credits"],
+      order: [["credits", "DESC"]],
+    });
+
+    if (!users.length) {
+      return res.status(404).json({ message: "No users found" });
+    }
+    const leaderboard = users.map(user => ({
+      name: user.name,
+      score: user.credits, // Rename credits to score
+    }));
+    res.json({
+      leaderboard:  leaderboard,
+      totalUsers: users.length,
+    });
+  } catch (error) {
+    console.error("Error fetching leaderboard data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
 });
