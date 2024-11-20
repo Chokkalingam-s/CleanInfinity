@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 export default function Post({
   name,
   time,
@@ -31,7 +30,6 @@ export default function Post({
       console.error("Error deleting post:", error);
     }
   }
-
   return (
     <div className="drop p-4 my-4 mx-4 w-full md:w-8/12">
       <div className="flex items-center justify-between">
