@@ -133,11 +133,7 @@ function LayoutContent() {
             <Route
               path="state_progress"
               element={
-                <StateProgress
-                  wardRank={1}
-                  leaderboardData={admin_leaderboardData}
-                  stateName={admin_state_progress_page}
-                />
+                <StateProgress />
               }
             />
             <Route path="inbox" element={<Inbox />} />
