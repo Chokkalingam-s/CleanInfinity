@@ -2,7 +2,6 @@ import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 import Seperator from "../common/seperator"
 import {toast} from "react-toastify"
-
 export default function AdminAuth({states, wards}) {
   const [formData, setFormData] = useState({
     email: "",
@@ -33,23 +32,38 @@ export default function AdminAuth({states, wards}) {
     }
   }
 
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    const stateInitial = formData.state.charAt(0).toUpperCase()
-    const districtInitial = formData.district.charAt(0).toUpperCase()
-    const expectedPassword = `CleanInfinity${stateInitial}${districtInitial}`
-
-    if (formData.password === expectedPassword) {
-      toast.success("Password verification successful!")
-      let timeout = setTimeout(() => {
-        navigate("/admin/dashboard")
-        clearTimeout(timeout)
-      }, 2000)
-    } else {
-      toast.error("Invalid password. Please try again.")
+  const handleSubmit = async e => {
+    e.preventDefault();
+  
+    try {
+      const response = await fetch("http://localhost:5000/adminLogin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          state: formData.state,
+          district: formData.district,
+          ward: formData.ward,
+          password: formData.password,
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("adminAuthToken", data.token);
+        toast.success("Login successful!");
+        navigate("/admin/dashboard");
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.error || "Login failed!");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("An error occurred. Please try again.");
     }
-  }
+  };
+  
 
   return (
     <div className='flex items-center justify-center container'>
