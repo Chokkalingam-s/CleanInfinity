@@ -71,7 +71,7 @@ export default function AuthComponent({ states, wards }) {
         ...prevData,
         generatedOtp: response.data.otp,
       }));
-      // setOtpSent(true) // TODO: changed here
+      
       toast.success("OTP sent to Entered Mail Successfully!");
     } catch (error) {
       toast.error("Error sending OTP");
@@ -80,9 +80,9 @@ export default function AuthComponent({ states, wards }) {
   };
 
   const verifyOtp = async () => {
-    setOtpVerified(true);
+    
     if (formData.otp.toUpperCase() === formData.generatedOtp.toUpperCase()) {
-      // setOtpVerified(true) //TODO: changed here
+      setOtpVerified(true);
       toast.success("OTP verified successfully!");
     } else {
       toast.error("OTP verification failed");
