@@ -8,12 +8,10 @@ export default function Dashboard({ BarGraphVals, titles }) {
   const [username, setUsername] = useState("");
   const [credits, setCredits] = useState(0);
   const [showNotification, setShowNotification] = useState(false);
+  const [latestNotification, setLatestNotification] = useState({ title: "", description: "" });
 
   useEffect(() => {
-    setShowNotification(true);
-    const timer = setTimeout(() => {
-      setShowNotification(false);
-    }, 3000);
+
     const fetchUserData = async () => {
       try {
         const response = await axios.get("http://localhost:5000/get-profile", {
@@ -28,16 +26,39 @@ export default function Dashboard({ BarGraphVals, titles }) {
       }
     };
 
+    const fetchLatestNotification = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/latest-notification");
+        if (response.data) {
+          setLatestNotification({
+            title: response.data.title,
+            description: response.data.message, 
+          });
+          console.log("Latest notification:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching latest notification:", error);
+      }
+    };
+
+    setShowNotification(true);
+    const timer = setTimeout(() => {
+      setShowNotification(false);
+    }, 3000);
+
     fetchUserData();
+    fetchLatestNotification();
+
     return () => clearTimeout(timer);
+
   }, []);
 
   return (
     <div className="container">
       {showNotification && (
         <NotificationPop
-          title="Fake Notification"
-          description="Filled with the latest notification"
+        title={latestNotification.title}
+        description={latestNotification.description}
           onClose={() => setShowNotification(false)}
         />
       )}

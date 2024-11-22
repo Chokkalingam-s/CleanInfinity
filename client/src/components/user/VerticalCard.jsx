@@ -1,7 +1,6 @@
 import {Link} from 'react-router-dom'
 
 export default function VerticalCard({titles}) {
-  console.log(titles)
   return (
     <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 items-center gap-4 max-w-4xl'>
       {titles.map(({title, path}) => (

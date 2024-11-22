@@ -304,6 +304,18 @@ app.post('/api/notifications', async (req, res) => {
   }
 });
 
+app.get('/api/latest-notification', async (req, res) => {
+  try {
+    const latestNotification = await Notification.findOne({
+      order: [['id', 'DESC']], 
+    });
+    res.json(latestNotification);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 app.delete('/activity/:id', async (req, res) => {
   const { id } = req.params;
 
