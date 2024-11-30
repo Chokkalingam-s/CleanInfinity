@@ -12,6 +12,7 @@ const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const sequelize = require('./models/db'); 
+const { Op } = require('sequelize');
 
 
 const jwt = require('jsonwebtoken');
@@ -68,8 +69,8 @@ app.post('/signup', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const nfcDId = mobile + '0';
-    const nfcNDId = mobile + '1';
+    // const nfcDId = mobile + '0';
+    // const nfcNDId = mobile + '1';
 
     const newUser = await Users.create({
       name,
@@ -81,8 +82,8 @@ app.post('/signup', async (req, res) => {
       ward,
       password: hashedPassword,
       mappedMobileNumber: mobile,
-      nfcDId: nfcDId,
-      nfcNDId: nfcNDId,
+      // nfcDId: nfcDId,
+      // nfcNDId: nfcNDId,
     });
     const token = jwt.sign({ mobile: newUser.mobileNumber, email: newUser.mailId }, JWT_SECRET, { expiresIn: '1h' });
 
@@ -428,6 +429,50 @@ app.get("/api/state-progress", async (req, res) => {
   } catch (error) {
     console.error("Error fetching state progress data:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+app.post('/process-nfc', async (req, res) => {
+  const { nfcUid } = req.body;
+
+  try {
+    const existingUser = await Users.findOne({
+      where: {
+        [Op.or]: [
+          { nfcDId: nfcUid },
+          { nfcNDId: nfcUid }
+        ]
+      }
+    });
+
+    if (existingUser) {
+      if (existingUser.nfcDId === nfcUid) {
+        existingUser.nfcDPoints += 1;
+      } else if (existingUser.nfcNDId === nfcUid) {
+        existingUser.nfcNDPoints += 1;
+      }
+      await existingUser.save();
+      return res.status(200).send('Points updated successfully.');
+    } else {
+      const latestUser = await Users.findOne({
+        order: [['createdAt', 'DESC']]
+      });
+      if (latestUser) {
+        if (!latestUser.nfcDId) {
+          latestUser.nfcDId = nfcUid;
+        } else if (!latestUser.nfcNDId) {
+          latestUser.nfcNDId = nfcUid;
+        } else {
+          return res.status(400).send('No available fields to store the NFC UID.');
+        }
+        await latestUser.save();
+        return res.status(201).send('NFC UID added successfully.');
+      }
+    }
+  } catch (error) {
+    console.error('Error processing NFC UID:', error);
+    res.status(500).send('Server error.');
   }
 });
 
