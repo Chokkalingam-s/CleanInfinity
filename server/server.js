@@ -449,8 +449,10 @@ app.post('/process-nfc', async (req, res) => {
     if (existingUser) {
       if (existingUser.nfcDId === nfcUid) {
         existingUser.nfcDPoints += 1;
+        existingUser.credits += 1;
       } else if (existingUser.nfcNDId === nfcUid) {
         existingUser.nfcNDPoints += 1;
+        existingUser.credits += 1;
       }
       await existingUser.save();
       return res.status(200).send('Points updated successfully.');
