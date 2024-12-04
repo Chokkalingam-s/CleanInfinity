@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./db'); 
+
 const Users = sequelize.define('Users', {
-name: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -35,7 +36,6 @@ name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-
     mappedMobileNumber: {
         type: DataTypes.STRING,
         allowNull: true
@@ -59,11 +59,20 @@ name: {
     nfcNDPoints: {
         type: DataTypes.INTEGER,
         defaultValue: 0
+    },
+    lastNfcDUpdate: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    lastNfcNDUpdate: {
+        type: DataTypes.DATE,
+        allowNull: true
     }
 }, {
     tableName: 'Users', 
     timestamps: true 
 });
+
 Users.sync()
     .then(() => {
         console.log('Users table created successfully');

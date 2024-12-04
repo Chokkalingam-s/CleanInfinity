@@ -447,19 +447,39 @@ app.post('/process-nfc', async (req, res) => {
     });
 
     if (existingUser) {
+      const now = new Date();
+      let pointsUpdated = false;
+
+      // Check if the NFC UID matches nfcDId
       if (existingUser.nfcDId === nfcUid) {
-        existingUser.nfcDPoints += 1;
-        existingUser.credits += 1;
-      } else if (existingUser.nfcNDId === nfcUid) {
-        existingUser.nfcNDPoints += 1;
-        existingUser.credits += 1;
+        if (!existingUser.lastNfcDUpdate || (now - existingUser.lastNfcDUpdate) >= 12 * 60 * 60 * 1000) {
+          existingUser.nfcDPoints += 1;
+          existingUser.credits += 1;
+          existingUser.lastNfcDUpdate = now;
+          pointsUpdated = true;
+        }
+      } 
+      // Check if the NFC UID matches nfcNDId
+      else if (existingUser.nfcNDId === nfcUid) {
+        if (!existingUser.lastNfcNDUpdate || (now - existingUser.lastNfcNDUpdate) >= 12 * 60 * 60 * 1000) {
+          existingUser.nfcNDPoints += 1;
+          existingUser.credits += 1;
+          existingUser.lastNfcNDUpdate = now;
+          pointsUpdated = true;
+        }
       }
-      await existingUser.save();
-      return res.status(200).send('Points updated successfully.');
+
+      if (pointsUpdated) {
+        await existingUser.save();
+        return res.status(200).send('Points and credits updated successfully.');
+      } else {
+        return res.status(400).send('Points can only be updated once every 12 hours.');
+      }
     } else {
       const latestUser = await Users.findOne({
         order: [['createdAt', 'DESC']]
       });
+
       if (latestUser) {
         if (!latestUser.nfcDId) {
           latestUser.nfcDId = nfcUid;
@@ -470,6 +490,8 @@ app.post('/process-nfc', async (req, res) => {
         }
         await latestUser.save();
         return res.status(201).send('NFC UID added successfully.');
+      } else {
+        return res.status(404).send('No users found to assign NFC UID.');
       }
     }
   } catch (error) {
