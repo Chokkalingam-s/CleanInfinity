@@ -18,19 +18,24 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        const cachedTime = cachedResponse.headers.get("sw-cache-time");
-        if (cachedTime && Date.now() - cachedTime > CACHE_EXPIRY_TIME) {
-          return fetchAndUpdateCache(event.request);
+  if (event.request.method === "GET") {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          const cachedTime = cachedResponse.headers.get("sw-cache-time");
+          if (cachedTime && Date.now() - cachedTime > CACHE_EXPIRY_TIME) {
+            return fetchAndUpdateCache(event.request);
+          }
+          return cachedResponse;
         }
-        return cachedResponse;
-      }
-      return fetchAndUpdateCache(event.request);
-    }),
-  );
+        return fetchAndUpdateCache(event.request);
+      }),
+    );
+  } else {
+    event.respondWith(fetch(event.request)); // For non-GET methods, don't cache
+  }
 });
+
 
 async function fetchAndUpdateCache(request) {
   try {
