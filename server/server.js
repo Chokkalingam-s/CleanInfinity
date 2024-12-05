@@ -24,7 +24,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors({
-  origin: "*",}));
+  origin: "*",methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],  
+}));
 
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
