@@ -68,10 +68,6 @@ app.post('/signup', async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // const nfcDId = mobile + '0';
-    // const nfcNDId = mobile + '1';
-
     const newUser = await Users.create({
       name,
       mobileNumber: mobile,
@@ -82,8 +78,6 @@ app.post('/signup', async (req, res) => {
       ward,
       password: hashedPassword,
       mappedMobileNumber: mobile,
-      // nfcDId: nfcDId,
-      // nfcNDId: nfcNDId,
     });
     const token = jwt.sign({ mobile: newUser.mobileNumber, email: newUser.mailId }, JWT_SECRET, { expiresIn: '1h' });
 
