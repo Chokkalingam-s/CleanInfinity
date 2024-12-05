@@ -9,6 +9,9 @@ const sequelize = new Sequelize(
     host: dbConfig.host,
     dialect: dbConfig.dialect,
     port: dbConfig.port,
+    dialectOptions: {
+      connectTimeout: 70000, 
+    },
   }
 );
 
