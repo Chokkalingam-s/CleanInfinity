@@ -12,7 +12,7 @@
 
 # Environment variables for production
 [context.production.environment]
-  VITE_BACKEND_URL=https://cleaninfinity-production.up.railway.app/
+  VITE_BACKEND_URL="https://cleaninfinity-production.up.railway.app/"
 
 # Optional: Customize the cache behavior if needed
 [build.environment]
