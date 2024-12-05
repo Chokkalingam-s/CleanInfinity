@@ -1,0 +1,19 @@
+[build]
+  command = "pnpm build"         # The build command
+  publish = "dist"                # The folder to deploy after build
+  base = ""                       # Optional: If your project is not in a subfolder, leave this empty or set it to your subfolder name.
+
+# Redirects for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+# Environment variables for production
+[context.production.environment]
+  VITE_BACKEND_URL=https://cleaninfinity-production.up.railway.app/
+
+# Optional: Customize the cache behavior if needed
+[build.environment]
+  NODE_ENV = "production"
