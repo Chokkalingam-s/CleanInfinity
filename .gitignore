@@ -23,10 +23,7 @@ Thumbs.db
 *.sublime-workspace
 *.sublime-project
 
-# Build output
-dist/
-build/
-out/
+
 
 # Temporary files
 tmp/
