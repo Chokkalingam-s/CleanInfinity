@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Seperator from "../common/seperator";
+import config from '../../config';
 
 export default function AuthComponent({ states, wards }) {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -64,7 +65,7 @@ export default function AuthComponent({ states, wards }) {
   const sendOtp = async () => {
     setOtpSent(true);
     try {
-      const response = await axios.post("http://localhost:5000/send-otp", {
+      const response = await axios.post(`${config.backendUrl}send-otp`, {
         email: formData.email,
       });
       setFormData((prevData) => ({
@@ -94,7 +95,7 @@ export default function AuthComponent({ states, wards }) {
 
     try {
       if (isSignUp) {
-        const response = await axios.post("http://localhost:5000/signup", {
+        const response = await axios.post(`${config.backendUrl}signup`, {
           name: formData.name,
           mobile: formData.mobile,
           email: formData.email,
@@ -122,7 +123,7 @@ export default function AuthComponent({ states, wards }) {
         });
         navigate("/dashboard");
       } else {
-        const response = await axios.post("http://localhost:5000/signin", {
+        const response = await axios.post(`${config.backendUrl}signin`, {
           mobile: formData.mobile,
           password: formData.password,
         });

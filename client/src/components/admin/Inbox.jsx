@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import config from '../../config';
 
 export default function Inbox() {
   const [cards, setCards] = useState([]);
@@ -10,7 +11,7 @@ export default function Inbox() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/pingme", {
+        const response = await axios.get(`${config.backendUrl}pingme`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -77,7 +78,7 @@ export default function Inbox() {
               {modalImage.map((image, index) => (
                 <img
                   key={index}
-                  src={`http://localhost:5000/${image}`}
+                  src={`${config.backendUrl}${image}`}
                   alt={`Modal View ${index + 1}`}
                   className="max-w-[40%] max-h-[40vh] object-contain" // Adjusted size
                 />

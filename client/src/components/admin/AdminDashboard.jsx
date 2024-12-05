@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Leaderboard from "../common/Leaderboard";
+import config from '../../config';
 
 export default function AdminDashboard() {
   const [state, setState] = useState("");
@@ -43,7 +44,7 @@ export default function AdminDashboard() {
       setDistrict(decodedDistrict);
       setWard(decodedWard);
       fetch(
-        `http://localhost:5000/api/leaderboard?state=${decodedState}&district=${decodedDistrict}&ward=${decodedWard}`,
+        `${config.backendUrl}api/leaderboard?state=${decodedState}&district=${decodedDistrict}&ward=${decodedWard}`,
       )
         .then((res) => res.json())
         .then((data) => {

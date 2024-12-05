@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Leaderboard from "../common/Leaderboard";
-
+import config from '../../config';
 const decodeJWT = token => {
   try {
     const base64Url = token.split(".")[1];
@@ -18,9 +18,9 @@ const decodeJWT = token => {
   }
 };
 export default function StateProgress() {
-  const [stateName, setStateName] = useState(""); // Admin's state
-  const [leaderboardData, setLeaderboardData] = useState([]); // Leaderboard data
-  const [wardRank, setWardRank] = useState(null); // Ranking of the ward in the state
+  const [stateName, setStateName] = useState(""); 
+  const [leaderboardData, setLeaderboardData] = useState([]); 
+  const [wardRank, setWardRank] = useState(null); 
 
   useEffect(() => {
     const token = localStorage.getItem("adminAuthToken");
@@ -31,12 +31,11 @@ export default function StateProgress() {
       const { state: decodedState, district: decodedDistrict, ward: decodedWard } = decoded;
 
       setStateName(decodedState);
-      fetch(`http://localhost:5000/api/state-progress?state=${decodedState}`)
+      fetch(`${config.backendUrl}/api/state-progress?state=${decodedState}`)
       .then(res => res.json())
       .then(data => {
         setLeaderboardData(data.leaderboard || []);
 
-        // Determine the rank of the current ward
         const wardIndex = data.leaderboard.findIndex(entry =>
           entry.name.includes(`${decodedDistrict}-${decodedWard}`)
         );

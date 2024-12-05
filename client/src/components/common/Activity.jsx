@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Post from "./Post";
+import config from '../../config';
 
 export default function Activity({ featuresStatus = false }) {
   const [posts, setPosts] = useState([]);
@@ -15,7 +16,7 @@ export default function Activity({ featuresStatus = false }) {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/activity", {
+      const response = await axios.get(`${config.backendUrl}activity`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,7 +43,7 @@ export default function Activity({ featuresStatus = false }) {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/activity", {
+      const response = await fetch(`${config.backendUrl}activity`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import config from '../../config';
 export default function Post({
   name,
   time,
@@ -11,12 +12,12 @@ export default function Post({
   const [liked, setLiked] = useState(false);
 
   const imageUrl = image
-    ? `http://localhost:5000/${image}`
+    ? `${config.backendUrl}${image}`
     : "https://placehold.co/50";
 
   async function handleDelete(postId) {
     try {
-      const response = await fetch(`http://localhost:5000/activity/${postId}`, {
+      const response = await fetch(`${config.backendUrl}activity/${postId}`, {
         method: "DELETE",
       });
 

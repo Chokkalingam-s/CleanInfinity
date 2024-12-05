@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import config from '../../config';
 
 export default function PingMe() {
   const [subject, setSubject] = useState("");
@@ -18,11 +19,11 @@ export default function PingMe() {
     images.forEach(file => formData.append("images", file));
   
     try {
-      const token = localStorage.getItem("token"); // Retrieve token from storage
-      const response = await fetch("http://localhost:5000/pingme", {
+      const token = localStorage.getItem("token"); 
+      const response = await fetch(`${config.backendUrl}pingme`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`, // Ensure token is included
+          Authorization: `Bearer ${token}`, 
         },
         body: formData,
       });

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import config from '../../config';
 export default function Notify({ enableCreateNotification = false }) {
   const [showPopup, setShowPopup] = useState(false);
   const [notifications, setNotifications] = useState({});
@@ -10,7 +10,7 @@ export default function Notify({ enableCreateNotification = false }) {
   const [monthExpanded, setMonthExpanded] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/notifications')
+    fetch(`${config.backendUrl}api/notifications`)
       .then(response => response.json())
       .then(data => {
         const groupedNotifications = data.reduce((acc, notification) => {
@@ -39,7 +39,7 @@ export default function Notify({ enableCreateNotification = false }) {
   }, []);
 
   const handleShare = () => {
-    fetch('http://localhost:5000/api/notifications', {
+    fetch(`${config.backendUrl}api/notifications`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newNotification),

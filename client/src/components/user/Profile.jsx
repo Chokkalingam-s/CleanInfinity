@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import config from '../../config';
 export default function ProfileForm() {
   const [profile, setProfile] = useState({
     id: '',
@@ -23,15 +23,14 @@ export default function ProfileForm() {
   });
 
   useEffect(() => {
-    // Fetch user profile details from the backend
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/get-profile', {
+        const response = await axios.get(`${config.backendUrl}get-profile`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        setProfile(response.data); // Set the fetched profile data
+        setProfile(response.data); 
       } catch (error) {
         console.error('Error fetching profile:', error);
       }

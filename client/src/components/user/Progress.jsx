@@ -3,7 +3,7 @@ import axios from "axios"
 import BarChart from "./BarChart"
 import {CircularProgressbar} from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
-
+import config from '../../config';
 const UserProgress = ({name, value, barStyles}) => (
   <div className='flex flex-col items-center'>
     <CircularProgressbar
@@ -45,7 +45,7 @@ export default function Progress({data, users, progressBarStyles}) {
   useEffect(() => {
     const fetchNfcData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/get-profile", {
+        const response = await axios.get(`${config.backendUrl}get-profile`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

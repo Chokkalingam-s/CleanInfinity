@@ -2,6 +2,7 @@ import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 import Seperator from "../common/seperator"
 import {toast} from "react-toastify"
+import config from '../../config';
 export default function AdminAuth({states, wards}) {
   const [formData, setFormData] = useState({
     email: "",
@@ -36,7 +37,7 @@ export default function AdminAuth({states, wards}) {
     e.preventDefault();
   
     try {
-      const response = await fetch("http://localhost:5000/adminLogin", {
+      const response = await fetch(`${config.backendUrl}adminLogin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -3,7 +3,7 @@ import axios from "axios";
 import BarGraph from "./BarChart";
 import VerticalCard from "./VerticalCard";
 import NotificationPop from "../common/NotificationPop";
-
+import config from '../../config';
 export default function Dashboard({ BarGraphVals, titles }) {
   const [username, setUsername] = useState("");
   const [credits, setCredits] = useState(0);
@@ -14,7 +14,7 @@ export default function Dashboard({ BarGraphVals, titles }) {
 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/get-profile", {
+        const response = await axios.get(`${config.backendUrl}get-profile`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -28,7 +28,7 @@ export default function Dashboard({ BarGraphVals, titles }) {
 
     const fetchLatestNotification = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/latest-notification");
+        const response = await axios.get(`${config.backendUrl}api/latest-notification`);
         if (response.data) {
           setLatestNotification({
             title: response.data.title,
