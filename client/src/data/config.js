@@ -1,6 +1,6 @@
 export const dashboard_data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 80]
 export const dashboard_credits = 500
-export const auth_wards = ["Choose Your Ward", "Ward 1", "Ward 2"]
+export const auth_wards = ["Choose Your Ward", "Ward 1"]
 export const dashboard_titles = [ 
   {title: "Knowledge", path: "/awareness", icon: "./knowledge.png"},
   {title: "Progress", path: "/progress", icon: "./progress.png"},
