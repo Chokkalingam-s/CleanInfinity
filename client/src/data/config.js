@@ -10,7 +10,7 @@ export const dashboard_titles = [
   {title: "Activity", path: "/activity"},
 ]
 export const awareness_video_link =
-  "https://www.youtube.com/embed/DHfRfU3XUEo?si=2Tw6Xk_Xs3Ihwak3"
+  "https://www.youtube.com/embed/luZmjS7b7f0?si=NKntSRkMMc9zUwWA"
 export const awareness_cardsData = Array.from({length: 9}, (_, index) => ({
   id: index + 1,
   title: `Card ${index + 1}`,
@@ -175,10 +175,10 @@ export const dummyNotifications = {
 }
 
 export const article_data = [
-  {title: "Article 1", description: "Description for article 1."},
-  {title: "Article 2", description: "Description for article 2."},
-  {title: "Article 3", description: "Description for article 3."},
-  {title: "Article 4", description: "Description for article 4."},
+  {title: "Waste Segregation Importance", description: "Highlights Effectic methods of waste separation & its role in reducing landfill dump, pollution."},
+  {title: "Biodegradable vs Non-Biodegradable", description: "Understand waste types, examples, and strategies managing waste materials responsibly."},
+  {title: "Solid Waste Management Basics", description: "Overview of global waste generation trends, challenges, and strategies to manage solid waste sustainably."},
+  {title: "Waste Sorting: Importance and Environmental Benefits", description: "Learn how waste sorting reduces pollution, enhances recycling efficiency."},
 ]
 
 export const admin_details_of_ward_items = ["Ward 1", "Tamil Nadu", "Chennai"]
