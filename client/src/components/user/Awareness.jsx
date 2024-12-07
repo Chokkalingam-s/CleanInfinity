@@ -72,11 +72,11 @@ export default function Awareness({src, data, cardsData}) {
       <div className='w-full max-w-md'>
         <Accordion
           title='What is this app about?'
-          content='This app helps you with Recycling Waste.'
+          content='A smart waste tracking app that rewards users for responsible waste disposal.'
         />
         <Accordion
-          title='How do I reset my password?'
-          content='You can reset your password from the profile settings.'
+          title='Whats The use of Credit Points?'
+          content='You Can Redeem your credit points at Government Services Such as Ration.'
         />
         <Accordion
           title='Can I sync my data?'
