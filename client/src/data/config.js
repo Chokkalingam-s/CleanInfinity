@@ -1,14 +1,15 @@
 export const dashboard_data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 80]
 export const dashboard_credits = 500
 export const auth_wards = ["Choose Your Ward", "Ward 1", "Ward 2"]
-export const dashboard_titles = [
-  {title: "Knowledge", path: "/awareness"},
-  {title: "Progress", path: "/progress"},
-  {title: "Pair Dustbin", path: "/nfc"},
-  {title: "Notify", path: "/notify"},
-  {title: "PingMe", path: "/ping-me"},
-  {title: "Activity", path: "/activity"},
+export const dashboard_titles = [ 
+  {title: "Knowledge", path: "/awareness", icon: "./knowledge.png"},
+  {title: "Progress", path: "/progress", icon: "./progress.png"},
+  {title: "Pair Dustbin", path: "/nfc", icon: "./pair-dustbin.png"},
+  {title: "Notify", path: "/notify", icon: "./notify.png"},
+  {title: "PingMe", path: "/ping-me", icon: "./pingme.png"},
+  {title: "Activity", path: "/activity", icon: "./activity.png"},
 ]
+
 export const awareness_video_link =
   "https://www.youtube.com/embed/luZmjS7b7f0?si=NKntSRkMMc9zUwWA"
   export const awareness_cardsData = [
