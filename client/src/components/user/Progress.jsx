@@ -137,11 +137,11 @@ export default function Progress({data, users, progressBarStyles}) {
           </div>
         </div>
       </div>
-      <h2 className='text-xl md:text-2xl font-bold px-5 mb-4'>Leaderboard</h2>
+      {/* <h2 className='text-xl md:text-2xl font-bold px-5 mb-4'>Leaderboard</h2>
       <UserProgressGrid users={users} progressBarStyles={progressBarStyles} />
       <div className='px-5 flex justify-center'>
         <BarChart data={data} />
-      </div>
+      </div> */}
     </div>
   )
 }

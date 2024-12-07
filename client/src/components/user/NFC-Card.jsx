@@ -1,16 +1,17 @@
-export default function NFCCard({titles}) {
+export default function NFCCard({cards}) {
   return (
-    <div className='flex p-2 gap-2 items-center'>
-      {titles.map((title, i) => (
+    <div className='flex p-2 gap-4 items-center'>
+      {cards.map((card, i) => (
         <div
-          className='p-2 flex flex-col items-center justify-center drop rounded-lg shadow-lg hover:shadow-md transition-shadow duration-150'
-          key={i}>
-          <img
-            src='https://placehold.co/150'
-            className='w-full h-32 object-cover rounded-lg mb-4 shadow-lg'
-            alt={`${title} Image`}
+          className='p-4 flex flex-col items-center justify-center drop rounded-lg shadow-lg hover:shadow-md transition-shadow duration-150 w-41'
+          key={i}
+        >
+          <img 
+            src={card.image} 
+            className='w-half h-36 object-cover rounded-lg shadow-md mb-4' 
+            alt={`${card.title} Image`} 
           />
-          <p className='font-medium text-center'>{title}</p>
+          <h3 className='font-semibold text-center'>{card.title}</h3>
         </div>
       ))}
     </div>

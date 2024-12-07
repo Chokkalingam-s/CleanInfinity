@@ -1,6 +1,16 @@
 import NFCCard from './NFC-Card'
 export default function NFCPage() {
-  const NFCtitles = ['Pair with BioDegradable', 'Pair with NonDegradable']
+  const NFCcards = [
+    {
+      title: 'Pair with BioDegradable',
+      image: './nfcd.png'
+
+    },
+    {
+      title: 'Pair with NonDegradable',
+      image:'./nfcnd.png'
+    }
+  ]
 
   return (
     <div className='flex flex-col items-center justify-center container'>
@@ -13,7 +23,7 @@ export default function NFCPage() {
       </div>
 
       <div className='flex flex-col items-center justify-center mb-1 w-full'>
-        <NFCCard titles={NFCtitles} />
+        <NFCCard cards={NFCcards} />
       </div>
 
       <div className='p-4 flex flex-col drop rounded-lg shadow-xl hover:shadow-md transition-shadow duration-150 mt-4 md:w-3/4 lg:w-1/2'>
