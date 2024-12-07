@@ -93,6 +93,7 @@ export default function Awareness({src, data, cardsData}) {
             title={card.title}
             description={card.description}
             image={card.image}
+            link={card.link} 
           />
         ))}
       </div>

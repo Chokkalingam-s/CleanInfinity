@@ -11,12 +11,45 @@ export const dashboard_titles = [
 ]
 export const awareness_video_link =
   "https://www.youtube.com/embed/luZmjS7b7f0?si=NKntSRkMMc9zUwWA"
-export const awareness_cardsData = Array.from({length: 9}, (_, index) => ({
-  id: index + 1,
-  title: `Card ${index + 1}`,
-  description: "This is a description of the card.",
-  image: "https://placehold.co/150",
-}))
+  export const awareness_cardsData = [
+    {
+      id: 1,
+      title: 'Clean Environment',
+      description: 'Learn how to maintain a clean and green environment.',
+      image: 'https://www.youtube.com/embed/YeVLBkypPRU?si=MsEzw0sOU8Y_wIel',
+      link: 'https://youtu.be/YeVLBkypPRU?si=aStWCCvkCnn-z-78'
+    },
+    {
+      id: 2,
+      title: 'Reduce Plastic Usage',
+      description: 'Discover effective ways to reduce plastic usage in daily life.',
+      image: 'https://www.youtube.com/embed/Gboh2yaAinM?si=iQVrxj6RddckcSjq',
+      link: 'https://youtu.be/Gboh2yaAinM?si=iQVrxj6RddckcSjq'
+    },
+    {
+      id: 3,
+      title: 'Waste Segregation',
+      description: 'Understand the importance of segregating waste properly.',
+      image: 'https://www.youtube.com/embed/4ECxHTf_Co4?si=LQdTQzgtPgS0cp4F',
+      link: 'https://youtu.be/4ECxHTf_Co4?si=LQdTQzgtPgS0cp4F'
+    },
+    {
+      id: 4,
+      title: 'Recycle & Reuse',
+      description: 'Tips and tricks to recycle and reuse household items.',
+      image: 'https://www.youtube.com/embed/6jQ7y_qQYUA?si=57Vk1W6-ehNnFP3S',
+      link: 'https://youtu.be/6jQ7y_qQYUA?si=57Vk1W6-ehNnFP3S'
+    },
+    {
+      id: 5,
+      title: 'Eco-Friendly Products',
+      description: 'Find out about products that are environmentally friendly.',
+      image: 'https://www.youtube.com/embed/29OFyXJC_uA?si=cu-_Kt-GAoQeaQnE',
+      link: 'https://youtu.be/29OFyXJC_uA?si=cu-_Kt-GAoQeaQnE'
+    }
+  ];
+  
+  
 export const progress_data = [70, 50, 90, 30, 100, 45, 80, 60, 25, 85, 55, 75]
 export const progress_users = [
   {name: "User 1", value: 66},
