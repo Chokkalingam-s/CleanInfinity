@@ -24,7 +24,7 @@ def read_nfc_uid():
 
 # Function to send NFC UID to server
 def send_scan_to_server(uid):
-    url = "http://192.168.230.134:5000/process-nfc"  #Needed update of ip/backendUrl
+    url = "https://cleaninfinity-production.up.railway.app/process-nfc"  #Needed update of ip/backendUrl
     data = {'nfcUid': uid}
 
     try:
