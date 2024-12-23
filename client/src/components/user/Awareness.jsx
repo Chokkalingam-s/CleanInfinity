@@ -59,7 +59,7 @@ export default function Awareness({src, data, cardsData}) {
         title='YouTube video player'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;'
         allowFullScreen
-        className='w-full lg:w-8/12 md:w-8/12 aspect-video shadow-xl rounded-lg relative -z-10'></iframe>
+        className='w-full lg:w-8/12 md:w-8/12 aspect-video shadow-xl rounded-lg relative'></iframe>
       <h2>How Can We Help You?</h2>
       <div className='relative w-full max-w-md'>
         <img
